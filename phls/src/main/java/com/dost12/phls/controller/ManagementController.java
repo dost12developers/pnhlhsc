@@ -3,6 +3,7 @@ package com.dost12.phls.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -38,6 +39,7 @@ public class ManagementController {
 	@Autowired
 	private CategoryDAO categoryDAO;		
 
+	
 	@RequestMapping("/product")
 	public ModelAndView manageProduct(@RequestParam(name="success",required=false)String success) {		
 

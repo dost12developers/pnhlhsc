@@ -19,7 +19,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Online Shopping - ${title}</title>
+<title>${title} - Philippine National Halal Laboratory and Halal Science
+	Center</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +55,7 @@
 	        <div class="container">
 	            <!-- Brand and toggle get grouped for better mobile display -->
 	            <div class="navbar-header">
-	                <a class="navbar-brand" href="${contextRoot}/home">Online Shopping</a>
+	                <a class="navbar-brand" href="${contextRoot}/home"><img src="${images}/logo.png" width="32"  alt=""></a>
 	            </div>
 			</div>
 		</nav>		
@@ -92,9 +93,7 @@
        </div>
        
        <div class="panel-body">
-        <form action="${contextRoot}/login" method="POST" class="form-horizontal"
-         id="loginForm"
-        >
+        <form action="${contextRoot}/login" method="POST" class="form-horizontal"id="loginForm">
          <div class="form-group">
           <label for="username" class="col-md-4 control-label">Email: </label>
           <div class="col-md-8">
@@ -116,11 +115,11 @@
         </form>
        
        </div>
-       <div class="panel-footer">
+<%--        <div class="panel-footer">
        	<div class="text-right">
        		New User - <a href="${contextRoot}/register">Register Here</a>
        	</div>
-       </div>
+       </div> --%>
       
       </div> 
     
