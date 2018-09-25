@@ -29,20 +29,8 @@ $(function() {
 	case 'Contact Us':
 		$('#contact').addClass('active');
 		break;
-	case 'Multimedia':
-		$('#multimedia').addClass('active');
-		break;
 	case 'All Products':
 		$('#listProducts').addClass('active');
-		break;
-	case 'Register':
-		$('#register').addClass('active');
-		break;
-	case 'Halal Research and Development':
-	case 'Halal Packaging and Labeling':
-	case 'Halal Food Developement/Training':
-	case 'Halal Packaging and Labeling':
-		$('#services').addClass('active');
 		break;
 	case 'Product Management':
 		$('#manageProduct').addClass('active');
@@ -58,12 +46,11 @@ $(function() {
 		break;
 	}
 
+	$('#productListTable').DataTable();
 	// code for jquery dataTable
-	var $table = $('#productListTable');
+	/*var $table = $('#productListTable');
 
-	// execute the below code only where we have this table
 	if ($table.length) {
-		// console.log('Inside the table!');
 
 		var jsonUrl = '';
 		if (window.categoryId == '') {
@@ -76,7 +63,7 @@ $(function() {
 		$table
 				.DataTable({
 
-					lengthMenu : [ [ 3, 3, 10, -1 ],
+					lengthMenu : [ [ 3, 5, 10, -1 ],
 							[ '3 Records', '5 Records', '10 Records', 'ALL' ] ],
 					pageLength : 5,
 					ajax : {
@@ -90,7 +77,7 @@ $(function() {
 								mRender : function(data, type, row) {
 
 									return '<img src="' + window.contextRoot
-											+ '/resources/images/products/' + data
+											+ '/resources/images/' + data
 											+ '.jpg" class="dataTableImg"/>';
 
 								}
@@ -104,7 +91,7 @@ $(function() {
 							{
 								data : 'unitPrice',
 								mRender : function(data, type, row) {
-									return '&#8369; ' + data
+									return '&#8377; ' + data
 								}
 							},
 							{
@@ -158,7 +145,7 @@ $(function() {
 
 							} ]
 				});
-	}
+	}*/
 
 	
 	
@@ -211,7 +198,7 @@ $(function() {
 								{
 									data : 'unitPrice',
 									mRender : function(data, type, row) {
-										return '&#8369; ' + data
+										return '&#8377; ' + data
 									}
 								},
 								{

@@ -38,6 +38,11 @@
 <!-- Bootstrap DataTables -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
+   <link href="${css}/modern-business.css" rel="stylesheet">
+
+    <link href="${css}/bootstrap.responsive.css" rel="stylesheet">
+    <link href="${css}/bootstrap.responsive.min.css" rel="stylesheet">
+     
 <!-- Custom CSS -->
 <link href="${css}/myapp.css" rel="stylesheet">
 
@@ -87,6 +92,11 @@
 			<c:if test="${userClickMultimedia == true }">
 				<%@include file="multimedia.jsp"%>
 			</c:if>
+	
+			<c:if test="${userClickAllProducts == true }">
+				<%@include file="viewProducts.jsp"%>
+			</c:if>			
+			
 						
 		</div>
 
@@ -94,6 +104,7 @@
 
 		<!-- Footer comes here -->
 		<%@include file="./shared/footer.jsp"%>
+		
  		<script src="${js}/jquery.min.js"></script>	
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>
@@ -108,6 +119,8 @@
 
 		<!-- DataTable Bootstrap Script -->
 		<script src="${js}/dataTables.bootstrap.js"></script>
+
+	    <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 		<!-- DataTable Bootstrap Script -->
 		<script src="${js}/bootbox.min.js"></script>

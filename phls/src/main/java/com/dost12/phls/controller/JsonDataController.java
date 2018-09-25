@@ -53,10 +53,6 @@ public class JsonDataController {
 		return productDAO.getProductsByParam("purchases", 5);				
 	}
 	
-	@RequestMapping("/all/categories")
-	@ResponseBody
-	public List<Category> getAllCategorysList() {		
-		return categoryDAO.list();
-	}	
+
 	
 }

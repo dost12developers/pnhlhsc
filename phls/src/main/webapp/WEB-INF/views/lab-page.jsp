@@ -46,50 +46,50 @@
 
   <body id="page-top">
 
-   <%@include file="./shared/lab/navbar.jsp"%>
+   <%@include file="laboratory/shared/navbar.jsp"%>
 
     <div id="wrapper">
 
       <!-- Sidebar -->
-	 <%@include file="./shared/lab/sidebar.jsp"%>
+	 <%@include file="laboratory/shared/sidebar.jsp"%>
 
       <div id="content-wrapper">
 
         <div class="container-fluid">
 
 			<c:if test="${userClickDashboard == true }">
-				<%@include file="lab-dashboard.jsp"%>
+				<%@include file="laboratory/lab-dashboard.jsp"%>
 			</c:if>
 
 			<c:if test="${userClickProducts == true }">
-				<%@include file="lab-manageProduct.jsp"%>
+				<%@include file="laboratory/lab-manageProduct.jsp"%>
 			</c:if>
 			
 			<c:if test="${userClickManufacture == true }">
-				<%@include file="lab-manageManufacture.jsp"%>
+				<%@include file="laboratory/lab-manageManufacture.jsp"%>
 			</c:if>
 			
 			<c:if test="${userClickIngredient == true }">
-				<%@include file="lab-manageIngredient.jsp"%>
+				<%@include file="laboratory/lab-manageIngredient.jsp"%>
 			</c:if>
 
 			<c:if test="${userClickAddress == true }">
-				<%@include file="lab-manageAddress.jsp"%>
+				<%@include file="laboratory/lab-manageAddress.jsp"%>
 			</c:if>	
 			
 			<c:if test="${userClickCertificate == true }">
-				<%@include file="lab-manageCertification.jsp"%>
+				<%@include file="laboratory/lab-manageCertification.jsp"%>
 			</c:if>	
 						
 			<c:if test="${userClickCategory == true }">
-				<%@include file="lab-manageCategory.jsp"%>
+				<%@include file="laboratory/lab-manageCategory.jsp"%>
 			</c:if>
 			
 											
 
         </div>
         <!-- /.container-fluid -->
-        <%@include file="./shared/lab/footer.jsp"%>
+        <%@include file="laboratory/shared/footer.jsp"%>
 
       </div>
       <!-- /.content-wrapper -->

@@ -1,15 +1,13 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
 	
-	$('#productListTableId').DataTable();
-	
-	var $tableCategory = $('#dataTableCategory');
+	var $tableIngredient = $('#dataTableIngredients');
  
 //execute the below code only where we have this table
-	if ($tableCategory.length) {
+	if ($tableIngredient.length) {
 		//console.log('Inside the table!');
 
-		var jsonUrl = '';            
+		var jsonUrl = '';
 		jsonUrl = window.contextRoot + '/json/lab/data/all/categories';
 
 		$tableCategory
