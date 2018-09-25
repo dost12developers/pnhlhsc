@@ -47,15 +47,11 @@ public class Category implements Serializable {
 		this.active = active;
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", imageURL=" + imageURL
 				+ ", active=" + active + "]";
 	}
-
-
 
 	/*
 	 * Private fields

@@ -26,51 +26,58 @@ public class LabController {
 
 	@RequestMapping(value = {"/", "/main", "/index"})
 	public ModelAndView manageLabProduct(@RequestParam(name="success",required=false)String success) {		
-
 		ModelAndView mv = new ModelAndView("lab-page");		
 		mv.addObject("title","Lab Page");
-		mv.addObject("userClickpagelab",true);
-			
+		mv.addObject("userClickDashboard",true);
 		return mv;
 		
 	}
-	
-	@RequestMapping(value="/login")
-	public ModelAndView login(@RequestParam(name="error", required = false)	String error,
-			@RequestParam(name="logout", required = false) String logout) {
-		ModelAndView mv= new ModelAndView("lab-login");
-		mv.addObject("title", "Login");
-		if(error!=null) {
-			mv.addObject("message", "Username and Password is invalid!");
-		}
-		if(logout!=null) {
-			mv.addObject("logout", "You have logged out successfully!");
-		}
-		return mv;
-	}
-	
-	@RequestMapping(value="/logout")
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		// Invalidates HTTP Session, then unbinds any objects bound to it.
-	    // Removes the authentication from securitycontext 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-		
-		return "redirect:/laboratory-admin/login?logout";
+	@RequestMapping(value = "/product")
+	public ModelAndView products() {		
+		ModelAndView mv = new ModelAndView("lab-page");		
+		mv.addObject("title","Products");
+		mv.addObject("userClickProducts",true);
+		return mv;				
 	}	
 	
+	@RequestMapping(value = "/manufacture")
+	public ModelAndView manufacture() {		
+		ModelAndView mv = new ModelAndView("lab-page");		
+		mv.addObject("title","Manufacture");
+		mv.addObject("userClickManufacture",true);
+		return mv;				
+	}	
+
+	@RequestMapping(value = "/ingredient")
+	public ModelAndView ingredient() {		
+		ModelAndView mv = new ModelAndView("lab-page");		
+		mv.addObject("title","Ingredient");
+		mv.addObject("userClickIngredient",true);
+		return mv;				
+	}	
 	
-	@RequestMapping(value="/access-denied")
-	public ModelAndView accessDenied() {
-		ModelAndView mv = new ModelAndView("error");		
-		mv.addObject("errorTitle", "Aha! Caught You.");		
-		mv.addObject("errorDescription", "You are not authorized to view this page!");		
-		mv.addObject("title", "403 Access Denied");		
-		return mv;
+	@RequestMapping(value = "/certificate")
+	public ModelAndView certificate() {		
+		ModelAndView mv = new ModelAndView("lab-page");		
+		mv.addObject("title","Certificate");
+		mv.addObject("userClickCertificate",true);
+		return mv;				
+	}	
+
+	@RequestMapping(value = "/address")
+	public ModelAndView address() {		
+		ModelAndView mv = new ModelAndView("lab-page");		
+		mv.addObject("title","Address");
+		mv.addObject("userClickAddress",true);
+		return mv;				
 	}		
-	
+	@RequestMapping(value = "/category")
+	public ModelAndView category() {		
+		ModelAndView mv = new ModelAndView("lab-page");		
+		mv.addObject("title","Category");
+		mv.addObject("userClickCategory",true);
+		return mv;				
+	}	
 }
 
 	

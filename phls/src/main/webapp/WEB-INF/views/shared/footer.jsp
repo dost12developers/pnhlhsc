@@ -1,14 +1,8 @@
-    <div class="container footer">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy;DOST XII</p>
-                </div>
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © DOST XII</span>
             </div>
+          </div>
         </footer>
-
-    </div>

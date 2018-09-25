@@ -6,8 +6,6 @@ import com.dost12.phls.phlsbackend.dto.Category;
 
 public interface CategoryDAO {
 
-	
-	
 	Category get(int id);
 	List<Category> list();
 	boolean add(Category category);
