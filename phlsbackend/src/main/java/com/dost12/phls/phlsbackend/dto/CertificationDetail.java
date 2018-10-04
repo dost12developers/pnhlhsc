@@ -34,13 +34,16 @@ public class CertificationDetail  implements Serializable{
 	@Column(name="update_on")
 	private Date updateOn;
 	
-	@OneToOne
-	@JoinColumn(name = "product_id")
+	@ManyToOne
+    @JoinColumn(name="product_id")
 	private Product product;
 	
 	@ManyToOne
 	@JoinColumn(name = "certificate_id")
 	private Certification certification;
+	
+	@Column(name="is_active")
+	private Boolean active;	
 
 	public int getId() {
 		return id;
@@ -80,6 +83,14 @@ public class CertificationDetail  implements Serializable{
 
 	public void setCertification(Certification certification) {
 		this.certification = certification;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 	

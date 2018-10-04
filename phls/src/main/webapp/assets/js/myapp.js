@@ -32,6 +32,16 @@ $(function() {
 	case 'All Products':
 		$('#listProducts').addClass('active');
 		break;
+	case 'Testing and Verification':
+	case 'On-Site Assessment and Product Certification':
+	case 'Halal Food Developement/Training':
+	case 'Halal Packaging and Labeling':
+	case 'Halal Research and Development':
+		$('#services').addClass('active');
+		break;
+	case 'Multimedia':
+		$('#multimedia').addClass('active');
+		break;
 	case 'Product Management':
 		$('#manageProduct').addClass('active');
 		break;
@@ -46,11 +56,12 @@ $(function() {
 		break;
 	}
 
-	$('#productListTable').DataTable();
 	// code for jquery dataTable
-	/*var $table = $('#productListTable');
+	var $table = $('#productListTable');
 
+	// execute the below code only where we have this table
 	if ($table.length) {
+		// console.log('Inside the table!');
 
 		var jsonUrl = '';
 		if (window.categoryId == '') {
@@ -145,7 +156,7 @@ $(function() {
 
 							} ]
 				});
-	}*/
+	}
 
 	
 	

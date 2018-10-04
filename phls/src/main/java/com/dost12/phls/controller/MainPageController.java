@@ -1,4 +1,4 @@
-package com.dost12.phls.controller.main;
+package com.dost12.phls.controller;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -67,74 +67,20 @@ public class MainPageController {
 			HttpServletRequest request, HttpServletResponse response) {
 		if(session.getAttribute("userModel") != null) {
 			UserModel userModel = (UserModel) session.getAttribute("userModel");
-			if(userModel.getRole().equals("ADMIN_LAB")) {
-				return "redirect:/laboratory-admin/";
-				
-			}
+			if(userModel.getRole().equals("LABORATORY")) 
+				return "redirect:/laboratory/";
+			else if (userModel.getRole().equals("SUPPLIER"))
+				return "redirect:/supplier/";
+			
 		}
 		return "redirect:/home";
 		
 	}	
 	
-	
-	
-	@RequestMapping(value = "/servicesLaboratory")
-	public ModelAndView servicesLaboratoryPage() {		
-		ModelAndView mv = new ModelAndView("page");		
-		mv.addObject("title","Halal Laboratory");
-		mv.addObject("userClickServicesLaboratory",true);
-		return mv;				
-	}	
-	
-	@RequestMapping(value = "/servicesFoodDevelopment")
-	public ModelAndView foodDevelopmentPage() {		
-		ModelAndView mv = new ModelAndView("page");		
-		mv.addObject("title","Halal Food Developement/Training");
-		mv.addObject("userClickServicesFoodDev",true);
-		return mv;				
-	}	
-
-	@RequestMapping(value = "/servicesPackageLabel")
-	public ModelAndView servicesPackageLabelPage() {		
-		ModelAndView mv = new ModelAndView("page");		
-		mv.addObject("title","Halal Packaging and Labeling");
-		mv.addObject("userClickServicesPackageLabel",true);
-		return mv;				
-	}	
-	
-	@RequestMapping(value = "/servicesResearch")
-	public ModelAndView servicesResearchPage() {		
-		ModelAndView mv = new ModelAndView("page");		
-		mv.addObject("title","Halal Research and Development");
-		mv.addObject("userClickServicesResearch",true);
-		return mv;				
-	}
-	@RequestMapping(value = "/about")
-	public ModelAndView about() {		
-		ModelAndView mv = new ModelAndView("page");		
-		mv.addObject("title","About Us");
-		mv.addObject("userClickAbout",true);
-		return mv;				
-	}	
-	
-	@RequestMapping(value = "/contact")
-	public ModelAndView contact() {		
-		ModelAndView mv = new ModelAndView("page");		
-		mv.addObject("title","Contact Us");
-		mv.addObject("userClickContact",true);
-		return mv;				
-	}
-	
-	@RequestMapping(value = "/multimedia")
-	public ModelAndView multimedia() {		
-		ModelAndView mv = new ModelAndView("page");		
-		mv.addObject("title","Multimedia");
-		mv.addObject("userClickMultimedia",true);
-		return mv;				
-	}		
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam(name="error", required = false)	String error,
 			@RequestParam(name="logout", required = false) String logout) {
+		
 		ModelAndView mv= new ModelAndView("login");
 		mv.addObject("title", "Login");
 		if(error!=null) {
@@ -166,6 +112,88 @@ public class MainPageController {
 		mv.addObject("errorDescription", "You are not authorized to view this page!");		
 		mv.addObject("title", "403 Access Denied");		
 		return mv;
+	}		
+	
+	@RequestMapping(value = "/servicesLaboratory")
+	public ModelAndView servicesLaboratoryPage() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Halal Laboratory");
+		mv.addObject("userClickServicesLaboratory",true);
+		return mv;				
 	}	
+	
+	@RequestMapping(value = "/servicesLabTesting")
+	public ModelAndView servicesLabTestingPage() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Testing and Verification");
+		mv.addObject("userClickServicesLabTesting",true);
+		return mv;				
+	}
+	
+	@RequestMapping(value = "/servicesLabOnSite")
+	public ModelAndView servicesLabOnSitePage() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","On-Site Assessment and Product Certification");
+		mv.addObject("userClickServicesLabOnSite",true);
+		return mv;				
+	}
+	
+	@RequestMapping(value = "/servicesFoodDevelopment")
+	public ModelAndView foodDevelopmentPage() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Halal Food Developement/Training");
+		mv.addObject("userClickServicesFoodDev",true);
+		return mv;				
+	}	
+
+	@RequestMapping(value = "/servicesPackageLabel")
+	public ModelAndView servicesPackageLabelPage() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Halal Packaging and Labeling");
+		mv.addObject("userClickServicesPackageLabel",true);
+		return mv;				
+	}	
+	
+	@RequestMapping(value = "/servicesResearch")
+	public ModelAndView servicesResearchPage() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Halal Research and Development");
+		mv.addObject("userClickServicesResearch",true);
+		return mv;				
+	}
+	
+	@RequestMapping(value = "/requestLabService")
+	public ModelAndView requestLabServicePage() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Request Laboratory Service");
+		mv.addObject("userClickRequestLaboratoryService",true);
+		return mv;				
+	}	
+	
+	@RequestMapping(value = "/about")
+	public ModelAndView about() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","About Us");
+		mv.addObject("userClickAbout",true);
+		return mv;				
+	}	
+
+	
+	@RequestMapping(value = "/contact")
+	public ModelAndView contact() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Contact Us");
+		mv.addObject("userClickContact",true);
+		return mv;				
+	}
+	
+	@RequestMapping(value = "/multimedia")
+	public ModelAndView multimedia() {		
+		ModelAndView mv = new ModelAndView("page");		
+		mv.addObject("title","Multimedia");
+		mv.addObject("userClickMultimedia",true);
+		return mv;				
+	}		
+
 		
 }

@@ -2,15 +2,21 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a
-		href="${contextRoot}/laboratory-admin/">Dashboard</a></li>
+		href="${contextRoot}/laboratory/">Dashboard</a></li>
 	<li class="breadcrumb-item active">Category</li>
 </ol>
 
+	<c:if test="${not empty message}">	
+		<div class="mb-3">			
+				<div class="alert alert-success">${message}</div>				
+		</div>
+	</c:if>
 <!-- DataTables Example -->
 <div class="card mb-3">
 	<div class="card-header">
 		<i class="fas fa-table"></i> List of Categories
 	</div>
+
 	<div class="card-body">
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCategoryId">Add New Category</button><br><br>
@@ -22,6 +28,7 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>Description</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tfoot>
@@ -29,6 +36,7 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>Description</th>
+						<th></th>
 					</tr>
 				</tfoot>
 			</table>
@@ -52,10 +60,10 @@
 				</button>
 			</div>
 			
-			<sf:form id="categoryForm" class="form-horizontal" modelAttribute="category"  action="${contextRoot}/laboratory-admin/category" method="POST">
+			<sf:form id="categoryForm" class="form-horizontal" modelAttribute="category"  action="${contextRoot}/laboratory/category" method="POST">
 				<div class="modal-body">
 
-       			<div class="form-group">
+				<div class="form-group">
 					<label class="control-label col-md-4">Name</label>
 					<div class="col-md-8 validate">
 						<sf:input type="text" path="name" class="form-control" placeholder="Category Name" /> 

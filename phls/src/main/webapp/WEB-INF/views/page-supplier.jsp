@@ -22,8 +22,7 @@
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
 
-<title>${title} - Philippine National Halal Laboratory and Halal Science
-	Center</title>
+<title>${title} - Philippine National Halal Laboratory and Halal Science Center</title>
 <script>
 	window.menu = '${title}';
 
@@ -46,50 +45,24 @@
 
   <body id="page-top">
 
-   <%@include file="laboratory/shared/navbar.jsp"%>
+   <%@include file="supplier/shared/navbar.jsp"%>
 
     <div id="wrapper">
 
       <!-- Sidebar -->
-	 <%@include file="laboratory/shared/sidebar.jsp"%>
+	 <%@include file="supplier/shared/sidebar.jsp"%>
 
       <div id="content-wrapper">
 
         <div class="container-fluid">
 
 			<c:if test="${userClickDashboard == true }">
-				<%@include file="laboratory/lab-dashboard.jsp"%>
+				<%@include file="supplier/dashboard.jsp"%>
 			</c:if>
-
-			<c:if test="${userClickProducts == true }">
-				<%@include file="laboratory/lab-manageProduct.jsp"%>
-			</c:if>
-			
-			<c:if test="${userClickManufacture == true }">
-				<%@include file="laboratory/lab-manageManufacture.jsp"%>
-			</c:if>
-			
-			<c:if test="${userClickIngredient == true }">
-				<%@include file="laboratory/lab-manageIngredient.jsp"%>
-			</c:if>
-
-			<c:if test="${userClickAddress == true }">
-				<%@include file="laboratory/lab-manageAddress.jsp"%>
-			</c:if>	
-			
-			<c:if test="${userClickCertificate == true }">
-				<%@include file="laboratory/lab-manageCertification.jsp"%>
-			</c:if>	
-						
-			<c:if test="${userClickCategory == true }">
-				<%@include file="laboratory/lab-manageCategory.jsp"%>
-			</c:if>
-			
-											
 
         </div>
         <!-- /.container-fluid -->
-        <%@include file="laboratory/shared/footer.jsp"%>
+        <%@include file="supplier/shared/footer.jsp"%>
 
       </div>
       <!-- /.content-wrapper -->
@@ -115,7 +88,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="${contextRoot}/logout">Logout</a>
           </div>
         </div>
       </div>
@@ -139,6 +112,7 @@
 
     <!-- Demo scripts for this page-->
     <script src="${js}/myDatabaseTable.js"></script>
+    <script src="${js}/myIngredientTable.js"></script>
     <script src="${js}/demo/datatables-demo.js"></script>
     <script src="${js}/demo/chart-area-demo.js"></script>
     

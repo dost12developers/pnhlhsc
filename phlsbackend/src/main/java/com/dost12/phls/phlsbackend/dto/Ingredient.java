@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Ingredient  implements Serializable{
@@ -31,11 +32,18 @@ public class Ingredient  implements Serializable{
 	private Date updateOn;
 	
 	@Column(name="is_active")
-	private boolean isActive;
+	private boolean active;
 	
 	private String name;
 	private String description;
+	private String mark;
 	
+	
+	public Ingredient() {
+		super();
+		active = true;
+		mark = null;
+	}
 	public int getId() {
 		return id;
 	}
@@ -55,10 +63,10 @@ public class Ingredient  implements Serializable{
 		this.updateOn = updateOn;
 	}
 	public boolean isActive() {
-		return isActive;
+		return active;
 	}
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	public String getName() {
 		return name;
@@ -72,6 +80,13 @@ public class Ingredient  implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getMark() {
+		return mark;
+	}
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
 
+	
 	
 }

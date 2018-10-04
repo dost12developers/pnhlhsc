@@ -32,20 +32,23 @@
 <!-- Bootstrap Core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap Readable Theme -->
-<link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
+
 
 <!-- Bootstrap DataTables -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
-   <link href="${css}/modern-business.css" rel="stylesheet">
 
-    <link href="${css}/bootstrap.responsive.css" rel="stylesheet">
-    <link href="${css}/bootstrap.responsive.min.css" rel="stylesheet">
+
+<%--     <link href="${css}/bootstrap.responsive.css" rel="stylesheet">
+    <link href="${css}/bootstrap.responsive.min.css" rel="stylesheet"> --%>
      
 <!-- Custom CSS -->
-<link href="${css}/myapp.css" rel="stylesheet">
+<!-- Bootstrap Readable Theme -->
 
+ 
+  <link href="${css}/myapp.css" rel="stylesheet"> 
+ 
+  <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">  
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,6 +79,14 @@
 			<c:if test="${userClickServicesLaboratory == true }">
 				<%@include file="servicesLaboratory.jsp"%>
 			</c:if>
+	
+			<c:if test="${userClickServicesLabTesting == true }">
+				<%@include file="serviceLabTesting.jsp"%>
+			</c:if>
+			
+			<c:if test="${userClickServicesLabOnSite == true }">
+				<%@include file="serviceLabOnSite.jsp"%>
+			</c:if>
 			
 			<c:if test="${userClickServicesFoodDev == true }">
 				<%@include file="servicesFoodDevelopment.jsp"%>
@@ -96,8 +107,15 @@
 			<c:if test="${userClickAllProducts == true }">
 				<%@include file="viewProducts.jsp"%>
 			</c:if>			
-			
-						
+
+			<c:if test="${userClickAbout == true }">
+				<%@include file="about.jsp"%>
+			</c:if>					
+
+			<c:if test="${userClickContact == true }">
+				<%@include file="contact.jsp"%>
+			</c:if>	
+									
 		</div>
 
 
@@ -120,12 +138,8 @@
 		<!-- DataTable Bootstrap Script -->
 		<script src="${js}/dataTables.bootstrap.js"></script>
 
-	    <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script>
+<%-- 	    <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script> --%>
 
-		<!-- DataTable Bootstrap Script -->
-		<script src="${js}/bootbox.min.js"></script>
-		
-		<script src="${js}/bootstrap.bundle.min.js"></script>
 
 		<!-- Self coded javascript -->
 		<script src="${js}/myapp.js"></script>

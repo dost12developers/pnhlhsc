@@ -48,6 +48,8 @@ public class Address implements Serializable {
 	@Column(name="is_billing")
 	private boolean billing;
 	
+	
+	
 	public int getId() {
 		return id;
 	}

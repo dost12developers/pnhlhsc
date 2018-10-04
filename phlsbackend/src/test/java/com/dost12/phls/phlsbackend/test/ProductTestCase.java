@@ -67,18 +67,18 @@ public class ProductTestCase {
 /*		product = productDAO.get(9);
 		assertEquals("Something went wrong while fetching the list of products!",
 				6,product.getCertificationDetails().size());*/
-		assertEquals("Something went wrong while inserting a new product!",
-				3, certificateDAO.list().size());			
+/*		assertEquals("Something went wrong while inserting a new product!",
+				3, certificateDAO.list().size());	*/		
 	}
 	
 	
-/*	@Test
+	@Test
 	public void testListActiveProducts() {
 		assertEquals("Something went wrong while fetching the list of products!",
 				5,productDAO.listActiveProducts().size());				
 	} 
 	
-	
+	/*	
 	@Test
 	public void testListActiveProductsByCategory() {
 		assertEquals("Something went wrong while fetching the list of products!",

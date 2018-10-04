@@ -6,14 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
@@ -25,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component
 @Entity
+@Table(name="product")
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -62,13 +62,9 @@ public class Product implements Serializable {
 	@Min(value = 1, message="Please select at least one value!")
 	private double unitPrice;
 	
-	@Column(name = "ingredient_id")
-	@JsonIgnore
-	private int ingredientId;	
-
-	@Column(name = "certificate_id")
-	@JsonIgnore
-	private int certificationId;	
+	
+	@Column(name = "nutrition_facts")
+	private String nutritionFacts;	
 	
 	@Column(name = "category_id")
 	@JsonIgnore
@@ -78,23 +74,44 @@ public class Product implements Serializable {
 	@JsonIgnore
 	private int supplierId;
 	
+	@Column(name = "origin_latitude")
+	@JsonIgnore
+	private double originLatitude;
+	
+	@Column(name = "origin_longitude")
+	@JsonIgnore
+	private double originLongitude;
+	
+	@Column(name = "destination_latitude")
+	@JsonIgnore
+	private double destinationLatitude;
+	
+	@Column(name = "destination_longitude")
+	@JsonIgnore
+	private double destinationLongitude;	
+	
+	@Transient
+	@OneToMany(mappedBy="product")
+	private List<Shipment> locations;
+	
+	@Transient
+	@OneToMany(mappedBy="product")
+	private List<Certification> certifications;	
+
+	@Transient
+	@OneToMany(mappedBy="product")
+	private List<Ingredient> ingredients;	
+	
+	@Transient
+	private MultipartFile file;
+	
 	private int purchases;
 	
 	private int views;
 	
+	
 
-	
-	
-/*	@OneToMany(mappedBy="IngredientDetail", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<IngredientDetail> ingredientDetails = new ArrayList<>();*/
-	
-	@Transient
-	@OneToMany(mappedBy="CertificationDetail", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<CertificationDetail> certificationDetails = new ArrayList<>();
-	
-	@Transient
-	private MultipartFile file;
-			
+
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -106,6 +123,7 @@ public class Product implements Serializable {
 	// default constructor
 	public Product() {
 		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();		
+		active = true;
 	}
 
 	// setters and getters	
@@ -209,24 +227,90 @@ public class Product implements Serializable {
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}
+
+
+
+	public double getOriginLatitude() {
+		return originLatitude;
+	}
+
+	public void setOriginLatitude(double originLatitude) {
+		this.originLatitude = originLatitude;
+	}
+
+	public double getOriginLongitude() {
+		return originLongitude;
+	}
+
+	public void setOriginLongitude(double originLongitude) {
+		this.originLongitude = originLongitude;
+	}
+
+	public double getDestinationLatitude() {
+		return destinationLatitude;
+	}
+
+	public void setDestinationLatitude(double destinationLatitude) {
+		this.destinationLatitude = destinationLatitude;
+	}
+
+	public double getDestinationLongitude() {
+		return destinationLongitude;
+	}
+
+	public void setDestinationLongitude(double destinationLongitude) {
+		this.destinationLongitude = destinationLongitude;
+	}
+
+	public List<Shipment> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(List<Shipment> locations) {
+		this.locations = locations;
+	}
+
+	public List<Certification> getCertifications() {
+		return certifications;
+	}
+
+	public void setCertifications(List<Certification> certifications) {
+		this.certifications = certifications;
+	}
+
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	
+	public String getNutritionFacts() {
+		return nutritionFacts;
+	}
+
+	public void setNutritionFacts(String nutritionFacts) {
+		this.nutritionFacts = nutritionFacts;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", active=" + active + ", code=" + code + ", name=" + name + ", brand=" + brand
+				+ ", description=" + description + ", quantity=" + quantity + ", weight=" + weight
+				+ ", manufacturedDate=" + manufacturedDate + ", expirationDate=" + expirationDate + ", unitPrice="
+				+ unitPrice + ", nutritionFacts=" + nutritionFacts + ", categoryId=" + categoryId + ", supplierId="
+				+ supplierId + ", originLatitude=" + originLatitude + ", originLongitude=" + originLongitude
+				+ ", destinationLatitude=" + destinationLatitude + ", destinationLongitude=" + destinationLongitude
+				+ ", locations=" + locations + ", certifications=" + certifications + ", ingredients=" + ingredients
+				+ ", file=" + file + ", purchases=" + purchases + ", views=" + views + "]";
+	}
+
+
 	
 	
-
-	public int getIngredientId() {
-		return ingredientId;
-	}
-
-	public void setIngredientId(int ingredientId) {
-		this.ingredientId = ingredientId;
-	}
-
-	public int getCertificationId() {
-		return certificationId;
-	}
-
-	public void setCertificationId(int certificationId) {
-		this.certificationId = certificationId;
-	}
+	
 
 /*	public List<IngredientDetail> getIngredientDetails() {
 		return ingredientDetails;
@@ -239,20 +323,15 @@ public class Product implements Serializable {
 
 	
 	// toString for debugging
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", brand=" + brand + ", description="
-				+ description + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", active=" + active
-				+ ", categoryId=" + categoryId + ", supplierId=" + supplierId + ", purchases=" + purchases + ", views="
-				+ views + "]";
-	}
 
-	public List<CertificationDetail> getCertificationDetails() {
+
+/*	public List<CertificationDetail> getCertificationDetails() {
 		return certificationDetails;
 	}
 
 	public void setCertificationDetails(List<CertificationDetail> certificationDetails) {
 		this.certificationDetails = certificationDetails;
-	}
+	}*/
 
+	
 }

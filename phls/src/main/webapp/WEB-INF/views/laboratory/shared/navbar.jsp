@@ -1,7 +1,11 @@
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+	<script>
+		window.userRole = '${userModel.role}';
+	</script>
     <nav class="navbar navbar-expand navbar-light bg-light static-top">
 
       <a class="navbar-brand mr-1" href="${contextRoot}/home"><img src="${images}/logo.png" width="32"  alt=""></a>
-      <a class="navbar-brand mr-1" href="${contextRoot}/laboratory-admin/">Laboratory - Admin</a>
+      <a class="navbar-brand mr-1" href="${contextRoot}/laboratory/">Lab - Admin</a>
       <button class="btn btn-link btn-sm text-black order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>

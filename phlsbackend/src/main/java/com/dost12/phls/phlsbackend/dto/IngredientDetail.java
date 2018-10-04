@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @Table(name = "ingredient_detail")
 public class IngredientDetail implements Serializable{
 
-
 	/**
 	 * 
 	 */
@@ -33,16 +32,27 @@ public class IngredientDetail implements Serializable{
 	@Column(name="created_on")
 	private Date createdOn;
 	
+	
 	@Column(name="update_on")
 	private Date updateOn;
+
+	@Column(name="is_active")
+	private Boolean active;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
 	@ManyToOne
 	@JoinColumn(name = "ingredient_id")
 	private Ingredient ingredient;
+
+	
+	
+	public IngredientDetail() {
+		super();
+		active = true;
+	}
 
 	public int getId() {
 		return id;
@@ -82,6 +92,14 @@ public class IngredientDetail implements Serializable{
 
 	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 

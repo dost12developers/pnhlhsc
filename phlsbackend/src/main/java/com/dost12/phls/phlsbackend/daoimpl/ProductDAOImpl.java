@@ -52,7 +52,8 @@ public class ProductDAOImpl implements ProductDAO {
 	 * */
 	@Override
 	public boolean add(Product product) {
-		try {			
+		try {		
+			
 			sessionFactory
 					.getCurrentSession()
 						.persist(product);

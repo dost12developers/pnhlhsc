@@ -22,29 +22,23 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                   <li id="services" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Services
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownPortfolio">
-                          <a class="dropdown-item" href="${contextRoot}/servicesLaboratory">Halal Laboratory Services</a>
-                          <a class="dropdown-item" href="${contextRoot}/servicesFoodDevelopment">Halal Food Developement/Training</a>
-                          <a class="dropdown-item" href="${contextRoot}/servicesResearch">Halal Research and Development</a>
-                          <a class="dropdown-item" href="${contextRoot}/servicesPackageLabel">Halal Packaging and Labeling</a>
-                        </div>
-                      </li>
-                     <li id="register" class="nav-item dropdown">
-                     
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Request Service
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownPortfolio">
-                          <a class="dropdown-item" href="labservices.html">Laboratory Services</a>
-                          <a class="dropdown-item" href="portfolio-2-col.html">Halal Quality Assurance</a>         
-                        </div>
-                      </li>                       
-                    <li id="listProducts">
+                     <li id="listProducts">
                         <a href="${contextRoot}/show/all/products">View Products</a>
-                    </li>
+                    </li>               
+                     <li id="services" class="dropdown">
+			            <a href="${contextRoot}/home" class="dropdown-toggle" data-toggle="dropdown" role="button" >Our Halal Services</a>
+			            <ul class="dropdown-menu">
+			               <li><i>&nbsp;&nbsp;Halal Laboratory Services:</i></li>
+			                <li><a href="${contextRoot}/servicesLabTesting">&nbsp;&nbsp;Testing and Verification</a></li>
+			                <li><a href="${contextRoot}/servicesLabOnSite">&nbsp;&nbsp;On-Site Assessment and Product Certification</a></li>
+			               <li role="separator" class="divider"></li>
+			               <li><i>&nbsp;&nbsp;Other Services:</i></li>
+			               <li><a href="${contextRoot}/servicesFoodDevelopment">&nbsp;&nbsp;Halal Food Developement/Training</a></li>
+			               <li><a href="${contextRoot}/servicesResearch">&nbsp;&nbsp;Halal Research and Development</a></li>
+			               <li><a href="${contextRoot}/servicesPackageLabel">&nbsp;&nbsp;Halal Packaging and Labeling</a></li>
+			          </ul>
+			        </li>
+
                      <li id="multimedia">
                         <a href="${contextRoot}/multimedia">View Multimedia</a>
                     </li>
@@ -54,11 +48,11 @@
                     <li id="about">
                         <a href="${contextRoot}/about">About Us</a>
                     </li>                                                           
-					<security:authorize access="hasAuthority('ADMIN')">
+<%-- 					<security:authorize access="hasAuthority('ADMIN')">
 	                    <li id="manageProduct">
 	                        <a href="${contextRoot}/manage/product">Manage Product</a>
 	                    </li>					
-					</security:authorize>
+					</security:authorize> --%>
                 </ul>
 			    
 			    <ul class="nav navbar-nav navbar-right">

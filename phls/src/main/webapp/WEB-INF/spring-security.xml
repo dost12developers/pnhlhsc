@@ -18,10 +18,22 @@
 	<http>
 		<!-- only admin access -->
 		<intercept-url pattern="/manage/**" access="hasAuthority('ADMIN')" />
-		<!-- only admin lab access -->
-		<intercept-url pattern="/laboratory-admin/**" access="hasAuthority('ADMIN_LAB')" />		
-		<!-- only user access (who is registered) -->
+		
+		<!-- only lab access -->
+		<intercept-url pattern="/laboratory/**" access="hasAuthority('LABORATORY')" />	
+							
+		<!-- only supplier access -->
+		<intercept-url pattern="/supplier/**" access="hasAuthority('SUPPLIER')" />
+		
+		<!-- only distributor access -->
+		<intercept-url pattern="/distributor/**" access="hasAuthority('DISTRIBUTOR')" />			
+
+		<!-- only staff access -->
+		<intercept-url pattern="/staff/**" access="hasAuthority('STAFF')" />
+		
+		<!-- only user access (who is registered) -->			
 		<intercept-url pattern="/cart/**" access="hasAuthority('USER')" />
+		
 		<!-- rest of the world -->			
 		<intercept-url pattern="/**" access="permitAll" />
 		<form-login login-page="/login" />
@@ -32,8 +44,8 @@
 		<authentication-provider>
  			<password-encoder ref="passwordEncoder" />
  			<jdbc-user-service data-source-ref="dataSource"
- 				authorities-by-username-query="select email, role from user_detail where email = ?"
- 				users-by-username-query="select email, password, enabled from user_detail where email = ?"
+ 				authorities-by-username-query="select email, role from user where email = ?"
+ 				users-by-username-query="select email, password, enabled from user where email = ?"
  			/>
  		</authentication-provider>
 	</authentication-manager>
