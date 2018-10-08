@@ -38,16 +38,16 @@ public class ProductTestCase {
 		// create operation
 		product = new Product();
 				
-/*		product.setName("1product name XYZ");
-		product.setBrand("XYZ");
-		product.setDescription("description XYZ");
+		product.setName("Tomato");
+		product.setBrand("Manang Karen");
+		product.setDescription("This available for you.");
 		product.setUnitPrice(25000);
 		product.setActive(true);
 		product.setCategoryId(3);
 		product.setSupplierId(3);
-		product.setCertificationId(3);
+
 		assertEquals("Something went wrong while inserting a new product!",
-				true,productDAO.add(product));	*/	
+				true,productDAO.add(product));	
 		
 		
 		// reading and updating the category

@@ -379,4 +379,9 @@ body.sidebar-toggled footer.sticky-footer {
 	height: 100px;
 	
 } 
+
+.trash{
+	padding:2px; border:1px solid red; margin-left:10px; background-color:red; color:#fff
+	}
+
 }

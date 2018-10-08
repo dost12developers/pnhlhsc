@@ -50,6 +50,9 @@ public class Product implements Serializable {
 	
 	private int quantity;
 	
+	@Column(name = "unit_price")
+	private double unitPrice;	
+
 	private Double weight;
 	
 	@Column(name = "manufactured_date")
@@ -57,10 +60,6 @@ public class Product implements Serializable {
 	
 	@Column(name = "expiration_date")
 	private Date expirationDate;
-	
-	@Column(name = "unit_price")
-	@Min(value = 1, message="Please select at least one value!")
-	private double unitPrice;
 	
 	
 	@Column(name = "nutrition_facts")
@@ -123,7 +122,7 @@ public class Product implements Serializable {
 	// default constructor
 	public Product() {
 		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();		
-		active = true;
+		this.active = true;
 	}
 
 	// setters and getters	

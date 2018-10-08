@@ -56,49 +56,18 @@
 				<div class="col-xs-12">
 
 
-					<!-- <table id="productListTableId" class="table table-striped table-borderd">
-						<thead>
-							<tr>
-								<th></th>
-								<th>Name</th>
-								<th>Produced By</th>
-								<th>Ingredients</th>
-								<th>View More Info</th>
-								<th>Order</th>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th></th>
-								<th>Name</th>
-								<th>Produced By</th>
-								<th>Ingredients</th>
-								<th>View More Info</th>
-								<th>Order</th>
-							</tr>
-						</tfoot>
-						<tbody>
-							<tr>
-								<td></td>
-								<td>Crunchy Atchara Papaya</td>
-								<td>Mommy Juling</td>
-								<td>Papaya, Vinegar, Sugar, Bell Peppers, Carrots, Pineapple, Ginger, Onion, Garlic and Salts</td>
-								<td>View</td>
-								<td>Order</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>Macapuno</td>
-								<td>Kablon Farms</td>
-								<td>Macapuno, Sugar and Water</td>
-								<td>View</td>
-								<td>Order</td>
-							</tr>							
-						</tbody>
-					</table> -->
+<div id="hacker-list">
+  <ul class="list"></ul>
+</div>
 
-					<!-- 1 -->
-					<div class="col-md-3 ">
+<div style="display:none;">
+  <!-- A template element is needed when list is empty, TODO: needs a better solution -->
+  <li id="hacker-item">
+   <h3 class="name"></h3>
+   <p class="city"></p>
+  </li>
+</div>
+					<%-- <div class="col-md-3 ">
 						<div class="card mb-4 shadow-lg">
 							<img class="card-img-top" src="${images}/halalproduct_6.png" alt="" data-holder-rendered="true"
 								style="height: 100%; width: 100%; display: block;">
@@ -117,7 +86,7 @@
 															data-target="#myModal">More Info</button>
 												</center>
 
-												<!-- Modal -->
+											
 												<div class="modal fade" id="myModal" role="dialog">
 													<div class="modal-dialog">
 														<!-- Modal content-->
@@ -162,7 +131,7 @@
 
 
 
-					<!-- 2 -->
+				
 					<div class="col-md-3 ">
 						<div class="card mb-4 shadow-lg">
 							<img class="card-img-top" src="${images}/halalproduct_1.png"
@@ -216,7 +185,7 @@
 
 
 
-					<!-- 3 -->
+
 					<div class="col-md-3 ">
 						<div class="card mb-4 shadow-lg">
 							<img class="card-img-top" src="${images}/halalproduct_1.png"
@@ -269,7 +238,7 @@
 					</div>
 
 
-					<!-- 4 -->
+	
 					<div class="col-md-3 ">
 						<div class="card mb-4 shadow-lg">
 							<img class="card-img-top" src="${images}/halalproduct_1.png"
@@ -329,12 +298,12 @@
 		</div>
 
 
-
-	</div>
-
-
+ --%>
+				</div>
 
 
 
 
-</div>
+
+
+			</div>

@@ -143,7 +143,19 @@
 
 		<!-- Self coded javascript -->
 		<script src="${js}/myapp.js"></script>
+		
+		<script src="${js}/list.min.js"></script>
+		<script>
 
+		var jsonUrl = '';            
+		jsonUrl = window.contextRoot + '/json/lab/data/all/certifications';
+		
+		var options = {
+			    item: 'hacker-item'
+			};
+
+			var hackerList = new List('hacker-list', options, jsonUrl);
+		</script>
 
 	</div>
 

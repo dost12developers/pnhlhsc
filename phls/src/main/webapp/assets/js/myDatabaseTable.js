@@ -26,7 +26,7 @@ $(document).ready(function() {
 					ajax : {
 						url : jsonUrl,
 						dataSrc : ''
-					},
+					},				
 					columns : [
 							{
 								data : 'id'
@@ -40,32 +40,36 @@ $(document).ready(function() {
 							{
 								data : 'id',
 								bSortable : false,
+								width: "11%",
 								mRender : function(data, type, row) {
-
 									var str = '';
 									if(userRole === 'LABORATORY') {
 									str += '<a href="'
 											+ window.contextRoot
-											+ '/laboratory/category?id='
+											+ '/laboratory/categories?id='
 											+ data
-											+ '" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a> &#160;';
-
-								
-										str += '<a href="'
+											+ '"><i class="fa fa-pencil">Edit</i></a> | ';
+									str += '<a href="'
 											+ window.contextRoot
-											+ '/manage/'
-											+ data
-											+ '/product" class="btn btn-danger"><i class="fas fa-fw fa-exclamation-circle"></i></a>';
+											+ '/laboratory/category/'
+											+ data											
+											+ '/delete" data-confirm="Are you sure you want to delete?">'
+											+ '<i class="fa fa-pencil">Delete</i></a>';
 									}
-									
 									return str;
 								}
 							}]
+
 				});
 	}
 
-	
-	
+	$tableCategory.on('click', ':not(form)[data-confirm]', function(e){
+	    if(!confirm($(this).data('confirm'))){
+	      e.stopImmediatePropagation();
+	      e.preventDefault();
+			}
+	});
+
 	var $dataCertification = $('#dataTableCertificationId');
 	if ($dataCertification.length) {
 		var jsonUrl = '';            
@@ -141,9 +145,9 @@ $(document).ready(function() {
 		$dataProduct
 				.DataTable({
 
-					lengthMenu : [ [  5, 15, 20 ],
+					lengthMenu : [ [  10, 15, 20 ],
 							       [ '10 Records', '15 Records', '20 Records' ] ],
-					pageLength : 5,
+					pageLength : 10,
 					ajax : {
 						url : jsonUrl,
 						dataSrc : ''
@@ -153,7 +157,6 @@ $(document).ready(function() {
 								data : 'code',
 								bSortable : false,
 								mRender : function(data, type, row) {
-	
 									return '<img src="' + window.contextRoot
 											+ '/resources/images/' + data
 											+ '.png" class="dataTableImg"/>';
@@ -182,11 +185,40 @@ $(document).ready(function() {
 							},
 							{
 								data : 'certifications'
+							},
+							{
+								data : 'id',
+								bSortable : false,
+								width: "11%",
+								mRender : function(data, type, row) {
+									var str = '';
+									if(userRole === 'LABORATORY') {
+									str += '<a href="'
+											+ window.contextRoot
+											+ '/laboratory/product?id='
+											+ data
+											+ '"><i class="fa fa-pencil">Edit</i></a> | ';
+									str += '<a href="'
+											+ window.contextRoot
+											+ '/laboratory/product/'
+											+ data											
+											+ '/delete" data-confirm="Are you sure you want to delete?">'
+											+ '<i class="fa fa-pencil">Delete</i></a>';
+									}
+									return str;
+								}
 							}
 							]
 				});
 	}
 
+	$dataProduct.on('click', ':not(form)[data-confirm]', function(e){
+	    if(!confirm($(this).data('confirm'))){
+	      e.stopImmediatePropagation();
+	      e.preventDefault();
+			}
+	});
+	
 	var $dataManufacture = $('#dataTableManufactureId');
 	if ($dataManufacture.length) {
 		var jsonUrl = '';            
@@ -217,8 +249,5 @@ $(document).ready(function() {
 							]
 				});
 	}
-	
-
-
 
 });

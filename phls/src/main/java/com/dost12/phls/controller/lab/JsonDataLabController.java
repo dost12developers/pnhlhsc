@@ -58,7 +58,7 @@ public class JsonDataLabController {
 	@RequestMapping("/all/products")
 	@ResponseBody
 	public List<Product> getAllProductsJSONList() {		
-		return productDAO.list();
+		return productDAO.listActiveProducts();
 	}
 	
 	@RequestMapping("/all/manufacatures")

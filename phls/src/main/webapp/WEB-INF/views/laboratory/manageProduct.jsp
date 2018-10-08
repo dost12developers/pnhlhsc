@@ -12,6 +12,7 @@
               <i class="fas fa-table"></i>
               List of Products</div>
             <div class="card-body">
+            <a class="btn btn-primary" href="${contextRoot}/laboratory/product">Add New Product</a><br><br>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTableProductId" width="100%" cellspacing="0">
                   <thead>
@@ -24,6 +25,7 @@
 					    <th>Weight</th>
 					    <th>Ingredient</th>
 					    <th>Certifications</th>
+					    <th></th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -36,6 +38,7 @@
 					    <th>Weight</th>
 					    <th>Ingredient</th>
 					    <th>Certifications</th>
+					    <th></th>
                     </tr>
                   </tfoot>
                 </table>
