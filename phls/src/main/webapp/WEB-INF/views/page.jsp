@@ -27,6 +27,8 @@
 	window.menu = '${title}';
 
 	window.contextRoot = '${contextRoot}'
+
+	window.image = '${images}';
 </script>
 
 <!-- Bootstrap Core CSS -->
@@ -45,10 +47,10 @@
 <!-- Custom CSS -->
 <!-- Bootstrap Readable Theme -->
 
- 
+   <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">  
   <link href="${css}/myapp.css" rel="stylesheet"> 
  
-  <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">  
+
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -140,21 +142,15 @@
 
 <%-- 	    <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script> --%>
 
-
-		<!-- Self coded javascript -->
+		<script src="${js}/list.min.js"></script>
+		<!-- Self coded javascript -->	
 		<script src="${js}/myapp.js"></script>
 		
-		<script src="${js}/list.min.js"></script>
+		
 		<script>
 
-		var jsonUrl = '';            
-		jsonUrl = window.contextRoot + '/json/lab/data/all/certifications';
-		
-		var options = {
-			    item: 'hacker-item'
-			};
 
-			var hackerList = new List('hacker-list', options, jsonUrl);
+				
 		</script>
 
 	</div>

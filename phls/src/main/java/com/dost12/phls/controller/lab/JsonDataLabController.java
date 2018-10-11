@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -59,6 +60,12 @@ public class JsonDataLabController {
 	@ResponseBody
 	public List<Product> getAllProductsJSONList() {		
 		return productDAO.listActiveProducts();
+	}
+
+	@RequestMapping("/category/{id}/products")
+	@ResponseBody
+	public List<Product> getProductsByCategory(@PathVariable int id) {
+		return productDAO.listActiveProductsByCategory(id);
 	}
 	
 	@RequestMapping("/all/manufacatures")

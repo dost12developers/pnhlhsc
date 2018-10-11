@@ -25,34 +25,40 @@ $(function() {
 
 	case 'About Us':
 		$('#about').addClass('active');
+		$("#login").css("display", "none");
+		$("#signup").css("display", "none");	
 		break;
 	case 'Contact Us':
 		$('#contact').addClass('active');
+		$("#login").css("display", "none");
+		$("#signup").css("display", "none");		
 		break;
 	case 'All Products':
 		$('#listProducts').addClass('active');
+
 		break;
+	case 'Enterprise':
+		$('#enterprise').addClass('active');
+		$("#login").css("display", "none");
+		$("#signup").css("display", "none");			
+		break;		
 	case 'Testing and Verification':
 	case 'On-Site Assessment and Product Certification':
 	case 'Halal Food Developement/Training':
 	case 'Halal Packaging and Labeling':
 	case 'Halal Research and Development':
-		$('#services').addClass('active');
+	
+		$('#enterprise').addClass('active');
+		$("#login").css("display", "none");
+		$("#signup").css("display", "none");	
 		break;
-	case 'Multimedia':
-		$('#multimedia').addClass('active');
-		break;
-	case 'Product Management':
-		$('#manageProduct').addClass('active');
-		break;
-	case 'Shopping Cart':
-		$('#userModel').addClass('active');
-		break;		
 	default:
 		if (menu == "Home")
 			break;
 		$('#listProducts').addClass('active');
 		$('#a_' + menu).addClass('active');
+		$("#login").css("display", "none");
+		$("#signup").css("display", "none");	
 		break;
 	}
 
@@ -420,5 +426,65 @@ $(function() {
 				window.location.href = updateUrl;
 			}
 		}
-	});			
+	});
+	
+	
+	if(menu === 'All Products' || window.categoryId != ''){
+	var jsonUrl = '';
+	if (window.categoryId == '') {
+		jsonUrl = window.contextRoot + '/json/lab/data/all/products';
+	} else {
+		jsonUrl = window.contextRoot + '/json/lab/data/category/'
+				+ window.categoryId + '/products';
+	}
+
+	$.getJSON(jsonUrl, function(json) {
+				  
+			    for (i=0; i<Object.keys(json).length; i++) {		 
+			    	var s = "";
+					s =   '<li style="list-style-type: none;"><div class="col-md-3"><div style="margin :10%">'
+						+ '<div class="card mb-4 shadow-lg">'
+							+ '<img class="card-img-top" src="'+image+'/'+json[i].code+'.png" alt="" data-holder-rendered="true"'
+								+ 'style="height: 100%; width: 100%; display: block;">'
+							+'<div class="card-body">'
+								+'<div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">'
+								   +'<div class="card">'
+										+'<div class="card-header" role="tab" id="headingTwo">'
+											+'<h5 class="mb-0">'
+												+'<h6 class="name"><center>'+json[i].name+'</center></h6><hr><center>'
+												+'<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal_'+json[i].id+'">More Info</button></center>'
+												 +'<div class="modal fade" id="myModal_'+json[i].id+'" role="dialog">'
+													+'<div class="modal-dialog">'
+														+'<div class="modal-content">'
+															+'<div class="modal-header">'
+																+'<button type="button" class="close" data-dismiss="modal">&times;</button></div>'
+															+'<div class="modal-body">'
+																+'<div class="col-md-12 ">'
+																	+'<div class="card mb-2 shadow-lg">'
+																		+'<img class="card-img-top" src="'+image+'/'+json[i].code+'.png" alt="" data-holder-rendered="true"'
+																			+'style="height: 100%; width: 100%; display: block;">'
+																		+'<hr><h6>'+json[i].name+'</h6><hr>'
+																		+'<hr><h6 class="code" >'+json[i].code+'</h6><hr>'
+																		+'<h7>'+json[i].description+'</h7><br/></div>'
+
+																+'</div>'
+															+'</div>'
+															+'<div class="modal-footer">'
+																+'<button type="button" class="btn btn-sm btn-info" data-dismiss="modal">Close</button>'
+															+'</div></div></div></div></div></div></div></div></div></div></div></li>';					
+			      $('#myproductsid').append(s);
+
+			    }
+			 	var options = {
+				     	valueNames: [ 'name', 'code'],
+				     	page: 4,
+				     	pagination: true
+				  };
+				 var halalList = new List('halal-item', options);
+			    
+				  
+	 });
+
+	}
+		
 });

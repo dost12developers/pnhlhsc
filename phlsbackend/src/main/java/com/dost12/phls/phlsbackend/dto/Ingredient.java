@@ -35,14 +35,16 @@ public class Ingredient  implements Serializable{
 	private boolean active;
 	
 	private String name;
+	private Boolean critical;
 	private String description;
-	private String mark;
 	
 	
 	public Ingredient() {
 		super();
 		active = true;
-		mark = null;
+		critical = false;
+		createdOn = new Date();
+		updateOn = new Date();
 	}
 	public int getId() {
 		return id;
@@ -74,18 +76,20 @@ public class Ingredient  implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Boolean getCritical() {
+		return critical;
+	}
+	public void setCritical(Boolean critical) {
+		this.critical = critical;
+	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getMark() {
-		return mark;
-	}
-	public void setMark(String mark) {
-		this.mark = mark;
-	}
+	
 
 	
 	

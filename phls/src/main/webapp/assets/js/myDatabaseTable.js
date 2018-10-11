@@ -130,10 +130,10 @@ $(document).ready(function() {
 									data : 'name'
 								},
 								{
-									data : 'description'
-								},
+									data : 'critical'
+								},								
 								{
-									data : 'mark'
+									data : 'description'
 								}]
 					});
 		}
@@ -245,6 +245,9 @@ $(document).ready(function() {
 							},
 							{
 								data : 'website'
+							 },
+							{
+								data : 'addresses'
 							 }
 							]
 				});

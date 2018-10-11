@@ -39,6 +39,11 @@ public class IngredientDetail implements Serializable{
 	@Column(name="is_active")
 	private Boolean active;
 	
+	private Boolean mark;
+
+	@Column(name="mark_description")
+	private String markDescription;
+	
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
@@ -52,6 +57,8 @@ public class IngredientDetail implements Serializable{
 	public IngredientDetail() {
 		super();
 		active = true;
+		createdOn = new Date();
+		updateOn = new Date();
 	}
 
 	public int getId() {
@@ -100,6 +107,22 @@ public class IngredientDetail implements Serializable{
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public Boolean getMark() {
+		return mark;
+	}
+
+	public void setMark(Boolean mark) {
+		this.mark = mark;
+	}
+
+	public String getMarkDescription() {
+		return markDescription;
+	}
+
+	public void setMarkDescription(String markDescription) {
+		this.markDescription = markDescription;
 	}
 
 

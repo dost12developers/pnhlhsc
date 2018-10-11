@@ -55,17 +55,7 @@
 						<td><sf:input path="weight" class="form-control"
 								placeholder="Weight" /></td>
 					</tr>
-					<tr>
-<%-- 					<tr>
-						<td><sf:label path="manufacturedDate" class="control-label">Date of manufactured</sf:label></td>
-						<td><sf:input path="manufacturedDate" type="date"
-								class="form-control" /></td>
-					</tr>
-					<tr>
-						<td><sf:label path="expirationDate" class="control-label">Date of Expiration</sf:label></td>
-						<td><sf:input path="expirationDate" type="date"
-								class="form-control" /></td>
-					</tr> --%>
+
 					<tr>
 						<td><sf:label path="nutritionFacts" class="control-label">Nutrition Facts</sf:label></td>
 						<td><sf:input path="nutritionFacts" type="textarea"
