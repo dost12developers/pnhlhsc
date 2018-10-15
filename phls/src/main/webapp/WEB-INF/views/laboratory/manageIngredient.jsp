@@ -67,7 +67,18 @@
 						<sf:textarea path="description" class="form-control"
 							placeholder="Enter category description here!" /> 
 					</div>
-				</div>	  				
+				</div> 
+				<div class="form-group">
+				<label class="control-label col-md-4">Mark Ingredient</label>
+				<div class="col-md-8">
+					<label class="radio-inline">
+						<sf:radiobutton path="critical" value="false" checked="checked"/> None Critical  				
+					</label>
+					<label class="radio-inline">
+						<sf:radiobutton path="critical" value="true"/>&nbsp;Critical
+					</label>
+				</div>
+			</div>								  				
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

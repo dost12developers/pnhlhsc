@@ -23,10 +23,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                      <li id="listProducts">
-                        <a href="${contextRoot}/show/all/products">View Products</a>
-                    </li>               
-                     <li id="services" class="dropdown">
-			            <a href="${contextRoot}/home" class="dropdown-toggle" data-toggle="dropdown" role="button" >Our Halal Services</a>
+                        <a href="${contextRoot}/show/all/products">Products</a>
+                    </li> 
+                     <li id="enterprise">
+                        <a href="${contextRoot}/enterprise">Enterprise</a>
+                    </li>                                    
+<%--                      <li id="services" class="dropdown">
+			            <a href="${contextRoot}/home" class="dropdown-toggle" data-toggle="dropdown" role="button" >Enterprise</a>
 			            <ul class="dropdown-menu">
 			               <li><i>&nbsp;&nbsp;Halal Laboratory Services:</i></li>
 			                <li><a href="${contextRoot}/servicesLabTesting">&nbsp;&nbsp;Testing and Verification</a></li>
@@ -37,17 +40,18 @@
 			               <li><a href="${contextRoot}/servicesResearch">&nbsp;&nbsp;Halal Research and Development</a></li>
 			               <li><a href="${contextRoot}/servicesPackageLabel">&nbsp;&nbsp;Halal Packaging and Labeling</a></li>
 			          </ul>
-			        </li>
+			        </li> --%>
 
-                     <li id="multimedia">
+<%--                      <li id="multimedia">
                         <a href="${contextRoot}/multimedia">View Multimedia</a>
-                    </li>
+                    </li> --%>
+                    <li id="about">
+                        <a href="${contextRoot}/about">About Us</a>
+                    </li>                      
                      <li id="contact">
                         <a href="${contextRoot}/contact">Contact</a>
                     </li>
-                    <li id="about">
-                        <a href="${contextRoot}/about">About Us</a>
-                    </li>                                                           
+                                                         
 <%-- 					<security:authorize access="hasAuthority('ADMIN')">
 	                    <li id="manageProduct">
 	                        <a href="${contextRoot}/manage/product">Manage Product</a>

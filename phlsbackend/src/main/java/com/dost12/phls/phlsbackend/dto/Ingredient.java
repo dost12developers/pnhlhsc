@@ -2,15 +2,20 @@ package com.dost12.phls.phlsbackend.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
+@Table(name="ingredient")
 public class Ingredient  implements Serializable{
 
 	/**
@@ -28,7 +33,7 @@ public class Ingredient  implements Serializable{
 	@Column(name="created_on")
 	private Date createdOn;
 	
-	@Column(name="update_on")
+	@Column(name="updated_on")
 	private Date updateOn;
 	
 	@Column(name="is_active")
@@ -89,8 +94,13 @@ public class Ingredient  implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	@Override
+	public String toString() {
+		return "Ingredient [id=" + id + ", createdOn=" + createdOn + ", updateOn=" + updateOn + ", active=" + active
+				+ ", name=" + name + ", critical=" + critical + ", description=" + description + "]";
+	}
 
+	
 	
 	
 }

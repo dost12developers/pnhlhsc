@@ -2,12 +2,18 @@ package com.dost12.phls.phlsbackend.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.dost12.phls.phlsbackend.dao.CertificateDAO;
+import com.dost12.phls.phlsbackend.dao.IngredientDAO;
+import com.dost12.phls.phlsbackend.dao.IngredientDetailDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
+import com.dost12.phls.phlsbackend.dto.IngredientDetail;
 import com.dost12.phls.phlsbackend.dto.Product;
 
 public class ProductTestCase {
@@ -19,6 +25,9 @@ public class ProductTestCase {
 	
 	private static CertificateDAO certificateDAO;
 	
+	private static IngredientDAO ingredientDAO;
+	
+	private static IngredientDetailDAO ingredientDetailDAO;	
 	
 	private Product product;
 	
@@ -30,25 +39,39 @@ public class ProductTestCase {
 		context.refresh();
 		productDAO = (ProductDAO)context.getBean("productDAO");
 		certificateDAO = (CertificateDAO) context.getBean("certificateDAO");
+		ingredientDAO = (IngredientDAO) context.getBean("ingredientDAO");
+		ingredientDetailDAO = (IngredientDetailDAO) context.getBean("ingredientDetailDAO");
 	}
 	
 	@Test
 	public void testCRUDProduct() {
 		
 		// create operation
-		product = new Product();
+/*		product = new Product();
 				
-		product.setName("Tomato");
-		product.setBrand("Manang Karen");
+		product.setName("Coke");
+		product.setBrand("Coke");
 		product.setDescription("This available for you.");
 		product.setUnitPrice(25000);
 		product.setActive(true);
-		product.setCategoryId(3);
-		product.setSupplierId(3);
-
-		assertEquals("Something went wrong while inserting a new product!",
-				true,productDAO.add(product));	
+		product.setCategoryId(4);
+		product.setSupplierId(4);
 		
+		IngredientDetail ingredientDetail = new IngredientDetail();
+		ingredientDetail.setProduct(product);
+		ingredientDetail.setIngredient(ingredientDAO.get(1));
+		ingredientDetail.setMark(true);
+		
+		product.getIngredientDetails().add(ingredientDetail);
+		
+		productDAO.add(product);
+		ingredientDetailDAO.add(ingredientDetail);*/
+
+	
+		
+
+/*		assertEquals("Something went wrong while updating the existing record!",
+				true, p.getIngredientDetails().size());		*/		
 		
 		// reading and updating the category
 /*		product = productDAO.get(2);

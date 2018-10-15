@@ -33,7 +33,7 @@ public class IngredientDetail implements Serializable{
 	private Date createdOn;
 	
 	
-	@Column(name="update_on")
+	@Column(name="updated_on")
 	private Date updateOn;
 
 	@Column(name="is_active")
@@ -49,7 +49,7 @@ public class IngredientDetail implements Serializable{
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name = "ingredient_id")
+	@JoinColumn(name = "ingredient_id", nullable=false)
 	private Ingredient ingredient;
 
 	
@@ -57,8 +57,11 @@ public class IngredientDetail implements Serializable{
 	public IngredientDetail() {
 		super();
 		active = true;
+		mark = true;
 		createdOn = new Date();
 		updateOn = new Date();
+		markDescription = ""; 
+		product = new Product();
 	}
 
 	public int getId() {

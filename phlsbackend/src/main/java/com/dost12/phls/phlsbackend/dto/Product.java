@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -90,27 +92,37 @@ public class Product implements Serializable {
 	private double destinationLongitude;	
 	
 	@Transient
-	@OneToMany(mappedBy="product")
+	@OneToMany
 	private List<Shipment> locations;
 	
 	@Transient
-	@OneToMany(mappedBy="product")
+	@OneToMany
 	private List<Certification> certifications;	
 
 	@Transient
-	@OneToMany(mappedBy="product")
-	private List<Ingredient> ingredients;	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
+	private List<IngredientDetail> ingredientDetails;	
 	
 	@Transient
 	private MultipartFile file;
+	
+
 	
 	private int purchases;
 	
 	private int views;
 	
-	
 
+	// default constructor
+	public Product() {
+		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();		
+		this.active = true;
+		locations = new ArrayList<>();
+		certifications = new ArrayList<>();
+		ingredientDetails = new ArrayList<>();
+	}
 
+	// setters and getters	
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -119,13 +131,6 @@ public class Product implements Serializable {
 		this.file = file;
 	}
 
-	// default constructor
-	public Product() {
-		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();		
-		this.active = true;
-	}
-
-	// setters and getters	
 	public int getId() {
 		return id;
 	}
@@ -277,15 +282,17 @@ public class Product implements Serializable {
 		this.certifications = certifications;
 	}
 
-	public List<Ingredient> getIngredients() {
-		return ingredients;
-	}
 
-	public void setIngredients(List<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
 
 	
+	public List<IngredientDetail> getIngredientDetails() {
+		return ingredientDetails;
+	}
+
+	public void setIngredientDetails(List<IngredientDetail> ingredientDetails) {
+		this.ingredientDetails = ingredientDetails;
+	}
+
 	public String getNutritionFacts() {
 		return nutritionFacts;
 	}
@@ -294,17 +301,20 @@ public class Product implements Serializable {
 		this.nutritionFacts = nutritionFacts;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", active=" + active + ", code=" + code + ", name=" + name + ", brand=" + brand
-				+ ", description=" + description + ", quantity=" + quantity + ", weight=" + weight
-				+ ", manufacturedDate=" + manufacturedDate + ", expirationDate=" + expirationDate + ", unitPrice="
-				+ unitPrice + ", nutritionFacts=" + nutritionFacts + ", categoryId=" + categoryId + ", supplierId="
-				+ supplierId + ", originLatitude=" + originLatitude + ", originLongitude=" + originLongitude
+				+ ", description=" + description + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", weight="
+				+ weight + ", manufacturedDate=" + manufacturedDate + ", expirationDate=" + expirationDate
+				+ ", nutritionFacts=" + nutritionFacts + ", categoryId=" + categoryId + ", supplierId=" + supplierId
+				+ ", originLatitude=" + originLatitude + ", originLongitude=" + originLongitude
 				+ ", destinationLatitude=" + destinationLatitude + ", destinationLongitude=" + destinationLongitude
-				+ ", locations=" + locations + ", certifications=" + certifications + ", ingredients=" + ingredients
-				+ ", file=" + file + ", purchases=" + purchases + ", views=" + views + "]";
+				+ ", locations=" + locations + ", certifications=" + certifications + ", ingredientDetails="
+				+ ingredientDetails + ", file=" + file + ", purchases=" + purchases + ", views=" + views + "]";
 	}
+
+
 
 
 	

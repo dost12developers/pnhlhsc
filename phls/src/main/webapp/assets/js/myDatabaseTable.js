@@ -130,14 +130,20 @@ $(document).ready(function() {
 									data : 'name'
 								},
 								{
-									data : 'critical'
-								},								
-								{
 									data : 'description'
+								},
+								{
+									data : 'critical',
+									mRender : function(data, type, row) {
+											if( data == true )
+												return 'Critcal';
+											else
+												return'None';
+									}
 								}]
 					});
 		}
-    
+
 	var $dataProduct = $('#dataTableProductId');
 	if ($dataProduct.length) {
 		var jsonUrl = '';            
@@ -145,9 +151,9 @@ $(document).ready(function() {
 		$dataProduct
 				.DataTable({
 
-					lengthMenu : [ [  10, 15, 20 ],
-							       [ '10 Records', '15 Records', '20 Records' ] ],
-					pageLength : 10,
+					lengthMenu : [ [  5, 10, 15 ],
+							       [ '5 Records', '10 Records', '15 Records' ] ],
+					pageLength : 5,
 					ajax : {
 						url : jsonUrl,
 						dataSrc : ''
@@ -176,15 +182,14 @@ $(document).ready(function() {
 							},	
 							{
 								data : 'description'
-							},
-							{
-								data : 'weight'
-							 },
-							{
-								data : 'ingredients'
-							},
-							{
-								data : 'certifications'
+							},{
+								data : 'id',
+/*								bSortable : false,
+								width: "11%",
+								mRender : function(data, type, row) {
+									var str = '';
+									return str;
+								}*/
 							},
 							{
 								data : 'id',
@@ -245,9 +250,6 @@ $(document).ready(function() {
 							},
 							{
 								data : 'website'
-							 },
-							{
-								data : 'addresses'
 							 }
 							]
 				});

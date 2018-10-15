@@ -33,7 +33,7 @@ public class CartLineTestCase {
 		context = new AnnotationConfigApplicationContext();
 		context.scan("com.dost12.phls.phlsbackend");
 		context.refresh();
-		cartLineDAO = (CartLineDAO)context.getBean("cartLineDAO");
+		/*cartLineDAO = (CartLineDAO)context.getBean("cartLineDAO");*/
 		productDAO = (ProductDAO)context.getBean("productDAO");
 		userDAO = (UserDAO)context.getBean("userDAO");
 	}
@@ -69,7 +69,7 @@ public class CartLineTestCase {
 	
 	*/
 	
-	@Test
+/*	@Test
 	public void testUpdateCartLine() {
 
 		// fetch the user and then cart of that user
@@ -89,7 +89,7 @@ public class CartLineTestCase {
 		assertEquals("Failed to update the CartLine!",true, cartLineDAO.update(cartLine));	
 
 		
-	}
+	}*/
 	
 	
 	

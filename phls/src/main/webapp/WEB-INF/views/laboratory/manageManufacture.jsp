@@ -20,7 +20,7 @@
                       <th>Name</th>
                       <th>Telephone No.</th>
                       <th>Website</th>
-                      <th>Address</th>
+                    
                     </tr>
                   </thead>
                   <tfoot>
@@ -29,7 +29,7 @@
                       <th>Name</th>
                       <th>Telephone No.</th>
                       <th>Website</th>
-                   	  <th>Address</th>
+                   
                     </tr>
                   </tfoot>
                 </table>

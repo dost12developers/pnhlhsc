@@ -63,7 +63,8 @@
 					</tr>
 					<tr>
 						<td><sf:label path="categoryId" class="control-label">Category</sf:label></td>
-						<td><sf:input path="categoryId" class="form-control" /></td>
+						<td><sf:select path="categoryId" items="${categories}" itemLabel="name" itemValue="id" class="form-control"/></td>
+						
 					</tr>
 					<tr>
 						<td><sf:label path="supplierId" class="control-label">Supplier</sf:label></td>

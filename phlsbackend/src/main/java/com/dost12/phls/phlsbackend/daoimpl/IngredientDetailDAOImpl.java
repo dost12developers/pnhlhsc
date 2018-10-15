@@ -15,6 +15,7 @@ import com.dost12.phls.phlsbackend.dao.IngredientDetailDAO;
 import com.dost12.phls.phlsbackend.dto.Category;
 import com.dost12.phls.phlsbackend.dto.Ingredient;
 import com.dost12.phls.phlsbackend.dto.IngredientDetail;
+import com.dost12.phls.phlsbackend.dto.Product;
 
 @Repository("ingredientDetailDAO")
 @Transactional
@@ -91,6 +92,19 @@ public class IngredientDetailDAOImpl implements IngredientDetailDAO {
 			ex.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public List<IngredientDetail> getList(Product product) {
+		String selectActiveCategory = "FROM IngredientDetail WHERE active = :active AND product = :product";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(selectActiveCategory);
+		
+		query.setParameter("active", true);
+		
+		query.setParameter("product", product);
+		
+		return query.getResultList();
 	}
 
 }

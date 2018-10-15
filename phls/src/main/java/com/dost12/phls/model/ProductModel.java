@@ -1,13 +1,17 @@
 package com.dost12.phls.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.dost12.phls.phlsbackend.dto.Category;
 import com.dost12.phls.phlsbackend.dto.Certification;
 import com.dost12.phls.phlsbackend.dto.Ingredient;
+import com.dost12.phls.phlsbackend.dto.IngredientDetail;
 import com.dost12.phls.phlsbackend.dto.Product;
 import com.dost12.phls.phlsbackend.dto.Shipment;
 
-public class ProductModel implements Serializable{
+public class ProductModel implements Serializable {
 
 	/**
 	 * 
@@ -15,12 +19,20 @@ public class ProductModel implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Product product;
-	
-	private Ingredient ingredient;
-	
-	private Shipment shipment;
-	
-	private Certification certification;
+    private List<IngredientDetail> ingredientDetails;
+    private List<Ingredient> ingredients;
+	private List<Shipment> shipments;
+	private List<Certification> certifications;
+
+
+	public ProductModel() {
+		super();
+		ingredientDetails = new ArrayList<>();
+		shipments = new ArrayList<>(); 
+		certifications = new ArrayList<>();
+		ingredientDetails = new ArrayList<>();
+		ingredients = new ArrayList<>();
+	}
 
 	public Product getProduct() {
 		return product;
@@ -30,31 +42,36 @@ public class ProductModel implements Serializable{
 		this.product = product;
 	}
 
-	public Ingredient getIngredient() {
-		return ingredient;
+	public List<IngredientDetail> getIngredientDetails() {
+		return ingredientDetails;
 	}
 
-	public void setIngredient(Ingredient ingredient) {
-		this.ingredient = ingredient;
+	public void setIngredientDetails(List<IngredientDetail> ingredientDetails) {
+		this.ingredientDetails = ingredientDetails;
 	}
 
-	public Shipment getShipment() {
-		return shipment;
+	public List<Shipment> getShipments() {
+		return shipments;
 	}
 
-	public void setShipment(Shipment shipment) {
-		this.shipment = shipment;
+	public void setShipments(List<Shipment> shipments) {
+		this.shipments = shipments;
 	}
 
-	public Certification getCertification() {
-		return certification;
+	public List<Certification> getCertifications() {
+		return certifications;
 	}
 
-	public void setCertification(Certification certification) {
-		this.certification = certification;
+	public void setCertifications(List<Certification> certifications) {
+		this.certifications = certifications;
 	}
-	
-	
-	
-	
+
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+
 }

@@ -53,12 +53,13 @@ $(function() {
 		$("#signup").css("display", "none");	
 		break;
 	default:
+		$("#login").css("display", "none");
+		$("#signup").css("display", "none");
 		if (menu == "Home")
 			break;
 		$('#listProducts').addClass('active');
 		$('#a_' + menu).addClass('active');
-		$("#login").css("display", "none");
-		$("#signup").css("display", "none");	
+
 		break;
 	}
 

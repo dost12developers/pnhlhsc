@@ -47,7 +47,7 @@
 <!-- Custom CSS -->
 <!-- Bootstrap Readable Theme -->
 
-   <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">  
+  <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">  
   <link href="${css}/myapp.css" rel="stylesheet"> 
  
 
@@ -108,8 +108,16 @@
 	
 			<c:if test="${userClickAllProducts == true }">
 				<%@include file="viewProducts.jsp"%>
-			</c:if>			
+			</c:if>		
+			
+			<c:if test="${userClickCategoryProducts == true }">
+				<%@include file="viewProducts.jsp"%>
+			</c:if>					
 
+			<c:if test="${userClickEnterprise == true }">
+				<%@include file="enterprise.jsp"%>
+			</c:if>	
+			
 			<c:if test="${userClickAbout == true }">
 				<%@include file="about.jsp"%>
 			</c:if>					
