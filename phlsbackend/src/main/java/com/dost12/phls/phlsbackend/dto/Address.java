@@ -2,11 +2,15 @@ package com.dost12.phls.phlsbackend.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -48,8 +52,10 @@ public class Address implements Serializable {
 	@Column(name="is_billing")
 	private boolean billing;
 	
-	
-	
+/*	@Transient
+	@OneToOne(mappedBy = "certification", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private OnsiteAssessment onsiteAssessment;
+	*/
 	public int getId() {
 		return id;
 	}
@@ -120,6 +126,14 @@ public class Address implements Serializable {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+/*	public OnsiteAssessment getOnsiteAssessment() {
+		return onsiteAssessment;
+	}
+	public void setOnsiteAssessment(OnsiteAssessment onsiteAssessment) {
+		this.onsiteAssessment = onsiteAssessment;
+	}
+	
+	*/
 	
 	
 }

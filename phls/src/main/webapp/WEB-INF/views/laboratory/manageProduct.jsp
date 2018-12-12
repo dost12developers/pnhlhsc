@@ -1,39 +1,49 @@
-  <!-- Breadcrumbs-->
+ <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="${contextRoot}/laboratory/">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">Product</li>
           </ol>
-
-          <!-- DataTables Example -->
+	
+		<c:if test="${not empty message}">
+			<div class="alert alert-success">${message}</div>
+		</c:if>
+		 <!-- DataTables Example -->
           <div class="card mb-3">
+          
             <div class="card-header">
               <i class="fas fa-table"></i>
-              List of Products</div>
+              List of All Products</div>
             <div class="card-body">
-            <a class="btn btn-primary" href="${contextRoot}/laboratory/lab-product">Add New Product</a><br><br>
               <div class="table-responsive">
+              <a class="btn btn-primary" style="float: left"  href="${contextRoot}/laboratory/product"><i class="fas fa-plus-square"></i></a>
                 <table class="table table-bordered" id="dataTableProductId" width="100%" cellspacing="0">
                   <thead>
                     <tr>
 					    <th></th>
-					    <th>ID</th>
-					    <th>Name</th>
 					    <th>Code</th>
+					    <th>Name</th>					    
 					    <th>Description</th>
-					    <th></th>
+						<th>Company</th>
+					    <th>Ingredients</th>
+					    <th>Halal Analysis</th>
+					    <th>Thayyibban Analysis</th>
+					    <th>Activate</th>
 					    <th></th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
 					    <th></th>
-					    <th>ID</th>
-					    <th>Name</th>
 					    <th>Code</th>
+					    <th>Name</th>					    
 					    <th>Description</th>
-					    <th></th>
+						<th>Company</th>
+					    <th>Ingredients</th>
+					    <th>Halal Analysis</th>
+					    <th>Thayyibban Analysis</th>					    
+					    <th>Activate</th>
 					    <th></th>
                     </tr>
                   </tfoot>

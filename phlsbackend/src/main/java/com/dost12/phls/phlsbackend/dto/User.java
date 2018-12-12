@@ -15,6 +15,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 public class User implements Serializable{
@@ -39,12 +41,21 @@ public class User implements Serializable{
 	@Column(name = "contact_number")
 	private String contactNumber;
 	private String role;
-	@NotBlank(message = "Please enter password!")
-	private String password;
 	private boolean enabled = true;
+	
+	@NotBlank(message = "Please enter password!")
+	@JsonIgnore
+	private String password;
+	
 	@Transient
 	private String confirmPassword;
 
+	
+	
+	public User() {
+		super();
+		role= "USER";
+	}
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
@@ -110,6 +121,7 @@ public class User implements Serializable{
 	
 	
 	@OneToOne(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
 	private Cart cart;
 	public Cart getCart() {
 		return cart;

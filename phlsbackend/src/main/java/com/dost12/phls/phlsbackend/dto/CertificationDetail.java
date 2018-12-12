@@ -3,6 +3,7 @@ package com.dost12.phls.phlsbackend.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Component
 @Entity
 @Table(name = "certification_detail")
 public class CertificationDetail  implements Serializable{
@@ -34,17 +40,22 @@ public class CertificationDetail  implements Serializable{
 	@Column(name="update_on")
 	private Date updateOn;
 	
-	@ManyToOne
-    @JoinColumn(name="product_id")
-	private Product product;
-	
-	@ManyToOne
-	@JoinColumn(name = "certificate_id")
-	private Certification certification;
-	
 	@Column(name="is_active")
 	private Boolean active;	
 
+	@OneToOne 
+	@JoinColumn(name="certificate_id")	
+	private Certification certification;
+	
+	@OneToOne 
+	@JoinColumn(name="onsite_id")		
+	private OnsiteAssessment onsiteAssessment;
+	
+	@Column(name="valid_until")
+	private Date valid; 
+
+
+	
 	public int getId() {
 		return id;
 	}
@@ -69,12 +80,12 @@ public class CertificationDetail  implements Serializable{
 		this.updateOn = updateOn;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public Certification getCertification() {
@@ -85,14 +96,21 @@ public class CertificationDetail  implements Serializable{
 		this.certification = certification;
 	}
 
-	public Boolean getActive() {
-		return active;
+	public OnsiteAssessment getOnsiteAssessment() {
+		return onsiteAssessment;
 	}
 
-	public void setActive(Boolean active) {
-		this.active = active;
+	public void setOnsiteAssessment(OnsiteAssessment onsiteAssessment) {
+		this.onsiteAssessment = onsiteAssessment;
 	}
-	
-	
+
+	public Date getValid() {
+		return valid;
+	}
+
+	public void setValid(Date valid) {
+		this.valid = valid;
+	}
+
 	
 }

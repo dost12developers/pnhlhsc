@@ -45,7 +45,7 @@ public class GlobalController {
 					userModel.setId(user.getId());
 					userModel.setFullName(user.getFirstName() + " " + user.getLastName());
 					userModel.setRole(user.getRole());
-					
+					userModel.setEmail(user.getEmail());
 					if(user.getRole().equals("USER")) {
 						userModel.setCart(user.getCart());					
 					}				

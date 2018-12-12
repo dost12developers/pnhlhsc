@@ -18,13 +18,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
-	content="Online Shopping Website Using Spring MVC and Hibernate">
+	content="DOST 12 - Halal Laboratory website">
 <meta name="author" content="DOST XII">
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
 
-<title>Form - Philippine National Halal Laboratory and Halal
+<title>${title} - Philippine National Halal Laboratory and Halal
 	Science Center</title>
 <script>
 	window.menu = '${title}';
@@ -40,14 +40,14 @@
 	type="text/css">
 
 <!-- Page level plugin CSS-->
-<link href="${vendor}/datatables/dataTables.bootstrap4.css"
-	rel="stylesheet">
+<link href="${vendor}/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 
-<link href="${css}/responsive.bootstrap.min.css" rel="stylesheet">
+<%-- <link href="${css}/responsive.bootstrap.min.css" rel="stylesheet"> --%>
 
 <!-- Custom styles for this template-->
 <link href="${css}/sb-admin.css" rel="stylesheet">
+
 
 </head>
 

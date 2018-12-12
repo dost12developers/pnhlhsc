@@ -13,6 +13,7 @@ public interface UserDAO {
 	User get(int id);
 
 	boolean add(User user);
+	boolean update(User user);
 	
 	// adding and updating a new address
 	Address getAddress(int addressId);

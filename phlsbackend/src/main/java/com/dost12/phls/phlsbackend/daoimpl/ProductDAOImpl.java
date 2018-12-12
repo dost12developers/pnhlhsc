@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
 import com.dost12.phls.phlsbackend.dto.Product;
+import com.dost12.phls.phlsbackend.dto.Supplier;
 
 
 @Repository("productDAO")
@@ -51,18 +52,18 @@ public class ProductDAOImpl implements ProductDAO {
 	 * INSERT
 	 * */
 	@Override
-	public boolean add(Product product) {
+	public Integer add(Product product) {
 		try {		
 			
-			sessionFactory
+			Integer id = (Integer)sessionFactory
 					.getCurrentSession()
-						.persist(product);
-			return true;
+						.save(product);
+			return id;
 		}
 		catch(Exception ex) {		
 			ex.printStackTrace();			
 		}		
-		return false;
+		return 0;
 	}
 
 	/*
@@ -101,8 +102,57 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+	public List<Product> getProductsByParam(String param, int count) {
+		
+		String query = "FROM Product WHERE active = true AND displayed = true ORDER BY " + param + " DESC";
+		
+		return sessionFactory
+					.getCurrentSession()
+						.createQuery(query,Product.class)
+							.setFirstResult(0)
+								.setMaxResults(count)
+									.getResultList();
+		
+	}
+	
+	@Override
+	public List<Product> getLatestActiveProducts(int count) {
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery("FROM Product WHERE active = :active AND displayed = true ORDER BY updatedOn, id", Product.class)
+						.setParameter("active", true)
+							.setFirstResult(0)
+							.setMaxResults(count)
+								.getResultList();					
+	}	
+	
+	@Override
+	public List<Product> listActiveDisplayedProducts() {
+		String selectActiveProducts = "FROM Product WHERE active = :active  AND displayed = true ORDER BY updatedOn, id";
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectActiveProducts, Product.class)
+						.setParameter("active", true)
+							.getResultList();
+	}
+
+	@Override
+	public List<Product> listActiveDisplayedProductsByCategory(int categoryId) {
+		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND displayed = true AND categoryId = :categoryId ORDER BY updatedOn, id";
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectActiveProductsByCategory, Product.class)
+						.setParameter("active", true)
+						.setParameter("categoryId",categoryId)
+							.getResultList();
+	}
+	
+	
+	
+	
+	@Override
 	public List<Product> listActiveProducts() {
-		String selectActiveProducts = "FROM Product WHERE active = :active";
+		String selectActiveProducts = "FROM Product WHERE active = :active ORDER BY updatedOn, id";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectActiveProducts, Product.class)
@@ -112,7 +162,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> listActiveProductsByCategory(int categoryId) {
-		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND categoryId = :categoryId";
+		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND categoryId = :categoryId ORDER BY updatedOn, id";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectActiveProductsByCategory, Product.class)
@@ -121,30 +171,22 @@ public class ProductDAOImpl implements ProductDAO {
 							.getResultList();
 	}
 
+	
+
+
+
+	
 	@Override
-	public List<Product> getLatestActiveProducts(int count) {
+	public List<Product> listActiveProductsBySupplier(Supplier supplier) {
+		String query = "FROM Product WHERE active = :active AND supplier = :supplier ORDER BY updatedOn, id";
 		return sessionFactory
 				.getCurrentSession()
-					.createQuery("FROM Product WHERE active = :active ORDER BY id", Product.class)
+					.createQuery(query, Product.class)
 						.setParameter("active", true)
-							.setFirstResult(0)
-							.setMaxResults(count)
-								.getResultList();					
+						.setParameter("supplier",supplier)
+							.getResultList();
 	}
 
-	@Override
-	public List<Product> getProductsByParam(String param, int count) {
-		
-		String query = "FROM Product WHERE active = true ORDER BY " + param + " DESC";
-		
-		return sessionFactory
-					.getCurrentSession()
-					.createQuery(query,Product.class)
-					.setFirstResult(0)
-					.setMaxResults(count)
-					.getResultList();
-					
-		
-	}
+
 
 }

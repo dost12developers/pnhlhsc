@@ -6,11 +6,12 @@
 		</li>
 		<li class="breadcrumb-item active">Contact US</li>
 	</ol>
-	<!-- Page Heading/Breadcrumbs -->
-	<h1 class="mt-4 mb-3">Contact Us</h1>
 
-
-	<div class="panel">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3><b>Contact Us</b></h3>
+		</div>
+		
 		<div class="panel-body">
 			<address>
 			<strong>Dr. Zenaida P. Hadji Raof - Laidan <br>

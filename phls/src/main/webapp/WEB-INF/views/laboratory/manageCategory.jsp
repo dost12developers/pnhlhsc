@@ -19,13 +19,14 @@
 
 	<div class="card-body">
 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCategoryId">Add New Category</button><br><br>
 		<div class="table-responsive">
+		
+		<a class="btn btn-primary" style="float: left"  data-toggle="modal" data-target="#modalCategoryId"><i class="fas fa-plus-square"></i></a>
 			<table class="table table-bordered" id="dataTableCategory"
 				width="100%" cellspacing="0">
 				<thead>
 					<tr>
-						<th>ID</th>
+						
 						<th>Name</th>
 						<th>Description</th>
 						<th></th>
@@ -33,7 +34,7 @@
 				</thead>
 				<tfoot>
 					<tr>
-						<th>ID</th>
+					
 						<th>Name</th>
 						<th>Description</th>
 						<th></th>

@@ -10,17 +10,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dost12.phls.phlsbackend.dao.CategoryDAO;
 import com.dost12.phls.phlsbackend.dao.CertificateDAO;
+import com.dost12.phls.phlsbackend.dao.HalalParameterDAO;
 import com.dost12.phls.phlsbackend.dao.IngredientDAO;
-import com.dost12.phls.phlsbackend.dao.ManufactureDAO;
+import com.dost12.phls.phlsbackend.dao.IngredientDetailDAO;
+import com.dost12.phls.phlsbackend.dao.NutritionFactsParameterDAO;
+import com.dost12.phls.phlsbackend.dao.OnsiteAssessmentDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
+import com.dost12.phls.phlsbackend.dao.SupplierDAO;
 import com.dost12.phls.phlsbackend.dto.Category;
 import com.dost12.phls.phlsbackend.dto.Certification;
+import com.dost12.phls.phlsbackend.dto.HalalParameter;
 import com.dost12.phls.phlsbackend.dto.Ingredient;
-import com.dost12.phls.phlsbackend.dto.Manufacture;
+import com.dost12.phls.phlsbackend.dto.IngredientDetail;
+import com.dost12.phls.phlsbackend.dto.NutritionFactsParameter;
+import com.dost12.phls.phlsbackend.dto.OnsiteAssessment;
+import com.dost12.phls.phlsbackend.dto.Supplier;
 import com.dost12.phls.phlsbackend.dto.Product;
 
 @Controller
-@RequestMapping("/json/lab/data")
+@RequestMapping("/laboratory/json/data")
 public class JsonDataLabController {
 
 	@Autowired
@@ -36,7 +44,20 @@ public class JsonDataLabController {
 	private CertificateDAO certificateDAO;
 	
 	@Autowired
-	private ManufactureDAO manufactureDAO;
+	private SupplierDAO supplierDAO;
+	
+	@Autowired
+	private IngredientDetailDAO ingredientDetailDAO;
+	
+	@Autowired
+	private OnsiteAssessmentDAO onsiteAssessmentDAO;
+	
+	@Autowired
+	private NutritionFactsParameterDAO nutritionFactsParameterDAO;
+
+	@Autowired
+	private HalalParameterDAO halalParameterDAO;
+	
 	
 	@RequestMapping("/all/categories")
 	@ResponseBody
@@ -68,11 +89,35 @@ public class JsonDataLabController {
 		return productDAO.listActiveProductsByCategory(id);
 	}
 	
-	@RequestMapping("/all/manufacatures")
+	@RequestMapping("/all/suppliers")
 	@ResponseBody
-	public List<Manufacture> getAllManufactureJSONList() {		
-		return manufactureDAO.list();
-	}	
-
+	public List<Supplier> getAllSupplierJSONList() {		
+		return supplierDAO.list();
+	}
+	
+	@RequestMapping("/all/onsiteassessments")
+	@ResponseBody
+	public List<OnsiteAssessment> getAllAssessmentJSONList() {		
+		return onsiteAssessmentDAO.list();
+	}
+	
+	@RequestMapping("/product/{id}/ingredients")
+	@ResponseBody
+	public List<IngredientDetail> getProductsByIngredients(@PathVariable int id) {
+		Product p = productDAO.get(id);
+		List<IngredientDetail> ingredientDetails = ingredientDetailDAO.getList(p);
+		return ingredientDetails;
+		
+	}
+	@RequestMapping("/all/nutritionfacts")
+	@ResponseBody
+	public List<NutritionFactsParameter> getAllNutritionFactsJSONList() {		
+		return nutritionFactsParameterDAO.list();
+	}
+	@RequestMapping("/all/halalparameters")
+	@ResponseBody
+	public List<HalalParameter> getAllHalalParametersJSONList() {		
+		return halalParameterDAO.list();
+	}
 }
  

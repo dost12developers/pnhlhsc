@@ -43,7 +43,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-4">Email</label>
 								<div class="col-md-8">
-									<sf:input type="text" path="email" class="form-control"
+									<sf:input type="email" path="email" class="form-control"
 										placeholder="abc@zyx.com" />
 									<sf:errors path="email" cssClass="help-block" element="em"/> 									
 								</div>
@@ -75,21 +75,7 @@
 									<sf:errors path="confirmPassword" cssClass="help-block" element="em"/>										 
 								</div>
 							</div>
-							
-						<div class="form-group">
-							<label class="control-label col-md-4">Select Role</label>
-							<div class="col-md-8">
-								<label class="radio-inline">
-									<sf:radiobutton path="role" value="USER" checked="checked"/> User 				
-								</label>
-								<label class="radio-inline">
-									<sf:radiobutton path="role" value="SUPPLIER"/> Supplier
-								</label>
-								<label class="radio-inline">
-									<sf:radiobutton path="role" value="USER" /> User 				
-								</label>								
-							</div>
-						</div>							
+													
 
 							<div class="form-group">
 								<div class="col-md-offset-4 col-md-8">

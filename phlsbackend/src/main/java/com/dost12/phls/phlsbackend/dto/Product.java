@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -36,18 +38,25 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name = "created_on")	
+	private Date createdOn;
+	
+	@Column(name = "updated_on")	
+	private Date updatedOn;
+	
 	@Column(name = "is_active")	
 	private boolean active;
+	
+	@Column(name = "is_display")	
+	private Boolean displayed;
 	
 	private String code;
 	
 	@NotBlank(message = "Please enter the product name!")
 	private String name;
-	
-	@NotBlank(message = "Please enter the brand name!")
+
 	private String brand;
 	
-	@NotBlank(message = "Please enter the description!")
 	private String description;
 	
 	private int quantity;
@@ -64,17 +73,14 @@ public class Product implements Serializable {
 	private Date expirationDate;
 	
 	
-	@Column(name = "nutrition_facts")
-	private String nutritionFacts;	
-	
 	@Column(name = "category_id")
 	@JsonIgnore
 	private int categoryId;
 	
-	@Column(name = "supplier_id")
-	@JsonIgnore
-	private int supplierId;
-	
+	@ManyToOne
+	@JoinColumn(name = "supplier_id", nullable=false)
+	private Supplier supplier;
+					 
 	@Column(name = "origin_latitude")
 	@JsonIgnore
 	private double originLatitude;
@@ -90,24 +96,19 @@ public class Product implements Serializable {
 	@Column(name = "destination_longitude")
 	@JsonIgnore
 	private double destinationLongitude;	
+
 	
-	@Transient
-	@OneToMany
-	private List<Shipment> locations;
-	
-	@Transient
-	@OneToMany
-	private List<Certification> certifications;	
 
 	@Transient
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
+	private int supplierId;
+	
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ingredient", cascade = CascadeType.ALL)
 	private List<IngredientDetail> ingredientDetails;	
 	
 	@Transient
 	private MultipartFile file;
-	
 
-	
 	private int purchases;
 	
 	private int views;
@@ -115,11 +116,13 @@ public class Product implements Serializable {
 
 	// default constructor
 	public Product() {
+		this.createdOn = new Date();
+		this.updatedOn = new Date();
 		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();		
 		this.active = true;
-		locations = new ArrayList<>();
-		certifications = new ArrayList<>();
+		this.displayed = false;
 		ingredientDetails = new ArrayList<>();
+		supplier = new Supplier();
 	}
 
 	// setters and getters	
@@ -232,8 +235,6 @@ public class Product implements Serializable {
 		this.expirationDate = expirationDate;
 	}
 
-
-
 	public double getOriginLatitude() {
 		return originLatitude;
 	}
@@ -266,25 +267,6 @@ public class Product implements Serializable {
 		this.destinationLongitude = destinationLongitude;
 	}
 
-	public List<Shipment> getLocations() {
-		return locations;
-	}
-
-	public void setLocations(List<Shipment> locations) {
-		this.locations = locations;
-	}
-
-	public List<Certification> getCertifications() {
-		return certifications;
-	}
-
-	public void setCertifications(List<Certification> certifications) {
-		this.certifications = certifications;
-	}
-
-
-
-	
 	public List<IngredientDetail> getIngredientDetails() {
 		return ingredientDetails;
 	}
@@ -293,54 +275,38 @@ public class Product implements Serializable {
 		this.ingredientDetails = ingredientDetails;
 	}
 
-	public String getNutritionFacts() {
-		return nutritionFacts;
+
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setNutritionFacts(String nutritionFacts) {
-		this.nutritionFacts = nutritionFacts;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
-	
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", active=" + active + ", code=" + code + ", name=" + name + ", brand=" + brand
-				+ ", description=" + description + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", weight="
-				+ weight + ", manufacturedDate=" + manufacturedDate + ", expirationDate=" + expirationDate
-				+ ", nutritionFacts=" + nutritionFacts + ", categoryId=" + categoryId + ", supplierId=" + supplierId
-				+ ", originLatitude=" + originLatitude + ", originLongitude=" + originLongitude
-				+ ", destinationLatitude=" + destinationLatitude + ", destinationLongitude=" + destinationLongitude
-				+ ", locations=" + locations + ", certifications=" + certifications + ", ingredientDetails="
-				+ ingredientDetails + ", file=" + file + ", purchases=" + purchases + ", views=" + views + "]";
+	public Date getUpdatedOn() {
+		return updatedOn;
 	}
 
-
-
-
-	
-	
-	
-
-/*	public List<IngredientDetail> getIngredientDetails() {
-		return ingredientDetails;
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
-	public void setIngredientDetails(List<IngredientDetail> ingredientDetails) {
-		this.ingredientDetails = ingredientDetails;
-	}*/
-
-
-	
-	// toString for debugging
-
-
-/*	public List<CertificationDetail> getCertificationDetails() {
-		return certificationDetails;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
-	public void setCertificationDetails(List<CertificationDetail> certificationDetails) {
-		this.certificationDetails = certificationDetails;
-	}*/
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public Boolean isDisplayed() {
+		return displayed;
+	}
+
+	public void setDisplayed(Boolean displayed) {
+		this.displayed = displayed;
+	}
 
 	
 }

@@ -42,7 +42,8 @@
 	window.menu = '${title}';
 	
 	window.contextRoot = '${contextRoot}'
-	
+
+	window.categoryId = '';
 </script>
 </head>
 
@@ -115,11 +116,11 @@
         </form>
        
        </div>
-<%--        <div class="panel-footer">
+        <div class="panel-footer">
        	<div class="text-right">
-       		New User - <a href="${contextRoot}/register">Register Here</a>
+       		New User - <a href="${contextRoot}/membership">Register Here</a>
        	</div>
-       </div> --%>
+       </div> 
       
       </div> 
     

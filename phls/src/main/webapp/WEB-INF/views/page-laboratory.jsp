@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
@@ -40,14 +39,14 @@
 	type="text/css">
 
 <!-- Page level plugin CSS-->
-<link href="${vendor}/datatables/dataTables.bootstrap4.css"
-	rel="stylesheet">
+<link href="${vendor}/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 
-<link href="${css}/responsive.bootstrap.min.css" rel="stylesheet">
+<%-- <link href="${css}/responsive.bootstrap.min.css" rel="stylesheet"> --%>
 
 <!-- Custom styles for this template-->
 <link href="${css}/sb-admin.css" rel="stylesheet">
+
 
 </head>
 
@@ -64,16 +63,21 @@
 
 			<div class="container-fluid">
 
+
 				<c:if test="${userClickDashboard == true }">
 					<%@include file="laboratory/dashboard.jsp"%>
 				</c:if>
 
+				<c:if test="${userClickOnsiteAssessments == true }">
+					<%@include file="laboratory/manageOnsite.jsp"%>
+				</c:if>	
+				
 				<c:if test="${userClickProducts == true }">
 					<%@include file="laboratory/manageProduct.jsp"%>
 				</c:if>
 
-				<c:if test="${userClickManufacture == true }">
-					<%@include file="laboratory/manageManufacture.jsp"%>
+				<c:if test="${userClickSupplier == true }">
+					<%@include file="laboratory/manageSupplier.jsp"%>
 				</c:if>
 
 				<c:if test="${userClickIngredient == true }">
@@ -99,7 +103,66 @@
 					<%@include file="laboratory/product.jsp"%>
 				</c:if>
 
+				<c:if test="${ingredientForm == true }">
+					<%@include file="laboratory/ingredient.jsp"%>
+				</c:if>
+	
+				<c:if test="${productIngredientsForm == true }">
+					<%@include file="laboratory/product-ingredient.jsp"%>
+				</c:if>	
+	
+				<c:if test="${productIngredientDetailForm == true }">
+					<%@include file="laboratory/ingredient-detail.jsp"%>
+				</c:if>		
+	
+				<c:if test="${supplierForm == true }">
+					<%@include file="laboratory/supplier.jsp"%>
+				</c:if>		
+	
+				<c:if test="${supplierProductsForm == true }">
+					<%@include file="laboratory/supplier-product.jsp"%>
+				</c:if>	
+								
+								
+				<c:if test="${onsiteAssessmentForm == true }">
+					<%@include file="laboratory/onsiteassessment.jsp"%>
+				</c:if>	
 
+				<c:if test="${userClickNutritionfact == true }">
+					<%@include file="laboratory/manageNutritionFacts.jsp"%>
+				</c:if>	
+								
+				<c:if test="${nutritionfactsForm == true }">
+					<%@include file="laboratory/nutritionfact.jsp"%>
+				</c:if>	
+				
+				<c:if test="${userClickHalalParameters == true }">
+					<%@include file="laboratory/manageHalalParameter.jsp"%>
+				</c:if>	
+				<c:if test="${halalParamForm == true }">
+					<%@include file="laboratory/halalparameter.jsp"%>
+				</c:if>									
+				              
+				<c:if test="${productHalalParamForm == true }">
+					<%@include file="laboratory/product-halalanalysis.jsp"%>
+				</c:if>					
+				
+				<c:if test="${halalAnalysisReportForm == true }">
+					<%@include file="laboratory/halalanalysisreport.jsp"%>
+				</c:if>
+	
+				<c:if test="${productNutritionFactsParamForm == true }">
+					<%@include file="laboratory/product-nutritionfactsresult.jsp"%>
+				</c:if>					
+				
+				<c:if test="${nutritionFactsResultForm == true }">
+					<%@include file="laboratory/nutritionfactsresult.jsp"%>
+				</c:if>
+				
+				<c:if test="${certificateForm == true }">
+					<%@include file="laboratory/certification.jsp"%>
+				</c:if>
+				
 			</div>
 			<!-- /.container-fluid -->
 			<%@include file="laboratory/shared/footer.jsp"%>
@@ -139,33 +202,27 @@
 	</div>
 
 
-
-	<!-- Bootstrap core JavaScript-->
-	<script src="${vendor}/jquery/jquery.min.js"></script>
-	<script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script src="${vendor}/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Page level plugin JavaScript-->
-	<script src="${vendor}/chart.js/Chart.min.js"></script>
-	<script src="${vendor}/datatables/jquery.dataTables.js"></script>
-	<script src="${vendor}/datatables/dataTables.bootstrap4.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="${js}/sb-admin.js"></script>
-
-	<script src="${js}/dataTables.responsive.min.js"></script>
-	<script src="${js}/responsive.bootstrap.min.js"></script>
-
-	<!-- Demo scripts for this page-->
-	<script src="${js}/myDatabaseTable.js"></script>
-	<script src="${js}/myIngredientTable.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="${vendor}/jquery/jquery.min.js"></script>
+    <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${js}/bootbox.min.js"></script>
 	
-	<script src="${js}/demo/datatables-demo.js"></script>
-	<script src="${js}/demo/chart-area-demo.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="${vendor}/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- Page level plugin JavaScript-->
+    <script src="${vendor}/chart.js/Chart.min.js"></script>
+    <script src="${vendor}/datatables/jquery.dataTables.js"></script>
+    <script src="${vendor}/datatables/dataTables.bootstrap4.js"></script>
+	
 
+    
+    <!-- Custom scripts for all pages-->
+    <script src="${js}/sb-admin.min.js"></script>
+    <script src="${js}/myDatabaseTable.js"></script>
+
+    
+    
 </body>
 
 </html>

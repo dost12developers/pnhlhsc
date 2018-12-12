@@ -47,17 +47,17 @@ public class IngredientDetailDAOImpl implements IngredientDetailDAO {
 	}
 
 	@Override
-	public boolean add(IngredientDetail ingredient) {
+	public Integer add(IngredientDetail ingredient) {
 
 		try {
 			ingredient.setCreatedOn(new Date());
 			ingredient.setUpdateOn(new Date());
 			// add the category to the database table
-			sessionFactory.getCurrentSession().persist(ingredient);
-			return true;
+			Integer id = (Integer)sessionFactory.getCurrentSession().save(ingredient);
+			return id;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return false;
+			return 0;
 		}
 
 	}

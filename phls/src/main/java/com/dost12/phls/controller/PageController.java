@@ -2,6 +2,7 @@ package com.dost12.phls.controller;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,8 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dost12.phls.exception.ProductNotFoundException;
 import com.dost12.phls.model.UserModel;
 import com.dost12.phls.phlsbackend.dao.CategoryDAO;
+import com.dost12.phls.phlsbackend.dao.HalalAnalysisReportDAO;
+import com.dost12.phls.phlsbackend.dao.IngredientDetailDAO;
+import com.dost12.phls.phlsbackend.dao.NutritionFactsResultDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
 import com.dost12.phls.phlsbackend.dto.Category;
+import com.dost12.phls.phlsbackend.dto.IngredientDetail;
 import com.dost12.phls.phlsbackend.dto.Product;
 
 @Controller
@@ -36,6 +41,15 @@ public class PageController {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private IngredientDetailDAO ingredientDetailDAO;
+	
+	@Autowired
+	private HalalAnalysisReportDAO halalAnalysisReportDAO;
+
+	@Autowired
+	private NutritionFactsResultDAO nutritionFactsResultDAO;
 	
 	@Autowired
 	private HttpSession session;	
@@ -68,6 +82,10 @@ public class PageController {
 				return "redirect:/laboratory/";
 			else if (userModel.getRole().equals("SUPPLIER"))
 				return "redirect:/supplier/";
+			else if (userModel.getRole().equals("STAFF"))
+				return "redirect:/staff/";			
+			else if (userModel.getRole().equals("USER"))
+				return "redirect:/show/all/products";
 			
 		}
 		return "redirect:/home";
@@ -247,7 +265,7 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("page");
 		
 		Product product = productDAO.get(id);
-		
+	
 		if(product == null) throw new ProductNotFoundException();
 		
 		// update the view count
@@ -257,10 +275,11 @@ public class PageController {
 		
 		mv.addObject("title", product.getName());
 		mv.addObject("product", product);
-		
+		mv.addObject("ingredientDetails", ingredientDetailDAO.getList(product));
+		mv.addObject("halalAnalysisReports", halalAnalysisReportDAO.listOfProduct(product));
+		mv.addObject("nutritionFactsResults", nutritionFactsResultDAO.listOfProduct(product));		
 		mv.addObject("userClickShowProduct", true);
-		
-		
+
 		return mv;
 		
 	}
@@ -275,6 +294,14 @@ public class PageController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/halalregistration")
+	public ModelAndView halalregister() {
+		ModelAndView mv= new ModelAndView("page");
+		
+		logger.info("Page Controller membership called!");
+		
+		return mv;
+	}
 	
 	
 		

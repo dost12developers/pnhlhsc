@@ -29,6 +29,8 @@
 	window.contextRoot = '${contextRoot}'
 
 	window.image = '${images}';
+
+	window.categoryId = '';
 </script>
 
 <!-- Bootstrap Core CSS -->
@@ -47,7 +49,7 @@
 <!-- Custom CSS -->
 <!-- Bootstrap Readable Theme -->
 
-  <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">  
+<%--   <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">   --%>
   <link href="${css}/myapp.css" rel="stylesheet"> 
  
 
@@ -114,6 +116,10 @@
 				<%@include file="viewProducts.jsp"%>
 			</c:if>					
 
+			<c:if test="${userClickShowProduct == true }">
+				<%@include file="viewProduct.jsp"%>
+			</c:if>	
+			
 			<c:if test="${userClickEnterprise == true }">
 				<%@include file="enterprise.jsp"%>
 			</c:if>	
@@ -125,7 +131,11 @@
 			<c:if test="${userClickContact == true }">
 				<%@include file="contact.jsp"%>
 			</c:if>	
-									
+			
+			<c:if test="${userClickShowCart == true }">
+				<%@include file="cart.jsp"%>
+			</c:if>	
+						
 		</div>
 
 
@@ -149,19 +159,18 @@
 		<script src="${js}/dataTables.bootstrap.js"></script>
 
 <%-- 	    <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script> --%>
-
+		
+		
+		<script src="${js}/myapp.js"></script>
+			
 		<script src="${js}/list.min.js"></script>
 		<!-- Self coded javascript -->	
-		<script src="${js}/myapp.js"></script>
+	
 		
-		
-		<script>
+		                   
 
 
-				
-		</script>
-
-	</div>
+	
 
 </body>
 

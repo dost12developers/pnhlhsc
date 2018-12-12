@@ -7,29 +7,33 @@
             <li class="breadcrumb-item active">Ingredient</li>
           </ol>
 
+		<c:if test="${not empty message}">
+			<div class="alert alert-success">${message}</div>
+		</c:if>
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
               List of Source Ingredients</div>
             <div class="card-body">
-             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalIngredientId">Add New Ingredient</button><br><br>
+             
               <div class="table-responsive">
+              <a style="float: left"  class="btn btn-primary" data-toggle="modal" data-target="#modalIngredientId"><i class="fas fa-plus-square"></i></a>  
                 <table class="table table-bordered" id="dataTableIngredientsId" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Name</th>
+             		  <th>Name</th>
                       <th>Description</th>
                       <th>Mark</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>ID</th>
-                      <th>Name</th>
+             		  <th>Name</th>
                       <th>Description</th>
                       <th>Mark</th>
+                      <th></th>
                     </tr>
                   </tfoot>
                  </table>
@@ -51,7 +55,7 @@
 				</button>
 			</div>
 			
-			<sf:form  class="form-horizontal" modelAttribute="ingredient"  action="${contextRoot}/laboratory-admin/ingredient" method="POST">
+			<sf:form  class="form-horizontal" modelAttribute="ingredient"  action="${contextRoot}/laboratory/ingredient" method="POST">
 				<div class="modal-body">
 
        			<div class="form-group">

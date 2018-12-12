@@ -1,8 +1,9 @@
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        </div>
+        <footer >
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright © DOST XII</span>
+              <span>DOST XII</span>
             </div>
           </div>
         </footer>

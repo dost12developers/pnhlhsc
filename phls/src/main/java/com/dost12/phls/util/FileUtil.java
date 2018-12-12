@@ -15,7 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUtil {
 
-	private static final String ABS_PATH = "D:/git/pnhlhsc/phls/src/main/webapp/assets/images";
+	private static final String ABS_PATH = "C:/Users/DOST-XII PC13/git4/pnhlhsc/phls/src/main/webapp/assets/images/";
+	                                       
 	private static String REAL_PATH = null;
 	private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 	public static boolean uploadFile(HttpServletRequest request, MultipartFile file, String code) 

@@ -28,8 +28,10 @@
 				</tr>
 				<c:forEach items="${ingredientDetails}" var="i">
 					<tr>
-						<td>${i.ingredient.name}</td>
-						<td>${i.ingredient.mark}</td>
+ 						<td>${i.ingredientName}</td>
+						<td>${i.ingredientMark}</td> 
+<!-- 						<td></td>
+						<td></td> -->
 						<td>${i.mark}</td>
 						<td>${i.markDescription}</td>
 					</tr>
@@ -40,7 +42,7 @@
 						class="btn btn-lg btn-primary">Back - Product</a>
 				<a href="${flowExecutionUrl}&_eventId_ingredientDetail"
 						class="btn btn-lg btn-primary">Add - Ingredient</a>
-					<a href="${flowExecutionUrl}&_eventId_confirm"
+				<a href="${flowExecutionUrl}&_eventId_confirm"
 						class="btn btn-lg btn-primary">Next - Confirm</a>
 
 		</div>

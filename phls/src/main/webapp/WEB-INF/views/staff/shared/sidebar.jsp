@@ -1,38 +1,31 @@
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="${contextRoot}/laboratory/main">
+          <a class="nav-link" href="${contextRoot}/staff/main">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
+            <span> Dashboard </span>
           </a>
         </li>
+          <li class="nav-item">
+          <a class="nav-link" href="${contextRoot}/staff/suppliers">
+            <i class="fas fa-fw fa-warehouse"></i>
+            <span>Company</span></a>
+        </li> 
+                    
         <li class="nav-item">
-          <a class="nav-link" href="${contextRoot}/laboratory/product">
-            <i class="fas fa-fw fa-table"></i>
+          <a class="nav-link" href="${contextRoot}/staff/products">
+            <i class="fas fa-fw fa-apple-alt"></i>
             <span>Product</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="${contextRoot}/laboratory/manufacture">
-            <i class="fas fa-fw fa-building"></i>
-            <span>Manufacturer</span></a>
+  
+          <li class="nav-item">
+          <a class="nav-link" href="${contextRoot}/staff/vieworders">
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Order</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="${contextRoot}/laboratory/ingredient">
-            <i class="fas fa-fw fa-flask"></i>
-            <span>Ingredient</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="${contextRoot}/laboratory/certificate">
-            <i class="fas fa-fw fa-certificate"></i>
-            <span>Certification</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="${contextRoot}/laboratory/location">
-            <i class="fas fa-fw fa-location-arrow"></i>
-            <span>Location</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="${contextRoot}/laboratory/category">
-            <i class="fas fa-fw fa-folder"></i>
+          
+         <li class="nav-item">
+          <a class="nav-link" href="${contextRoot}/staff/categories">
+            <i class="fas fa-fw fa-object-group"></i>
             <span>Category</span></a>
-        </li>               
+        </li>              
       </ul>

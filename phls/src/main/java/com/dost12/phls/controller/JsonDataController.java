@@ -29,17 +29,17 @@ public class JsonDataController {
 		return productDAO.list();
 	}	
 	
-/*	@RequestMapping("/all/products")
+	@RequestMapping("/all/products")
 	@ResponseBody
 	public List<Product> getAllProducts() {
-		return productDAO.listActiveProducts();
-	}*/
+		return productDAO.listActiveDisplayedProducts();
+	}
 	
-/*	@RequestMapping("/category/{id}/products")
+	@RequestMapping("/category/{id}/products")
 	@ResponseBody
 	public List<Product> getProductsByCategory(@PathVariable int id) {
-		return productDAO.listActiveProductsByCategory(id);
-	}*/
+		return productDAO.listActiveDisplayedProductsByCategory(id);
+	}
 	
 	@RequestMapping("/mv/products")
 	@ResponseBody

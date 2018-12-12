@@ -24,12 +24,11 @@
 			<div class="modal-body">
 				<table>
 
-					<tr>
-						<td><sf:label path="ingredient" class="control-label">Ingredient</sf:label></td>
-						<td><sf:select path="ingredient" items="${ingredients}"
-								itemLabel="name" itemValue="id" class="form-control" /></td>
+  					<tr>
+						<td><sf:label path="ingredientId" class="control-label">Ingredient</sf:label></td>
+						<td><sf:select path="ingredientId" items="${ingredients}" itemLabel="name" itemValue="id" class="form-control" /></td>
 
-					</tr>
+					</tr> 
 					<tr>
 						<td><sf:label path="mark" class="control-label">Mark</sf:label></td>
 						<td><label class="radio-inline"> 
@@ -44,15 +43,23 @@
 						<td><sf:input path="markDescription" class="form-control" placeholder="Mark Description" /></td>
 					</tr>
 					<tr>
+						<td><sf:label path="productId" class="control-label">Product</sf:label></td>
+						<td><sf:select path="productId" items="${products}"
+								itemLabel="name" itemValue="id" class="form-control" /></td>
+
+					</tr>					
+					<tr>
 			
 						<td>&nbsp;</td>
 					</tr>
 					<tr>
 	
 						<td>
+
 							<button type="submit" name="_eventId_ingredient"
-								class="btn btn-primary">
-								Add<span class="glyphicon glyphicon-chevron-right"></span>
+																 
+								class="btn btn-lg btn-primary">
+								Add<span class="glyphicon glyphicon-chevron-right"></span> 
 							</button>
 						</td>
 

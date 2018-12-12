@@ -1,6 +1,9 @@
 package com.dost12.phls.phlsbackend.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.dost12.phls.phlsbackend.dao.UserDAO;
@@ -24,6 +27,17 @@ public class UserTestCase {
 		context.refresh();
 		
 		userDAO = (UserDAO) context.getBean("userDAO");
+	}
+	
+	@Test
+	public void test() {
+		User user = userDAO.get(11);
+		
+		user.setEnabled(false);
+		
+		userDAO.update(user);
+		
+		assertEquals("Failed to add the shipping address!", true, user.isEnabled());
 	}
 	
 /*

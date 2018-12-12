@@ -35,7 +35,7 @@
 		<on-entry>
 			<evaluate expression="productHandler.getIngredientsDetails(flowScope.productModel)" result="flowScope.ingredientDetails"/>											 
 		</on-entry>
-		<transition on="ingredient" 	  to="ingredient" />
+		<transition on="confirm" 	      to="confirm" />
 		<transition on="product" 		  to="product" />
 		<transition on="ingredientDetail" to="ingredientDetail" />	
 	</view-state>
@@ -43,20 +43,20 @@
 	<view-state id="ingredientDetail" view="flows/laboratory/lab-product/lab-ingredient-detail" model="ingredientDetail">
 		<on-entry>
 			<evaluate expression="productHandler.getIngredients()" result="flowScope.ingredients"/>			
-			<evaluate expression="productHandler.getProducts()" result="flowScope.products"/>								 
+			<evaluate expression="productHandler.getProducts()"    result="flowScope.products"/>							 
 		</on-entry>	
-		<transition on="confirm" to="validateInDetail" />
+		
 		<transition on="ingredient" to="ingredient" />
 		<on-exit>
 			<evaluate expression="productHandler.addIngredientProduct(flowScope.productModel, ingredientDetail)" />
-		</on-exit>
+		</on-exit>		
 	</view-state>
 	
-	<action-state id="validateInDetail">
+<!-- 	<action-state id="validateInDetail">
 		<evaluate expression="productHandler.validationIngrendientDetail(ingredientDetail, messageContext)" />
 		<transition on="success" to="ingredient"/>
 		<transition on="failure" to="ingredientDetail"/>
-	</action-state>
+	</action-state> -->
 	
 	<!-- view the signup-confirm page -->	
 	<view-state id="confirm" view="flows/laboratory/lab-product/lab-confirm" model="flowScope.productModel">

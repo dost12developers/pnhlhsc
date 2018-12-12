@@ -6,7 +6,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy;DOST XII</p>
+                    <p>DOST XII</p>
                 </div>
             </div>
         </footer>

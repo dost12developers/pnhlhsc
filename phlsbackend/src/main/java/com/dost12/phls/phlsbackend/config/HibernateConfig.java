@@ -22,7 +22,7 @@ public class HibernateConfig {
 	// Change the below based on the DBMS you choose
 	private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/phls";
 	private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-	private final static String DATABASE_DIALECT = "org.hibernate.dialect.H2Dialect";
+	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
 	private final static String DATABASE_USERNAME = "root";
 	private final static String DATABASE_PASSWORD = "";
 	

@@ -5,7 +5,9 @@
             </li>
             <li class="breadcrumb-item active">Certification</li>
           </ol>
-
+		<c:if test="${not empty message}">
+			<div class="alert alert-success">${message}</div>
+		</c:if>
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
@@ -13,21 +15,24 @@
               List of Certifications</div>
             <div class="card-body">
               <div class="table-responsive">
+              <a class="btn btn-primary" style="float: left"  href="${contextRoot}/laboratory/certificate"><i class="fas fa-plus-square"></i></a>
                 <table class="table table-bordered" id="dataTableCertificationId" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
+              		  <th>Certificate No</th>
                       <th>Title</th>
                       <th>Description</th>
                       <th>Type</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>ID</th>
+					  <th>Certificate No</th>
                       <th>Title</th>
                       <th>Description</th>
                       <th>Type</th>
+                      <th></th>
                     </tr>
                   </tfoot>
                 </table>

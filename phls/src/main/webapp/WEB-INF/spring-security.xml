@@ -25,9 +25,6 @@
 		<!-- only supplier access -->
 		<intercept-url pattern="/supplier/**" access="hasAuthority('SUPPLIER')" />
 		
-		<!-- only distributor access -->
-		<intercept-url pattern="/distributor/**" access="hasAuthority('DISTRIBUTOR')" />			
-
 		<!-- only staff access -->
 		<intercept-url pattern="/staff/**" access="hasAuthority('STAFF')" />
 		

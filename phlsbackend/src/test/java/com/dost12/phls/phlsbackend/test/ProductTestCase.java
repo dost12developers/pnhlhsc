@@ -47,10 +47,10 @@ public class ProductTestCase {
 	public void testCRUDProduct() {
 		
 		// create operation
-/*		product = new Product();
+		product = new Product();
 				
-		product.setName("Coke");
-		product.setBrand("Coke");
+		product.setName("Pop");
+		product.setBrand("Pop");
 		product.setDescription("This available for you.");
 		product.setUnitPrice(25000);
 		product.setActive(true);
@@ -58,20 +58,23 @@ public class ProductTestCase {
 		product.setSupplierId(4);
 		
 		IngredientDetail ingredientDetail = new IngredientDetail();
-		ingredientDetail.setProduct(product);
-		ingredientDetail.setIngredient(ingredientDAO.get(1));
+	
+		Integer id = productDAO.add(product);
+		ingredientDetail.setProductId(id);
+		/*ingredientDetail.setIngredient(ingredientDAO.get(1));*/
+	
 		ingredientDetail.setMark(true);
 		
 		product.getIngredientDetails().add(ingredientDetail);
 		
-		productDAO.add(product);
-		ingredientDetailDAO.add(ingredientDetail);*/
+		
+		ingredientDetailDAO.add(ingredientDetail);
 
 	
 		
 
-/*		assertEquals("Something went wrong while updating the existing record!",
-				true, p.getIngredientDetails().size());		*/		
+		assertEquals("Something went wrong while updating the existing record!",
+				true, product.getIngredientDetails().size());		
 		
 		// reading and updating the category
 /*		product = productDAO.get(2);
