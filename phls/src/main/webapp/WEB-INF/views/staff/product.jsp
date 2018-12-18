@@ -86,7 +86,7 @@
 					</tr>
 					<tr>
 						<sf:input type="hidden" path="id" />
-						
+						<sf:input type="hidden" path="displayed" />	
 						<td>
 							
 							<c:if test="${supplier != null}">

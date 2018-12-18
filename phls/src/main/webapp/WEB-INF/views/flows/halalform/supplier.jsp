@@ -90,7 +90,7 @@
 								<div class="col-md-12">
 									<div class="form-label-group">
 										<label for="website">Website</label>
-										<sf:input path="website" class="form-control" placeholder="Website" />
+										<sf:input path="website" type="url" class="form-control" placeholder="Website" />
 										
 									</div>
 								</div>
@@ -102,8 +102,8 @@
 							<div class="form-row">
 								<div class="col-md-12">
 									<div class="form-label-group">
-										<label for="owner">Owner</label>
-										<sf:input path="owner" type="textarea" class="form-control" placeholder="Owner" />
+										<label for="owner">Name of Owner</label>
+										<sf:input path="owner" type="textarea" class="form-control" placeholder="Owner" required="required"/>
 										
 									</div>
 								</div>
@@ -129,7 +129,7 @@
 								<div class="col-md-12">
 									<div class="form-label-group">
 										<label for="numOfEmployees">Number of Employees</label>
-										<sf:input path="numOfEmployees" class="form-control" placeholder="Number of Employees" />
+										<sf:input path="numOfEmployees" type="number" class="form-control" placeholder="Number of Employees" />
 										
 									</div>
 								</div>
@@ -170,27 +170,23 @@
 
 						<div class="form-group">
 							<div class="form-row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="form-label-group">
-										<label for="numOfRawMaterial">Number of Raw Materials</label>
-										<sf:input path="numOfRawMaterial" class="form-control" />
+										<label for="numOfRawMaterial"><br>Number of Raw Materials</label>
+										<sf:input path="numOfRawMaterial" type="number" class="form-control" />
 										
 									</div>
 								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="form-row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="form-label-group">
 										<label for="numProductsWarehouses">Number of Products in Warehouse(s)</label>
-										<sf:input path="numProductsWarehouses" class="form-control" />
+										<sf:input path="numProductsWarehouses" type="number" class="form-control" />
 										
 									</div>
 								</div>
-							</div>
-						</div>
+							   </div>
+						   </div>
+						
 
 						<div class="form-group">
 							<div class="form-row">
@@ -303,7 +299,7 @@
 
 						<sf:input type="hidden" path="id" />
 						
-						<button type="submit" name="_eventId_onsite" class="btn btn-lg btn-primary">Next - Address</button>
+						<button type="submit" name="_eventId_onsite" class="btn btn-lg btn-primary">Next - On Site Address</button>
 						
 						
 					</sf:form>

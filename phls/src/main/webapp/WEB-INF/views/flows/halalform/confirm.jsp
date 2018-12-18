@@ -9,7 +9,7 @@
 			<div class="panel panel-primary">
 
 				<div class="panel-heading">
-					<h4>Register - Confirmation</h4>
+					<h4>Confirmation</h4>
 				</div>
 
 				<div class="panel-body">
@@ -34,6 +34,45 @@
 						
 						<br/>
 						<p>
+							<a  href="${flowExecutionUrl}&_eventId_supplier" class="btn btn-lg btn-default">
+								Edit Supplier
+							</a>
+							
+							<a  href="${flowExecutionUrl}&_eventId_address" class="btn btn-lg btn-default">
+								Edit On site Address
+							</a>
+
+						</p>
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+
+			<div class="panel panel-primary">
+
+				<div class="panel-heading">
+					<h4>Terms and Conditions</h4>
+				</div>
+
+				<div class="panel-body">
+
+					<div class="text-center">
+						
+I HEREBY STATE THAT THE INFORMATION GIVEN ABOVE IS CORRECT AND CAN BE VERIFIED BY RECORDS. 
+I KINDLY ASK YOU TO REVIEW THIS INFORMATION AND ADVISE US PROCEDURES FOR USE OF THE DOST XII SEAL OF QUALITY LOGO. 
+I UNDERSTAND THAT DOST XII  HAS THE RIGHT TO ACCEPT OR REJECT OUR APPLICATION AND THAT IN CASE OF REFUSAL, IT IS FREE TO GIVE REASONS FOR THE REFUSAL. 
+						
+						<br/>
+						<p>
 							<a  href="${flowExecutionUrl}&_eventId_submit" class="btn btn-lg btn-primary">
 								Submit
 							</a>
@@ -48,7 +87,6 @@
 
 
 		</div>
-
 
 	</div>
 

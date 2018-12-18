@@ -10,7 +10,7 @@
 		<div class="breadcrumb">
 
 			<h1>
-				Online Shopping <small>with our verified Halal</small>
+				Online Shopping
 			</h1>
 
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">

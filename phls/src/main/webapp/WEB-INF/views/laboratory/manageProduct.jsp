@@ -29,7 +29,6 @@
 					    <th>Ingredients</th>
 					    <th>Halal Analysis</th>
 					    <th>Thayyibban Analysis</th>
-					    <th>Activate</th>
 					    <th></th>
                     </tr>
                   </thead>
@@ -43,7 +42,6 @@
 					    <th>Ingredients</th>
 					    <th>Halal Analysis</th>
 					    <th>Thayyibban Analysis</th>					    
-					    <th>Activate</th>
 					    <th></th>
                     </tr>
                   </tfoot>

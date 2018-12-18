@@ -47,7 +47,7 @@
 					</tr>
 					<tr>
 						<td><sf:label path="website" class="control-label">Website</sf:label></td>
-						<td><sf:input path="website" class="form-control" placeholder="Website" /></td>
+						<td><sf:input path="website" type="url" class="form-control" placeholder="Website" /></td>
 					</tr>
 
 					<tr>

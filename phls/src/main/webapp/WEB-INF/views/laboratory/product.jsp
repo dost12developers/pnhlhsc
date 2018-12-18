@@ -22,7 +22,7 @@
 	 					<tr>
 							<td><label>Supplier</label></td>
 							<td>${supplier.nameOfEstablishment }
-							<sf:input type="hidden" path="supplierId" value="${supp3lier.id}"/>
+							<sf:input type="hidden" path="supplierId" value="${supplier.id}"/>
 							</td>
 							
 						</tr> 
@@ -87,7 +87,7 @@
 					</tr>
 					<tr>
 						<sf:input type="hidden" path="id" />
-						
+						<sf:input type="hidden" path="displayed" />	
 						<td>
 							
 							<c:if test="${supplier != null}">

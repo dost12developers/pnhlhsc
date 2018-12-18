@@ -509,9 +509,9 @@ public class LabController {
 		}else
 			FileUtil.uploadNoImage(request, mProduct.getCode());
 		
-		if(supplierId != "" && supplierDAO.get(Integer.parseInt(supplierId)).getId() > 0)
+		if(supplierId != "" && supplierDAO.get(Integer.parseInt(supplierId)) != null)
 			return "redirect:/laboratory/supplier/"+
-				supplierDAO.get(Integer.parseInt(supplierId)).getId()+"/products";
+				supplierDAO.get(Integer.parseInt(supplierId)).getId()+"/products?success=product";
 		
 		return "redirect:/laboratory/products?success=product";
 	}
@@ -578,13 +578,23 @@ public class LabController {
 	}
 
 	@RequestMapping(value = "/supplier/{supplierId}/products")
-	public ModelAndView supplierProduct(@PathVariable int supplierId, HttpServletRequest request) {
+	public ModelAndView supplierProduct(
+			@RequestParam(name = "success", required = false) String success,
+			@PathVariable int supplierId, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("page-laboratory");
 		Supplier supplier = supplierDAO.get(supplierId);
 		mv.addObject("title", "Supplier Products");
 		mv.addObject("supplierProductsForm", true);
 		mv.addObject("supplier", supplier);
 		mv.addObject("products", productDAO.listActiveProductsBySupplier(supplier));
+		if (success != null) {
+			if (success.equals("product")) {
+				mv.addObject("message", "Product submitted successfully!");
+			}
+			if (success.equals("remove")) {
+				mv.addObject("message", "Removed successfully!");
+			}
+		}
 		return mv;
 	}
 

@@ -48,7 +48,7 @@ public class Product implements Serializable {
 	private boolean active;
 	
 	@Column(name = "is_display")	
-	private Boolean displayed;
+	private boolean displayed;
 	
 	private String code;
 	
@@ -98,7 +98,6 @@ public class Product implements Serializable {
 	private double destinationLongitude;	
 
 	
-
 	@Transient
 	private int supplierId;
 	
@@ -300,11 +299,11 @@ public class Product implements Serializable {
 		this.supplier = supplier;
 	}
 
-	public Boolean isDisplayed() {
+	public boolean isDisplayed() {
 		return displayed;
 	}
 
-	public void setDisplayed(Boolean displayed) {
+	public void setDisplayed(boolean displayed) {
 		this.displayed = displayed;
 	}
 

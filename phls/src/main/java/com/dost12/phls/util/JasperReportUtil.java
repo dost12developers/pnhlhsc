@@ -33,8 +33,6 @@ import net.sf.jasperreports.export.SimpleHtmlReportConfiguration;
 public class JasperReportUtil {
 	
 
-
-
 	public JasperReport getCompiledFile(String fileName, HttpServletRequest request) throws JRException {
 		System.out.println(
 				"path " + request.getSession().getServletContext().getRealPath("/jasper/" + fileName + ".jasper"));

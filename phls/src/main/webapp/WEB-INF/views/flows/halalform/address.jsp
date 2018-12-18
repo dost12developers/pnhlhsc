@@ -45,6 +45,9 @@
 						</div>
 
 						<sf:input type="hidden" path="id" />
+					
+						<a href="${flowExecutionUrl}&_eventId_supplier" class="btn btn-lg btn-primary">Back - Company Profile</a>
+						
 						<button type="submit" name="_eventId_confirm" class="btn btn-lg btn-primary">Next - Confirmation</button>
 						
 					</sf:form>

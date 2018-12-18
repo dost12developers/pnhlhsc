@@ -29,6 +29,7 @@
 
 	<view-state id="onsite" view="flows/halalform/address" model="onsite">
 		<transition on="confirm" to="confirm"/>
+		<transition on="supplier" to="supplier"/>
 		<on-exit>
 			<evaluate expression="halalRegisterHandler.addAddress(flowScope.halalRegisterModel, onsite)" />			
 		</on-exit>		

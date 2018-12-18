@@ -94,7 +94,7 @@
        </div>
        
        <div class="panel-body">
-        <form action="${contextRoot}/login" method="POST" class="form-horizontal"id="loginForm">
+        <form action="${contextRoot}/login" method="POST" class="form-horizontal" id="loginForm">
          <div class="form-group">
           <label for="username" class="col-md-4 control-label">Email: </label>
           <div class="col-md-8">

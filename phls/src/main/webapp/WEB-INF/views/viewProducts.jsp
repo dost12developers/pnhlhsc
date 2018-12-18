@@ -28,7 +28,7 @@
 		<div class="breadcrumb">
 
 			<h1>
-				<b>Online Shopping <small>with Halal Seal</small></b>
+				<b>Online Shopping</b>
 			</h1>
 
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">

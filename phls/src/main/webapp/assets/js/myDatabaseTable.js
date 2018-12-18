@@ -285,8 +285,7 @@ $(document)
 												data : 'id',
 												bSortable : false,
 												width : "8%",
-												mRender : function(data, type,
-														row) {
+												mRender : function(data, type, row) {
 													if (userRole === 'LABORATORY') {
 														var str = '';
 														str += '<a href="'
@@ -299,26 +298,10 @@ $(document)
 												}
 											},
 											{
-												data : 'displayed',
-												bSortable : false,
-												mRender : function(data, type, row) {
-													var str = '';
-													if(data) {											
-														str += '<label class="switch"> <input type="checkbox" value="'+row.id+'" checked="checked">  <div class="slider round"> </div></label>';
-														
-													}else {
-														str += '<label class="switch"> <input type="checkbox" value="'+row.id+'">  <div class="slider round"> </div></label>';
-													}
-													
-													return str;
-												}
-											},
-											{
 												data : 'id',
 												bSortable : false,
 												width : "8%",
-												mRender : function(data, type,
-														row) {
+												mRender : function(data, type, row) {
 													var str = '';
 													if (userRole === 'LABORATORY') {
 														str += '<a href="'
@@ -336,22 +319,7 @@ $(document)
 													return str;
 												}
 
-											} ],
-									
-											initComplete: function () {
-												var api = this.api();
-												api.$('.switch input[type="checkbox"]').on('change' , function() {							
-													var dText = (this.checked)? 'You want to activate the Product?': 'You want to de-activate the Product?';
-													var checked = this.checked;
-													var checkbox = $(this);
-										            $.ajax({
-								            			url: window.contextRoot + '/laboratory/product/'+checkbox.prop('value')+'/activation'
-										            });		
-										            
-										            
-												});
-													
-											}
+											} ]
 								});
 					}
 
