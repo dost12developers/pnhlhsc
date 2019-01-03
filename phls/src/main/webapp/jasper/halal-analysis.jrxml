@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="halal-analysis" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64cce965-4975-4e5b-81af-537f5ceffd8c">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="labcode" class="java.lang.String"/>
+	<field name="dateSubmitted" class="java.lang.String"/>
+	<field name="fromDateAnalyzed" class="java.lang.String"/>
+	<field name="toDateAnalyzed" class="java.lang.String"/>
+	<field name="dateReported" class="java.lang.String"/>
+	<field name="halalParameter" class="java.lang.String"/>
+	<field name="sampleCode" class="java.lang.String"/>
+	<field name="sampleDescription" class="java.lang.String"/>
+	<field name="testMethod" class="java.lang.String"/>
+	<field name="parameter" class="java.lang.String"/>
+	<field name="result" class="java.lang.String"/>
+	<field name="unit" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="262" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="30" width="100" height="20" uuid="ea4e845c-9e4a-4f99-a4dc-a132efb47701"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Date Submitted]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="50" width="100" height="20" uuid="d305f8c3-6b33-4a11-92cf-9c8c33187c92"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Date Analyzed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="70" width="100" height="20" uuid="3df4e1d3-506d-46d1-8921-67af38d1ea9d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Date Reported]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="90" width="100" height="20" uuid="3e3dd2ec-90b0-40bb-81f7-7b92551fa9a8"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sample Submitted by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="160" width="80" height="30" uuid="eb4d8657-a2dc-4de4-9463-0a2059b02f3b"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sample Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="160" width="100" height="30" uuid="0a9abc3a-d75d-475b-8a42-356daae0cbc4"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sample Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="160" width="100" height="30" uuid="ad865555-e9aa-431c-b926-7369c3eb6d4c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Test Method]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="160" width="100" height="30" uuid="26c9b0da-4dba-4598-95a2-b116e3bcaf02"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Parameter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="160" width="60" height="30" uuid="214b931a-68da-4c95-8457-2349caa4a064"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Result]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="160" width="80" height="30" uuid="4033c332-86a3-45ca-8bd4-072374277796"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Unit]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="190" width="80" height="30" uuid="47a12d17-6e8e-4d97-acc4-b65fad749f54"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="190" width="100" height="30" uuid="566c95fa-5b7c-44ab-ab2d-7a2d96673b26"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="190" width="100" height="30" uuid="bca51243-8638-4d75-8eaa-f0cf38e6b9a5"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="190" width="80" height="30" uuid="5e9d6c30-db4f-462e-9521-3606073e9355"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="190" width="60" height="30" uuid="1ac2d556-aa42-4be9-9701-18764082f19a"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="190" width="80" height="30" uuid="8ecadb79-6f27-489c-bfaa-c159ae6a0675"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="110" width="100" height="20" uuid="51ab0124-ffe9-4d0d-8084-26c73d0a71f8"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Name of Company]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="130" width="100" height="20" uuid="efbe8b40-a866-4abe-8a95-cab62fe4cba1"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="10" width="100" height="30" uuid="e8e3363f-7eae-49ec-8a14-e201cdde91ea"/>
+				<textFieldExpression><![CDATA[$F{labcode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="10" width="100" height="30" uuid="90dc398c-c416-4f94-8e63-ffdf89584c5f"/>
+				<text><![CDATA[Laboratory No.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
