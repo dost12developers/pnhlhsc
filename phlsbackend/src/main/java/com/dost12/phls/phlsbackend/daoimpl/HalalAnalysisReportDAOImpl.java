@@ -1,5 +1,6 @@
 package com.dost12.phls.phlsbackend.daoimpl;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -46,8 +47,7 @@ public class HalalAnalysisReportDAOImpl implements HalalAnalysisReportDAO{
 	public boolean add(HalalAnalysisReport halalAnalysisReport) {
 
 		try {
-			halalAnalysisReport.setCreatedOn(new Date());
-			halalAnalysisReport.setUpdateOn(new Date());
+
 			// add the category to the database table
 			sessionFactory.getCurrentSession().persist(halalAnalysisReport);
 			return true;
@@ -65,7 +65,7 @@ public class HalalAnalysisReportDAOImpl implements HalalAnalysisReportDAO{
 	public boolean update(HalalAnalysisReport halalAnalysisReport) {
 
 		try {
-			halalAnalysisReport.setUpdateOn(new Date());
+			halalAnalysisReport.setUpdatedOn(LocalDate.now());
 			// add the category to the database table
 			sessionFactory.getCurrentSession().update(halalAnalysisReport);
 			return true;
@@ -93,7 +93,7 @@ public class HalalAnalysisReportDAOImpl implements HalalAnalysisReportDAO{
 	@Override
 	public List<HalalAnalysisReport> listOfProduct(Product product) {
 		
-		String selectActiveCategory = "FROM HalalAnalysisReport WHERE active = :active AND product = :product";
+		String selectActiveCategory = "FROM HalalAnalysisReport WHERE active = :active AND product = :product ORDER BY updatedOn DESC";
 		                                    
 		Query query = sessionFactory.getCurrentSession().createQuery(selectActiveCategory);
 				

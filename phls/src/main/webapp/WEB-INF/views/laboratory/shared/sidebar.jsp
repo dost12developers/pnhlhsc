@@ -5,17 +5,17 @@
             <span>Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="${contextRoot}/laboratory/onsiteassessments">
-            <i class="fas fa-fw fa-map-marker"></i>
-            <span>Onsite Assessment</span></a>
-        </li>
+
           <li class="nav-item">
           <a class="nav-link" href="${contextRoot}/laboratory/suppliers">
             <i class="fas fa-fw fa-warehouse"></i>
             <span>Company</span></a>
         </li> 
-        
+        <li class="nav-item">
+          <a class="nav-link" href="${contextRoot}/laboratory/onsiteassessments">
+            <i class="fas fa-fw fa-map-marker"></i>
+            <span>Onsite Assessment</span></a>
+        </li>        
         <li class="nav-item">
           <a class="nav-link" href="${contextRoot}/laboratory/certificates">
             <i class="fas fa-fw fa-certificate"></i>

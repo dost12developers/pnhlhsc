@@ -10,21 +10,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.dost12.phls.model.UserModel;
 import com.dost12.phls.phlsbackend.dao.UserDAO;
+import com.dost12.phls.phlsbackend.dao.UserlabDAO;
 import com.dost12.phls.phlsbackend.dto.Cart;
 import com.dost12.phls.phlsbackend.dto.User;
+import com.dost12.phls.phlsbackend.dto.Userlab;
 
 @ControllerAdvice
 public class GlobalController {
 	
 	
 	@Autowired
-	private UserDAO userDAO;
+	private UserlabDAO userlabDAO;
 	
 	@Autowired
 	private HttpSession session;
 	
 	private UserModel userModel = null;
-	private User user = null;	
+	private Userlab user = null;	
 	
 	
 	@ModelAttribute("userModel")
@@ -36,7 +38,7 @@ public class GlobalController {
 			
 			if(!authentication.getPrincipal().equals("anonymousUser")){
 				// get the user from the database
-				user = userDAO.getByEmail(authentication.getName());
+				user = userlabDAO.getByEmail(authentication.getName());
 				
 				if(user!=null) {
 					// create a new model
@@ -46,9 +48,7 @@ public class GlobalController {
 					userModel.setFullName(user.getFirstName() + " " + user.getLastName());
 					userModel.setRole(user.getRole());
 					userModel.setEmail(user.getEmail());
-					if(user.getRole().equals("USER")) {
-						userModel.setCart(user.getCart());					
-					}				
+			
 	
 					session.setAttribute("userModel", userModel);
 					return userModel;

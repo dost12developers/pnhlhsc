@@ -85,7 +85,7 @@ public class PageController {
 			else if (userModel.getRole().equals("STAFF"))
 				return "redirect:/staff/";			
 			else if (userModel.getRole().equals("USER"))
-				return "redirect:/show/all/products";
+				return "redirect:/home";
 			
 		}
 		return "redirect:/home";
@@ -242,7 +242,7 @@ public class PageController {
 		
 		category = categoryDAO.get(id);
 		
-		mv.addObject("title",category.getName());
+		mv.addObject("title",category.getNameRp());
 		
 		//passing the list of categories
 		mv.addObject("categories", categoryDAO.list());

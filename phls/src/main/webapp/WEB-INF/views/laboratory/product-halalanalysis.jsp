@@ -21,22 +21,40 @@
 	</div>
 
 	<div class="card-body">
-		<h4>${product.name}</h4>
+		<p>
+			<h5>Name : ${product.name}</h5>
+			<h6>Code : ${product.code}</h6>
+			<h6>Description : ${product.description}</h6>
+		</p>
 		<div class="modal-body">
 			<table class="table table-bordered">
 				<tr>
-					<th>Halal Parameter Name</th>
+					<th>Created On</th>
+					<th>Updated On</th>
+					<th>Test Method</th>
+					<th>Parameter</th>
+					<th>Result</th>
+					<th>Unit</th>
 					<th>Mark</th>
+					<th></th>
 					<th></th>
 				</tr>
 				<c:forEach items="${halalAnalysisReports}" var="halalAnalysisReport">
 					<tr>
+						<td>${halalAnalysisReport.createdOnStr}</td>
+						<td>${halalAnalysisReport.updatedOnStr}</td>
+						<td>${halalAnalysisReport.testMethod}</td>
 						<td>${halalAnalysisReport.halalParameter.name}</td>
+						<td>${halalAnalysisReport.result}</td>
+						<td>${halalAnalysisReport.unit}</td>					
 						<td><c:if test="${halalAnalysisReport.mark eq 0}">
-								ABSENT
+								Conform to H. Standards
 							</c:if> <c:if test="${halalAnalysisReport.mark eq 1}">
-								FOUND
+								Found non-conformant to H. Standards
 							</c:if>
+						</td>
+															  
+						<td><a href="${contextRoot}/laboratory/product/${product.id}/halalanalysis/pdf?halalanalysisid=${halalAnalysisReport.id}" target="_blank"><i class="fas fa-file-pdf"></i></a></td>
 						<td><a
 							href="${contextRoot}/laboratory/product/${product.id}/halalanalysis?halalanalysisId=${halalAnalysisReport.id}"><i
 								class="fas fa-edit"></i></a>| <a href="#" data-toggle="modal"

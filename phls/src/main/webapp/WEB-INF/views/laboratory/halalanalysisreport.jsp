@@ -17,11 +17,38 @@
 			action="${contextRoot}/laboratory/product/${product.id}/halalanalysis" method="POST" enctype="multipart/form-data">
 			<div class="modal-body">
 				<table>
+				
+					<tr>
+						<td><sf:label path="dateSubmittedStr" class="control-label">Date Submitted</sf:label></td>
+						<td>
+							<sf:input path="dateSubmittedStr" type="date" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td><sf:label path="fromDateAnalyzedStr" class="control-label">Started Date Analyzed</sf:label></td>
+						<td>
+							<sf:input path="fromDateAnalyzedStr" type="date" class="form-control"/>
+						</td>
+					</tr>				
+					<tr>
+						<td><sf:label path="toDateAnalyzedStr" class="control-label">End Date Analyzed</sf:label></td>
+						<td>
+							<sf:input path="toDateAnalyzedStr" type="date" class="form-control"/>
+						</td>
+					</tr>					
+					<tr>
+						<td><sf:label path="dateReportedStr" class="control-label">Date Reported</sf:label></td>
+						<td>
+							<sf:input path="dateReportedStr" type="date" class="form-control"/>
+						</td>
+					</tr>	
+										
+					
 					<c:if test="${halalParameter == null}">
 					<tr>
 						<td><sf:label path="halalParameterId" class="control-label">Halal Parameter</sf:label></td>
 						<td>
-							<sf:select path="halalParameterId" items="${halalParameters}" itemLabel="name" itemValue="id" class="form-control"/>
+							<sf:select path="halalParameterId" items="${halalParameters}" itemLabel="name" multiple="true" itemValue="id" required="required" class="form-control"/>
 						</td>
 					</tr>
 					</c:if>
@@ -33,7 +60,27 @@
 							<sf:input type="hidden" path="halalParameterId" value="${halalParameter.id}"/>
 						</td>
 					</tr>
-					</c:if>					
+					</c:if>	
+					
+					<tr>
+						<td><sf:label path="testMethod" class="control-label">Test Method</sf:label></td>
+						<td>
+							<sf:input path="testMethod" class="form-control" required="required"/>
+						</td>
+					</tr>
+					<tr>
+						<td><sf:label path="result" class="control-label">Result</sf:label></td>
+						<td>
+							<sf:input path="result" class="form-control" required="required"/>
+						</td>
+					</tr>					
+					<tr>
+						<td><sf:label path="unit" class="control-label">Unit</sf:label></td>
+						<td>
+							<sf:input path="unit" class="form-control" required="required"/>
+						</td>
+					</tr>	
+														
 					<tr>
 						<td><sf:label path="mark" class="control-label">Mark</sf:label></td>
 						<td>

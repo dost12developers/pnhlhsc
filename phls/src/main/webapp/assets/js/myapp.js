@@ -1,11 +1,11 @@
 $(function() {
 	
 	// for adding a loader
-	$(window).load(function(){
+/*	$(window).load(function(){
 		setTimeout(function() {
 			$(".se-pre-con").fadeOut("slow");
 		}, 500);			
-	});	
+	});	*/
 	
 	// for handling CSRF token
 	var token = $('meta[name="_csrf"]').attr('content');
@@ -23,15 +23,16 @@ $(function() {
 	// solving the active menu problem
 	switch (menu) {
 
+	case 'Home':
+		$('#home').addClass('active');
+		break;
 	case 'About Us':
 		$('#about').addClass('active');
-		$("#login").css("display", "none");
-		$("#signup").css("display", "none");	
+
 		break;
 	case 'Contact Us':
 		$('#contact').addClass('active');
-		$("#login").css("display", "none");
-		$("#signup").css("display", "none");		
+
 		break;
 	case 'All Products':
 		$('#listProducts').addClass('active');
@@ -39,8 +40,7 @@ $(function() {
 		break;
 	case 'Enterprise':
 		$('#enterprise').addClass('active');
-		$("#login").css("display", "none");
-		$("#signup").css("display", "none");			
+		
 		break;		
 	case 'Testing and Verification':
 	case 'On-Site Assessment and Product Certification':
@@ -49,12 +49,9 @@ $(function() {
 	case 'Halal Research and Development':
 	
 		$('#enterprise').addClass('active');
-		$("#login").css("display", "none");
-		$("#signup").css("display", "none");	
+
 		break;
 	default:
-		$("#login").css("display", "none");
-		$("#signup").css("display", "none");
 		if (menu == "Home")
 			break;
 		$('#listProducts').addClass('active');

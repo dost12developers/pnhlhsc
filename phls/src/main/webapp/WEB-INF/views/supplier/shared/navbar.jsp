@@ -4,7 +4,7 @@
 	</script>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="${contextRoot}/home"><img src="${images}/logo.png" width="32"  alt=""></a>|&nbsp;&nbsp;
+      <img src="${images}/logo.png" width="32"  alt="">|&nbsp;&nbsp;
       <a class="navbar-brand mr-1" href="${contextRoot}/supplier/">${company.nameOfEstablishment }</a>
       <button class="btn btn-link btn-sm text-black order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>

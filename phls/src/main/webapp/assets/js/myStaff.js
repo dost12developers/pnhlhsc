@@ -438,9 +438,9 @@ $(document)
 													if (userRole === 'STAFF') {
 														
 														if(data)
-															str += modalConfirm(row.id+'activate', "Deactivate deletes the existing User Account permanate. Are you sure?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-success')
+															str += modalConfirm(row.id+'activate', "Deletes the existing User Account permanately. Are you sure?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-success')
 														else
-															str += modalConfirm(row.id+'activate', "Create Account for Supplier. Kindly confirm?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-warning')
+															str += modalConfirm(row.id+'activate', "Activate Email address for this Supplier. Kindly confirm?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-warning')
 													}
 													return str;
 												}

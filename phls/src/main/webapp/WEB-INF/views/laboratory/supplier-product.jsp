@@ -6,7 +6,7 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="${contextRoot}/laboratory/">Dashboard</a></li>
-	<li class="breadcrumb-item active">Supplier</li>
+	<li class="breadcrumb-item active">Company</li>
 </ol>
 <c:if test="${not empty message}">
 	<div class="alert alert-success">${message}</div>
@@ -14,7 +14,7 @@
 <!-- DataTables -->
 <div class="card mb-3">
 	<div class="card-header">
-		<i class="fas fa-table"></i> Supplier
+		<i class="fas fa-table"></i> Company
 	</div>
 
 	<div class="card-body">

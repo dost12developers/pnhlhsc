@@ -44,8 +44,10 @@ import com.dost12.phls.phlsbackend.dao.NutritionFactsParameterDAO;
 import com.dost12.phls.phlsbackend.dao.NutritionFactsResultDAO;
 import com.dost12.phls.phlsbackend.dao.OnsiteAssessmentDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
+import com.dost12.phls.phlsbackend.dao.SettingDAO;
 import com.dost12.phls.phlsbackend.dao.SupplierDAO;
 import com.dost12.phls.phlsbackend.dao.UserDAO;
+import com.dost12.phls.phlsbackend.dao.UserlabDAO;
 import com.dost12.phls.phlsbackend.dto.Category;
 import com.dost12.phls.phlsbackend.dto.Certification;
 import com.dost12.phls.phlsbackend.dto.HalalAnalysisReport;
@@ -57,9 +59,9 @@ import com.dost12.phls.phlsbackend.dto.NutritionFactsResult;
 import com.dost12.phls.phlsbackend.dto.OnsiteAssessment;
 import com.dost12.phls.phlsbackend.dto.Supplier;
 import com.dost12.phls.phlsbackend.dto.User;
+import com.dost12.phls.phlsbackend.dto.Userlab;
 import com.dost12.phls.phlsbackend.dto.Product;
 import com.dost12.phls.util.FileUtil;
-import com.dost12.phls.util.JasperReportDAO;
 import com.dost12.phls.util.JasperReportUtil;
 import com.dost12.phls.validator.ProductValidator;
 
@@ -81,8 +83,11 @@ public class LabController {
 	private HttpSession session;
 
 	@Autowired
-	private UserDAO userDAO;
+	private UserlabDAO userlabDAO;
 
+	@Autowired
+	private UserDAO userDAO;
+	
 	@Autowired
 	private CategoryDAO categoryDAO;
 
@@ -116,9 +121,12 @@ public class LabController {
 	@Autowired
 	private NutritionFactsResultDAO nutritionFactsResultDAO;
 	
+	@Autowired
+	private SettingDAO settingDAO;
+	
 
 
-	@RequestMapping(value = { "/", "/main", "/index" })
+	@RequestMapping(value = { "","/", "/main", "/index" })
 	public ModelAndView manageLabProduct(@RequestParam(name = "success", required = false) String success) {
 		ModelAndView mv = new ModelAndView("page-laboratory");
 		mv.addObject("title", "Lab Page");
@@ -127,6 +135,7 @@ public class LabController {
 
 	}
 
+	
 	@RequestMapping(value = "/products")
 	public ModelAndView products(
 			@RequestParam(name = "success", required = false) String success) {
@@ -197,7 +206,16 @@ public class LabController {
 		}
 		return mv;
 	}
-
+	@RequestMapping(value = "/setting")
+	public ModelAndView setting(
+			@RequestParam(name = "success", required = false) String success) {
+		ModelAndView mv = new ModelAndView("page-laboratory");
+		mv.addObject("title", "Setting");
+		mv.addObject("settings", settingDAO.list());
+		mv.addObject("userClickSetting", true);
+		return mv;
+	}
+	
 	@RequestMapping(value = "/ingredient", method = RequestMethod.POST)
 	public String addIngredient(@ModelAttribute("ingredient") Ingredient ingredient, HttpServletRequest request) {
 		if (ingredient.getId() != 0)
@@ -549,10 +567,9 @@ public class LabController {
 	@RequestMapping(value = "/supplier", method = RequestMethod.POST)
 	public String supplier(@Valid @ModelAttribute("supplier") Supplier supplier, BindingResult results, Model model,
 			HttpServletRequest request) {
-		if (session.getAttribute("userModel") != null) {
-			UserModel userModel = (UserModel) session.getAttribute("userModel");
-			supplier.setCreatedBy(userDAO.get(userModel.getId()));
-		}
+		
+		supplier.setCreatedBy(getUserlab());
+		
 		if (supplier.getId() != 0)
 			supplierDAO.update(supplier);
 		else
@@ -560,6 +577,7 @@ public class LabController {
 		return "redirect:/laboratory/suppliers?success=supplier";
 	}
 
+	
 	@RequestMapping(value = "/supplier/{id}/delete")
 	public String deleteSupplier(@PathVariable int id, HttpServletRequest request) {
 		if (supplierDAO.get(id) != null) {
@@ -618,8 +636,7 @@ public class LabController {
 				mv.addObject("title", "Ingredient");
 				mv.addObject("productIngredientDetailForm", true);
 				mv.addObject("ingredientDetail", ingredientDetailDAO.get(Integer.parseInt(ingredientDetailId)));
-				mv.addObject("ingredient",
-						ingredientDetailDAO.get(Integer.parseInt(ingredientDetailId)).getIngredient());
+				mv.addObject("ingredient",ingredientDetailDAO.get(Integer.parseInt(ingredientDetailId)).getIngredient());
 				mv.addObject("ingredients", ingredients);
 			} else {
 				mv.addObject("title", "Product Ingredients");
@@ -692,11 +709,11 @@ public class LabController {
 				if (halalAnalysisReport.getHalalParameter().getName().equals(halalParameter.getName()))
 					halalParameters.remove(halalParameter);
 
-		if (halalanalysisId != null && Integer.parseInt(halalanalysisId) > 0) {
+		if (halalanalysisId != null  && halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId)) != null) {
 			mv.addObject("title", "Halal Analysis");
 			mv.addObject("halalAnalysisReportForm", true);
 			mv.addObject("halalParameters", halalParameters);
-			mv.addObject("halalAnalysisReport", halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId)));
+			mv.addObject("halalAnalysisReport", halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId)) );
 			mv.addObject("halalParameter",
 					halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId)).getHalalParameter());
 		} else {
@@ -734,6 +751,25 @@ public class LabController {
 		Product product = productDAO.get(id);
 		halalAnalysisReport.setHalalParameter(halalParameterDAO.get(halalAnalysisReport.getHalalParameterId()));
 		halalAnalysisReport.setProduct(product);
+		
+		try {
+		halalAnalysisReport.setDateSubmitted(LocalDate.parse(halalAnalysisReport.getDateSubmittedStr()));
+		}catch(Exception e) {}
+		
+		try {
+		halalAnalysisReport.setFromDateAnalyzed(LocalDate.parse(halalAnalysisReport.getFromDateAnalyzedStr()));
+		}catch(Exception e) {}
+		
+		try {
+		halalAnalysisReport.setToDateAnalyzed(LocalDate.parse(halalAnalysisReport.getToDateAnalyzedStr()));
+		}catch(Exception e) {}
+		
+		try {
+		halalAnalysisReport.setDateReported(LocalDate.parse(halalAnalysisReport.getDateReportedStr()));
+		}catch(Exception e) {}
+		
+		halalAnalysisReport.setUpdatedBy(getUserlab());
+		
 		Boolean b = halalAnalysisReport.getId() > 0 ? halalAnalysisReportDAO.update(halalAnalysisReport)
 				: halalAnalysisReportDAO.add(halalAnalysisReport);
 		return "redirect:/laboratory/product/" + product.getId() + "/halalanalysis";
@@ -830,6 +866,14 @@ public class LabController {
 	@ModelAttribute("suppliers")
 	public List<Supplier> modelSuppliers() {
 		return supplierDAO.list();
+	}
+	
+	private Userlab getUserlab() {
+		if (session.getAttribute("userModel") != null) {
+			UserModel userModel = (UserModel) session.getAttribute("userModel");
+			return userlabDAO.get(userModel.getId());
+		}
+		return null;
 	}
 
 }

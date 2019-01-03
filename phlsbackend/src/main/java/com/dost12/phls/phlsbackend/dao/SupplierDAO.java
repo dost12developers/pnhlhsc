@@ -11,4 +11,5 @@ public interface SupplierDAO {
 	boolean update(Supplier manufacture);
 	boolean delete(Supplier manufacture);
 	public Supplier getByEmail(String email);
+	public Supplier getByEmailEnable(String email);
 }

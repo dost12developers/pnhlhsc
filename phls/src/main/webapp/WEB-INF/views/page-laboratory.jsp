@@ -163,6 +163,13 @@
 					<%@include file="laboratory/certification.jsp"%>
 				</c:if>
 				
+				
+				
+				<c:if test="${userClickSetting == true }">
+					<%@include file="laboratory/setting.jsp"%>
+				</c:if>
+				
+				
 			</div>
 			<!-- /.container-fluid -->
 			<%@include file="laboratory/shared/footer.jsp"%>

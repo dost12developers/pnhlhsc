@@ -39,6 +39,22 @@ public class SupplierDAOImpl implements SupplierDAO {
 	}
 	
 	@Override
+	public Supplier getByEmailEnable(String email) {
+		String selectQuery = "FROM Supplier WHERE active = true AND enable = true AND email = :email";
+		try {
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectQuery, Supplier.class)
+						.setParameter("email",email)
+							.getSingleResult();
+		}
+		catch(Exception ex) {
+			return null;
+		}
+							
+	}
+	
+	@Override
 	public List<Supplier> list() {
 		
 		String selectActiveCategory = "FROM Supplier s WHERE s.active = :active ORDER BY updatedOn DESC";

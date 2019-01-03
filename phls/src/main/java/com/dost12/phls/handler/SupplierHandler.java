@@ -13,6 +13,7 @@ import com.dost12.phls.model.UserModel;
 import com.dost12.phls.phlsbackend.dao.OnsiteAddressDAO;
 import com.dost12.phls.phlsbackend.dao.SupplierDAO;
 import com.dost12.phls.phlsbackend.dao.UserDAO;
+import com.dost12.phls.phlsbackend.dao.UserlabDAO;
 import com.dost12.phls.phlsbackend.dto.OnsiteAddress;
 import com.dost12.phls.phlsbackend.dto.Supplier;
 import com.dost12.phls.phlsbackend.dto.User;
@@ -32,7 +33,10 @@ public class SupplierHandler {
 	private OnsiteAddressDAO onsiteAddressDAO;
 	
 	@Autowired
-	private UserDAO userDAO;
+	private UserlabDAO userlabDAO;
+	
+	@Autowired
+	private UserDAO userDAO;	
 
 	public SupplierModel init() {
 		return new SupplierModel();
@@ -63,7 +67,7 @@ public class SupplierHandler {
 		Supplier supplier = supplierModel.getSupplier();
 		if(session.getAttribute("userModel") != null) {
 			UserModel userModel = (UserModel) session.getAttribute("userModel");
-			supplier.setCreatedBy(userDAO.get(userModel.getId()));
+			supplier.setCreatedBy(userlabDAO.get(userModel.getId()));
 		}
 		Integer supplierId = supplierDAO.add(supplier);
 		OnsiteAddress adress = supplierModel.getAddress();

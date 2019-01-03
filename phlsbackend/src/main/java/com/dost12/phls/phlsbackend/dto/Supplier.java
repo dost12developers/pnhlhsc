@@ -124,22 +124,16 @@ public class Supplier implements Serializable {
 	@Column(name ="additional_activities")
 	private String additionalActivities;
 
+	
+	// eccommerse - account
 	@OneToOne
 	@JoinColumn(name="user_id")
 	private User user;
 
-
+	// phls - account
 	@OneToOne
 	@JoinColumn(name="created_by_id")
-	private User createdBy;
-	
-/*	@OneToOne
-	@JoinColumn(name="address_id")	
-	private OnsiteAddress onsiteAddress;*/
-	
-/*	@Transient
-	@OneToOne(mappedBy = "certification", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	private OnsiteAssessment onsiteAssessment;*/
+	private Userlab createdBy;
 	
 	
 	@Transient
@@ -147,9 +141,13 @@ public class Supplier implements Serializable {
 	
 	public Supplier() {
 		super();
+		
 		active = true;
+		enable = false;
+		
 		createdOn = LocalDate.now();
 		updatedOn = LocalDate.now();
+		
 		position ="";
 		website ="";
 		telNo ="";
@@ -171,7 +169,7 @@ public class Supplier implements Serializable {
 		namesOfSuppliers ="";
 		productsProcess="";
 		createdBy = null;
-		enable = false;
+		
 	}
 	
 	public int getId() {
@@ -272,22 +270,7 @@ public class Supplier implements Serializable {
 		this.user = user;
 	}
 
-/*	public OnsiteAssessment getOnsiteAssessment() {
-		return onsiteAssessment;
-	}
 
-	public void setOnsiteAssessment(OnsiteAssessment onsiteAssessment) {
-        if (onsiteAssessment == null) {
-            if (this.onsiteAssessment != null) {
-                this.onsiteAssessment.setSupplier(null);;
-            }
-        }
-        else {
-        	onsiteAssessment.setSupplier(this);
-        }
-		this.onsiteAssessment = onsiteAssessment;
-	}
-*/
 	public String getFax() {
 		return fax;
 	}
@@ -435,11 +418,11 @@ public class Supplier implements Serializable {
 		return createdOn.toString();
 	}
 
-	public User getCreatedBy() {
+	public Userlab getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(User createdBy) {
+	public void setCreatedBy(Userlab createdBy) {
 		this.createdBy = createdBy;
 	}
 

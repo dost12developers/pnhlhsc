@@ -35,6 +35,7 @@ import com.dost12.phls.phlsbackend.dao.OnsiteAssessmentDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
 import com.dost12.phls.phlsbackend.dao.SupplierDAO;
 import com.dost12.phls.phlsbackend.dao.UserDAO;
+import com.dost12.phls.phlsbackend.dao.UserlabDAO;
 import com.dost12.phls.phlsbackend.dto.Category;
 import com.dost12.phls.phlsbackend.dto.Certification;
 import com.dost12.phls.phlsbackend.dto.HalalAnalysisReport;
@@ -61,6 +62,9 @@ public class StaffController {
 
 	@Autowired
 	private UserDAO userDAO;
+
+	@Autowired
+	private UserlabDAO userlabDAO;
 
 	@Autowired
 	private CategoryDAO categoryDAO;
@@ -453,8 +457,14 @@ public class StaffController {
 		Supplier supplier = supplierDAO.get(id);
 		boolean isEnableAccount = !supplier.getEnable();
 		supplier.setEnable(isEnableAccount);
-		if (!isEnableAccount)
-			supplier.setUser(null);
+		if (!isEnableAccount) {
+			User user = userDAO.get(id);
+			boolean isEnableUser = !user.isEnabled();
+			if (!isEnableUser) {
+				user.setEnabled(isEnableUser);
+				userDAO.update(user);
+			}
+		}
 		supplierDAO.update(supplier);
 
 		return "redirect:/staff/suppliers?success=update";
@@ -487,7 +497,7 @@ public class StaffController {
 			HttpServletRequest request) {
 		if (session.getAttribute("userModel") != null) {
 			UserModel userModel = (UserModel) session.getAttribute("userModel");
-			supplier.setCreatedBy(userDAO.get(userModel.getId()));
+			supplier.setCreatedBy(userlabDAO.get(userModel.getId()));
 		}
 		if (supplier.getId() != 0) {
 			supplierDAO.update(supplier);
@@ -499,9 +509,9 @@ public class StaffController {
 	@RequestMapping(value = "/supplier/{id}/delete")
 	public String deleteSupplier(@PathVariable int id, HttpServletRequest request) {
 		if (supplierDAO.get(id) != null) {
-			
+
 			User user = null;
-			if(!supplierDAO.get(id).getEmail().isEmpty())
+			if (!supplierDAO.get(id).getEmail().isEmpty())
 				user = userDAO.getByEmail(supplierDAO.get(id).getEmail());
 			if (user != null && user.getId() > 0) {
 				user.setEnabled(false);

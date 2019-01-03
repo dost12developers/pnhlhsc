@@ -78,9 +78,8 @@
 							
 							<div class="form-group">
 								<div class="col-md-offset-4 col-md-8">
-									<button type="submit" name="_eventId_personal" class="btn btn-primary">
-										<span class="glyphicon glyphicon-chevron-left"></span> Back - Personal
-									</button>								
+		
+									<a href="${flowExecutionUrl}&_eventId_personal" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Back - Personal</a>					
 									<button type="submit" name="_eventId_confirm" class="btn btn-primary">
 										Next - Confirm<span class="glyphicon glyphicon-chevron-right"></span>
 									</button>																	 

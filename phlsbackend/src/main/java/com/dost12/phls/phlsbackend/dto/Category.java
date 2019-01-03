@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Category implements Serializable {
@@ -47,6 +48,15 @@ public class Category implements Serializable {
 		this.active = active;
 	}
 	
+	
+	public String getNameRp() {
+		if(name != "")
+			return name.replace(' ', '_');
+		return nameRp;
+	}
+	public void setNameRp(String nameRp) {
+		this.nameRp = nameRp;
+	}
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", imageURL=" + imageURL
@@ -70,5 +80,7 @@ public class Category implements Serializable {
 	@Column(name = "is_active")
 	private boolean active = true;
 	
+	@Transient
+	private String nameRp; 
 	
 }

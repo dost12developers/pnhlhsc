@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
@@ -31,11 +33,12 @@ import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
 import net.sf.jasperreports.export.SimpleHtmlReportConfiguration;
 
 public class JasperReportUtil {
-	
 
 	public JasperReport getCompiledFile(String fileName, HttpServletRequest request) throws JRException {
 		System.out.println(
 				"path " + request.getSession().getServletContext().getRealPath("/jasper/" + fileName + ".jasper"));
+	
+		
 		File reportFile = new File(
 				request.getSession().getServletContext().getRealPath("/jasper/" + fileName + ".jasper"));
 		// If compiled file is not found, then compile XML template
@@ -45,6 +48,7 @@ public class JasperReportUtil {
 					request.getSession().getServletContext().getRealPath("/jasper/" + fileName + ".jasper"));
 		}
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportFile.getPath());
+		
 		return jasperReport;
 	}
 
@@ -61,14 +65,19 @@ public class JasperReportUtil {
 
 	}
 
-	public void generateReportPDF(HttpServletResponse resp, Map parameters, JasperReport jasperReport)
+	public void generateReportPDF(HttpServletResponse resp, Map parameters, 
+			List<Map<String, ?>> fields,
+			JasperReport jasperReport)
 			throws JRException, NamingException, SQLException, IOException {
 		byte[] bytes = null;
 		//JasperRunManager.runReportToHtmlFile(sourceFileName, params, jrDataSource)
 
-		JRDataSource jrDataSource = new JREmptyDataSource();
+
+		
+		JRDataSource jrDataSource = new JRBeanCollectionDataSource(fields);		
 		
 		bytes = JasperRunManager.runReportToPdf(jasperReport, parameters, jrDataSource);
+
 		resp.reset();
 		resp.resetBuffer();
 		resp.setContentType("application/pdf");

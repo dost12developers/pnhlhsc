@@ -98,6 +98,7 @@ public class Product implements Serializable {
 	private double destinationLongitude;	
 
 	
+	
 	@Transient
 	private int supplierId;
 	

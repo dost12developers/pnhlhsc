@@ -19,16 +19,16 @@
                 <table class="table table-bordered" id="dataTableSupplierId" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>CreatedOn</th>
-                      <th>UpdatedOn</th>                              
+                      <th>Created On</th>
+                      <th>Updated On</th>                              
                       <th>Name</th>
                       <th>Authorized Person</th>
                       <th>Position</th>                      
                       <th>Telephone No.</th>
                       <th>Email</th>                     
                       <th>Products</th>
-                      <th>Account</th>
-                      <th>User</th>
+                      <th>Can Registered as Supplier(Online Shopping)</th>
+                       <th>Enable User (Online shopping)</th>
                       <th>UpdatedBy</th>
                    	  <th></th>
                    	  <th></th>
@@ -45,7 +45,7 @@
                       <th>Email</th>                     
                       <th>Products</th>
                       <th>Account</th>
-                      <th>User</th>
+                       <th>Enable</th>
                       <th>UpdatedBy</th>
                    	  <th></th>
                    	  <th></th>

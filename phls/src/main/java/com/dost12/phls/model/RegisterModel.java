@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.dost12.phls.phlsbackend.dto.Address;
 import com.dost12.phls.phlsbackend.dto.User;
+import com.dost12.phls.phlsbackend.dto.Userlab;
 
 public class RegisterModel implements Serializable {
 
@@ -13,13 +14,14 @@ public class RegisterModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
-	private User user;
+	private Userlab userlab;
 	private Address billing;
-	public User getUser() {
-		return user;
+	
+	public Userlab getUserlab() {
+		return userlab;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserlab(Userlab userlab) {
+		this.userlab = userlab;
 	}
 	public Address getBilling() {
 		return billing;

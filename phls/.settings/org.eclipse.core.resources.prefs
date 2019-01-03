@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/serviceLabTesting.jsp=UTF-8
+encoding//src/main/webapp/jasper/company.jrxml=UTF-8
+encoding//src/main/webapp/jasper/companyprofile-form.jrxml=UTF-8
+encoding//src/main/webapp/jasper/halal-analysis.jrxml=UTF-8
+encoding//src/main/webapp/jasper/halalform.jrxml=UTF-8

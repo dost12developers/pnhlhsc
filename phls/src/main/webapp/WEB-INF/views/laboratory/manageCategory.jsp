@@ -67,7 +67,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-4">Name</label>
 					<div class="col-md-8 validate">
-						<sf:input type="text" path="name" class="form-control" placeholder="Category Name" /> 
+						<sf:input type="text" path="name" class="form-control" placeholder="Category Name" required="required"/> 
 					</div>
 				</div>
        			

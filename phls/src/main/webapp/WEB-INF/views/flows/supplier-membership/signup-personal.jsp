@@ -22,9 +22,7 @@
 							<div class="form-group">
 							<div class="control-label col-md-4">						
 							</div>
-							<div class="col-md-8">
-							<i>Use the email address you registered as company.</i>  
-							</div>
+
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-4">Email</label>
