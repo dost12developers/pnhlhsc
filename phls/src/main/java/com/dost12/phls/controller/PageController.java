@@ -1,5 +1,7 @@
 package com.dost12.phls.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +18,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dost12.phls.exception.ProductNotFoundException;
@@ -27,9 +35,14 @@ import com.dost12.phls.phlsbackend.dao.HalalAnalysisReportDAO;
 import com.dost12.phls.phlsbackend.dao.IngredientDetailDAO;
 import com.dost12.phls.phlsbackend.dao.NutritionFactsResultDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
+import com.dost12.phls.phlsbackend.dao.SupplierDAO;
 import com.dost12.phls.phlsbackend.dto.Category;
 import com.dost12.phls.phlsbackend.dto.IngredientDetail;
 import com.dost12.phls.phlsbackend.dto.Product;
+import com.dost12.phls.phlsbackend.dto.Supplier;
+import com.dost12.phls.util.FileUtil;
+import com.dost12.phls.validator.ProductValidator;
+import com.dost12.phls.validator.SupplierValidator;
 
 @Controller
 public class PageController {
@@ -50,6 +63,9 @@ public class PageController {
 
 	@Autowired
 	private NutritionFactsResultDAO nutritionFactsResultDAO;
+	
+	@Autowired
+	private SupplierDAO supplierDAO;
 	
 	@Autowired
 	private HttpSession session;	
@@ -79,11 +95,7 @@ public class PageController {
 		if(session.getAttribute("userModel") != null) {
 			UserModel userModel = (UserModel) session.getAttribute("userModel");
 			if(userModel.getRole().equals("LABORATORY")) 
-				return "redirect:/laboratory/";
-			else if (userModel.getRole().equals("SUPPLIER"))
-				return "redirect:/supplier/";
-			else if (userModel.getRole().equals("STAFF"))
-				return "redirect:/staff/";			
+				return "redirect:/laboratory/";		
 			else if (userModel.getRole().equals("USER"))
 				return "redirect:/home";
 			
@@ -296,14 +308,35 @@ public class PageController {
 	
 	@RequestMapping(value="/halalregistration")
 	public ModelAndView halalregister() {
-		ModelAndView mv= new ModelAndView("page");
+		ModelAndView mv= new ModelAndView("companyform");
 		
+		mv.addObject("title","Registration");
+		
+		mv.addObject("supplier", new Supplier());
 		logger.info("Page Controller membership called!");
 		
 		return mv;
 	}
 	
-	
+	@RequestMapping(value="/halalregistration", method = RequestMethod.POST)
+	public String singleFileUpload(@Valid Supplier supplier, BindingResult result, ModelMap model, HttpServletRequest request) throws IOException {
+
+		new SupplierValidator().validate(supplier, result);
+		
+		if (result.hasErrors()) {
+			model.addAttribute("message", "Validation fails for adding the File!");
+			return "companyform";
+		}
+		
+		supplierDAO.add(supplier);
+		
+		// upload the file
+		if (!supplier.getFile().getOriginalFilename().equals("")) {
+			FileUtil.uploadDoc(request, supplier.getFile(), supplier.getCode());
+		}
+		
+		return "page";
+	}
 		
 	
 	

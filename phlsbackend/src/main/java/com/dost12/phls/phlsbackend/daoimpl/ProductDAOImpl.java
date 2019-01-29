@@ -1,5 +1,7 @@
 package com.dost12.phls.phlsbackend.daoimpl;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -71,6 +73,7 @@ public class ProductDAOImpl implements ProductDAO {
 	 * */
 	@Override
 	public boolean update(Product product) {
+		product.setUpdatedOn(LocalDate.now());;
 		try {			
 			sessionFactory
 					.getCurrentSession()
@@ -128,7 +131,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public List<Product> listActiveDisplayedProducts() {
-		String selectActiveProducts = "FROM Product WHERE active = :active  AND displayed = true ORDER BY updatedOn, id";
+		String selectActiveProducts = "FROM Product WHERE active = :active  AND displayed = true ORDER BY updatedOn, id DESC";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectActiveProducts, Product.class)
@@ -138,7 +141,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> listActiveDisplayedProductsByCategory(int categoryId) {
-		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND displayed = true AND categoryId = :categoryId ORDER BY updatedOn, id";
+		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND displayed = true AND categoryId = :categoryId ORDER BY updatedOn, id DESC";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectActiveProductsByCategory, Product.class)
@@ -152,7 +155,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public List<Product> listActiveProducts() {
-		String selectActiveProducts = "FROM Product WHERE active = :active ORDER BY updatedOn, id";
+		String selectActiveProducts = "FROM Product WHERE active = :active ORDER BY updatedOn, id DESC";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectActiveProducts, Product.class)
@@ -162,7 +165,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> listActiveProductsByCategory(int categoryId) {
-		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND categoryId = :categoryId ORDER BY updatedOn, id";
+		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND categoryId = :categoryId ORDER BY updatedOn, id DESC";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectActiveProductsByCategory, Product.class)
@@ -178,7 +181,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public List<Product> listActiveProductsBySupplier(Supplier supplier) {
-		String query = "FROM Product WHERE active = :active AND supplier = :supplier ORDER BY updatedOn, id";
+		String query = "FROM Product WHERE active = :active AND supplier = :supplier ORDER BY updatedOn, id DESC";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(query, Product.class)

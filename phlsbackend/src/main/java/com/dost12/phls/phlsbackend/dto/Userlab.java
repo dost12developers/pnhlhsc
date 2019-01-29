@@ -48,9 +48,19 @@ public class Userlab implements Serializable{
 	private String password;
 	
 	@Transient
+	@JsonIgnore
 	private String confirmPassword;
 
+	@Transient
+	@JsonIgnore
+	private String completeName;
 	
+	public String getCompleteName() {
+		return lastName+", "+firstName;
+	}
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
+	}
 	public Userlab() {
 		super();
 		role= "USER";

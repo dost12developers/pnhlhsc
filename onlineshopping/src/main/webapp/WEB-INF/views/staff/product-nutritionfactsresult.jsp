@@ -6,12 +6,14 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="${contextRoot}/staff/">Dashboard</a></li>
-	<li class="breadcrumb-item"><a href="${contextRoot}/staff/products">Product</a></li>
+	<li class="breadcrumb-item"><a
+		href="${contextRoot}/staff/products">Product</a></li>
 	<li class="breadcrumb-item active">Nutrition Facts</li>
 </ol>
-		<c:if test="${not empty message}">
-			<div class="alert alert-success">${message}</div>
-		</c:if>
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">${message}</div>
+</c:if>
 <!-- DataTables -->
 <div class="card mb-3">
 	<div class="card-header">
@@ -19,58 +21,58 @@
 	</div>
 
 	<div class="card-body">
-		<h4>${product.name}</h4>
+		<h4>Company : <strong>${product.supplier.nameOfEstablishment}</strong></h4>
+		<h4>Product : <strong>${product.name}</strong></h4>
+		<h4>Thayyibban Analysis : </h4>
 		<div class="modal-body">
 			<table class="table table-bordered">
 				<tr>
-					<th>Nutrition Fact Name</th>
-					<th>Value</th>
-					<th></th>
+					<th>Created On</th>
+					<th>Updated On</th>
+					<th>Nutrition Fact Label</th>
+					<th>Analyst By</th>
+					<th>Updated By</th>
+
 				</tr>
-				<c:forEach items="${nutritionFactsResults}" var="nutritionFactsResult">
+				<c:forEach items="${nutritionFactsResults}"
+					var="nutritionFactsResult">
 					<tr>
- 						<td>${nutritionFactsResult.nutritionFactsParameter.name}</td>
+						<td>${nutritionFactsResult.createdOnStr}</td>
+						<td>${nutritionFactsResult.updatedOnStr}</td>
 						<td>
-							${nutritionFactsResult.value}
-						<td>
-							<a href="${contextRoot}/staff/product/${product.id}/nutritionfactsresult?nutritionfactsId=${nutritionFactsResult.id}"><i class="fas fa-edit"></i></a>|						
-							<a href="#" data-toggle="modal"
-								data-target="#mymodal${nutritionFactsResult.id}"><i class="fas fa-trash-alt"></i></a>
-								
-							<div id="mymodal${nutritionFactsResult.id}" class="modal fade"
-								tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
+							<table class="table table-bordered">
+								<tr>
+									<th>Nutrition</th>
+									<th>Value</th>
+									<th>%Daily Value*</th>
+									
+								</tr>
+								<c:forEach items="${nutritionFactsResult.nutritionFactsParameters}" var="nutritionFactsParameter">
+									<tr>
+										<td>${nutritionFactsParameter.name}</td>
+										<td>${nutritionFactsParameter.value}</td>
+										<td>${nutritionFactsParameter.value2}</td>
 
-										<div class="modal-header">
-											<h4 class="modal-title">Delete</h4>
-											<button type="button" class="close" data-dismiss="modal"aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											
-										</div>
-										<div class="modal-body">
-											<p>Are you sure you want to delete?</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
-											<a href="${contextRoot}/staff/product/${product.id}/nutritionfactsresult/${nutritionFactsResult.id}/delete"
-												class="btn btn-danger">Delete</a>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							
-															
+									</tr>
+								</c:forEach> 
+									
+												
+										
+							</table>
+		
 						</td>
+						<td>${nutritionFactsResult.analyst.name }
+						</td>
+						<td>${nutritionFactsResult.updatedBy.completeName }
+						</td>
+
 					</tr>
 				</c:forEach>
 			</table>
-			
-			<a href="${contextRoot}/staff/products" class="btn btn-lg btn-primary">Back</a>
-			<a href="${contextRoot}/staff/product/${product.id}/nutritionfactsresult/add" class="btn btn-lg btn-primary">Add</a>
+
+			<a href="${contextRoot}/staff/products"
+				class="btn btn-lg btn-primary">Back</a>
+
 
 		</div>
 	</div>

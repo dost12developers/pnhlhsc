@@ -41,12 +41,16 @@
             <span>Halal Parameter</span></a>
         </li>     
               
-        <li class="nav-item">
+<%--         <li class="nav-item">
           <a class="nav-link" href="${contextRoot}/laboratory/nutritionfacts">
             <i class="fab fa-fw fa-nutritionix"></i>
             <span>Nutrition Facts</span></a>
-        </li>
-        
+        </li> --%>
+        <li class="nav-item">
+          <a class="nav-link" href="${contextRoot}/laboratory/personnels">
+            <i class="fab fa-fw fa-nutritionix"></i>
+            <span>Personnel</span></a>
+        </li>        
          <li class="nav-item">
           <a class="nav-link" href="${contextRoot}/laboratory/categories">
             <i class="fas fa-fw fa-object-group"></i>

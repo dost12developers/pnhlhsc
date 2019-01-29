@@ -2,6 +2,8 @@ package com.dost12.phls.phlsbackend.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +39,8 @@ public class HalalAnalysisReport implements Serializable{
 	@Column(name = "is_active")	
 	private Boolean active;
 	
+	private String code;
+	
 	@Column(name ="test_method")
 	private String testMethod;
 	
@@ -63,12 +67,17 @@ public class HalalAnalysisReport implements Serializable{
 	private LocalDate dateReported;
 	
 	@ManyToOne
-	@JoinColumn(name = "halal_param_id")
+	@JoinColumn(name = "halal_param_id", nullable=false)
 	private HalalParameter halalParameter;
 
 	@ManyToOne
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "product_id", nullable=false)
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name="analyst_by_id", nullable=false)
+	private Personnel analyst;
+	
 	
 	@OneToOne
 	@JoinColumn(name="updated_by_id")
@@ -76,6 +85,10 @@ public class HalalAnalysisReport implements Serializable{
 	
 	@Transient
 	private int halalParameterId;
+	
+	@Transient
+	private int analystId;
+	
 	@Transient
 	private  String createdOnStr;
 	@Transient
@@ -95,6 +108,7 @@ public class HalalAnalysisReport implements Serializable{
 		active = true;
 		createdOn = LocalDate.now();
 		updatedOn = LocalDate.now();
+		this.code = "HL-" + UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 	
 	
@@ -216,6 +230,20 @@ public class HalalAnalysisReport implements Serializable{
 
 
 
+	public String getCode() {
+		return code;
+	}
+
+
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+
+
 	public Userlab getUpdatedBy() {
 		return updatedBy;
 	}
@@ -312,6 +340,20 @@ public class HalalAnalysisReport implements Serializable{
 
 
 
+	public int getAnalystId() {
+		return analystId;
+	}
+
+
+
+
+	public void setAnalystId(int analystId) {
+		this.analystId = analystId;
+	}
+
+
+
+
 	public String getDateReportedStr() {
 		if(dateReported != null)
 			return dateReported.toString();
@@ -323,6 +365,20 @@ public class HalalAnalysisReport implements Serializable{
 
 	public void setDateReportedStr(String dateReportedStr) {
 		this.dateReportedStr = dateReportedStr;
+	}
+
+
+
+
+	public Personnel getAnalyst() {
+		return analyst;
+	}
+
+
+
+
+	public void setAnalyst(Personnel analyst) {
+		this.analyst = analyst;
 	}
 
 

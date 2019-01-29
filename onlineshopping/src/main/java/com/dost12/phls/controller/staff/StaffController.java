@@ -99,7 +99,7 @@ public class StaffController {
 	@Autowired
 	private NutritionFactsResultDAO nutritionFactsResultDAO;
 
-	@RequestMapping(value = { "/", "/main", "/index" })
+	@RequestMapping(value = { "", "/", "/main", "/index" })
 	public ModelAndView manageLabProduct(@RequestParam(name = "success", required = false) String success) {
 		ModelAndView mv = new ModelAndView("page-staff");
 		mv.addObject("title", "Staff Page");
@@ -289,8 +289,10 @@ public class StaffController {
 	public String addNutritionFact(
 			@ModelAttribute("nutritionfactsparameter") NutritionFactsParameter nutritionfactsparameter,
 			HttpServletRequest request) {
-		boolean c = nutritionfactsparameter.getId() != 0 ? nutritionFactsParameterDAO.update(nutritionfactsparameter)
-				: nutritionFactsParameterDAO.add(nutritionfactsparameter);
+		if( nutritionfactsparameter.getId() != 0)
+			nutritionFactsParameterDAO.update(nutritionfactsparameter);
+		else
+			nutritionFactsParameterDAO.add(nutritionfactsparameter);
 		return "redirect:/staff/nutritionfacts?success=nutritionfacts";
 	}
 
@@ -393,10 +395,14 @@ public class StaffController {
 		mv.addObject("title", "Product");
 		mv.addObject("productForm", true);
 
-		if (id != null && productDAO.get(Integer.parseInt(id)).getId() != 0)
+		if (id != null && productDAO.get(Integer.parseInt(id)).getId() != 0) {
 			mv.addObject("product", productDAO.get(Integer.parseInt(id)));
-		else
+			mv.addObject("edit", true);
+		}
+		else {
 			mv.addObject("product", new Product());
+			mv.addObject("edit", false);
+		}
 
 		return mv;
 	}
@@ -429,11 +435,47 @@ public class StaffController {
 		// upload the file
 		if (!mProduct.getFile().getOriginalFilename().equals("")) {
 			FileUtil.uploadFile(request, mProduct.getFile(), mProduct.getCode());
+		}else {
+			FileUtil.uploadNoImage(request, mProduct.getCode());
 		}
 
 		return "redirect:/staff/products?success=product";
 	}
+	@RequestMapping(value = "/supplier-product", method = RequestMethod.POST)                        
+	public String managePostSuppplierProduct(@Valid @ModelAttribute("product") Product mProduct,
+			BindingResult results,
+			Model model, HttpServletRequest request){
+		// mandatory file upload check
+		if (mProduct.getId() == 0) {
+			new ProductValidator().validate(mProduct, results);
+		} else {
+			// edit check only when the file has been selected
+			if (!mProduct.getFile().getOriginalFilename().equals("")) {
+				new ProductValidator().validate(mProduct, results);
+			}
+		}
+		if (results.hasErrors()) {
+			model.addAttribute("message", "Validation fails for adding the product!");
+			model.addAttribute("userClickProducts", true);
+			return "page-staff";
+		}
 
+		mProduct.setSupplier(supplierDAO.get(mProduct.getSupplierId()));
+
+		if (mProduct.getId() != 0)
+			productDAO.update(mProduct);
+		else
+			productDAO.add(mProduct);
+
+		// upload the file
+		if (!mProduct.getFile().getOriginalFilename().equals("")) {
+			FileUtil.uploadFile(request, mProduct.getFile(), mProduct.getCode());
+		}else
+			FileUtil.uploadNoImage(request, mProduct.getCode());
+		
+		return "redirect:/staff/supplier/"+
+			mProduct.getSupplier().getId()+"/products?success=product";
+	}
 	@RequestMapping(value = "/product/{id}/delete")
 	public String deleteProduct(@PathVariable int id, HttpServletRequest request) {
 		if (productDAO.get(id) != null)
@@ -457,10 +499,7 @@ public class StaffController {
 		Supplier supplier = supplierDAO.get(id);
 		boolean isEnableAccount = !supplier.getEnable();
 		supplier.setEnable(isEnableAccount);
-		if (!isEnableAccount)
-			supplier.setUser(null);
 		supplierDAO.update(supplier);
-
 		return "redirect:/staff/suppliers?success=update";
 	}
 
@@ -685,21 +724,21 @@ public class StaffController {
 		Product product = productDAO.get(id);
 		mv.addObject("product", productDAO.get(id));
 
-		// remove
+/*		// remove
 		List<NutritionFactsParameter> nutritionFactsParameters = nutritionFactsParameterDAO.list();
 		for (NutritionFactsResult nutritionFactsResult : nutritionFactsResultDAO.listOfProduct(productDAO.get(id)))
 			for (NutritionFactsParameter nutritionFactsParameter : nutritionFactsParameterDAO.list())
 				if (nutritionFactsResult.getNutritionFactsParameter().getName()
 						.equals(nutritionFactsParameter.getName()))
-					nutritionFactsParameters.remove(nutritionFactsParameter);
+					nutritionFactsParameters.remove(nutritionFactsParameter);*/
 
 		if (nutritionfactsId != null && Integer.parseInt(nutritionfactsId) > 0) {
 			mv.addObject("title", "Nutrition Facts Result");
 			mv.addObject("nutritionFactsResultForm", true);
-			mv.addObject("nutritionFactsParameters", nutritionFactsParameters);
+/*			mv.addObject("nutritionFactsParameters", nutritionFactsParameters);*/
 			mv.addObject("nutritionFactsResult", nutritionFactsResultDAO.get(Integer.parseInt(nutritionfactsId)));
-			mv.addObject("nutritionFactsParameter",
-					nutritionFactsResultDAO.get(Integer.parseInt(nutritionfactsId)).getNutritionFactsParameter());
+/*			mv.addObject("nutritionFactsParameter",
+					nutritionFactsResultDAO.get(Integer.parseInt(nutritionfactsId)).getNutritionFactsParameter());*/
 		} else {
 			mv.addObject("title", "Product Nutrition Facts");
 			mv.addObject("productNutritionFactsParamForm", true);
@@ -714,17 +753,16 @@ public class StaffController {
 		ModelAndView mv = new ModelAndView("page-staff");
 
 		// remove
-		List<NutritionFactsParameter> nutritionFactsParameters = nutritionFactsParameterDAO.list();
+/*		List<NutritionFactsParameter> nutritionFactsParameters = nutritionFactsParameterDAO.list();
 		for (NutritionFactsResult nutritionFactsResult : nutritionFactsResultDAO.listOfProduct(productDAO.get(id)))
 			for (NutritionFactsParameter nutritionFactsParameter : nutritionFactsParameterDAO.list())
 				if (nutritionFactsResult.getNutritionFactsParameter().getName()
 						.equals(nutritionFactsParameter.getName()))
-					nutritionFactsParameters.remove(nutritionFactsParameter);
+					nutritionFactsParameters.remove(nutritionFactsParameter);*/
 
 		mv.addObject("product", productDAO.get(id));
 		mv.addObject("title", "Nutrition Facts Result");
 		mv.addObject("nutritionFactsResultForm", true);
-		mv.addObject("nutritionFactsParameters", nutritionFactsParameters);
 		mv.addObject("nutritionFactsResult", new NutritionFactsResult());
 		return mv;
 	}
@@ -734,8 +772,7 @@ public class StaffController {
 			@Valid @ModelAttribute("nutritionfactsresult") NutritionFactsResult nutritionfactsresult, Model model,
 			BindingResult results, HttpServletRequest request) {
 		Product product = productDAO.get(id);
-		nutritionfactsresult.setNutritionFactsParameter(
-				nutritionFactsParameterDAO.get(nutritionfactsresult.getNutritionFactsParameterId()));
+/*		nutritionfactsresult.setNutritionFactsParameter(nutritionFactsParameterDAO.get(nutritionfactsresult.getNutritionFactsParameterId()));*/
 		nutritionfactsresult.setProduct(product);
 		Boolean b = nutritionfactsresult.getId() > 0 ? nutritionFactsResultDAO.update(nutritionfactsresult)
 				: nutritionFactsResultDAO.add(nutritionfactsresult);

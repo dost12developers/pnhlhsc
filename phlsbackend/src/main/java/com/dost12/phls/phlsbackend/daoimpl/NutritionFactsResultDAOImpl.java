@@ -1,5 +1,6 @@
 package com.dost12.phls.phlsbackend.daoimpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -60,8 +61,9 @@ public class NutritionFactsResultDAOImpl implements NutritionFactsResultDAO {
 	 */
 	@Override
 	public boolean update(NutritionFactsResult nutritionFactsResult) {
-
+		
 		try {
+			nutritionFactsResult.setUpdatedOn(LocalDate.now());
 			// add the category to the database table
 			sessionFactory.getCurrentSession().update(nutritionFactsResult);
 			return true;

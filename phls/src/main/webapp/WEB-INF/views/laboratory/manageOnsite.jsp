@@ -25,9 +25,9 @@
 					    <th>Supplier Name</th>
 					    <th>Certificate No.</th>
 					    <th>Certificate Name</th>
-					    <th>CB</th>
+					    <th>Address</th>
 					    <th>Status</th>
-					    <th></th>
+					    <th>Comment</th>
 					    <th></th>
 					    <th></th>
                     </tr>
@@ -39,9 +39,9 @@
 					    <th>Supplier Name</th>
 					    <th>Certificate No.</th>
 					    <th>Certificate Name</th>
-					    <th>CB</th>
+					    <th>Address</th>
 					    <th>Status</th>
-					    <th></th>
+					    <th>Comment</th>
 					    <th></th>
 					    <th></th>
                     </tr>

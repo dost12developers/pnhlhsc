@@ -78,15 +78,12 @@ public class PageController {
 			HttpServletRequest request, HttpServletResponse response) {
 		if(session.getAttribute("userModel") != null) {
 			UserModel userModel = (UserModel) session.getAttribute("userModel");
-			if(userModel.getRole().equals("LABORATORY")) 
-				return "redirect:/laboratory/";
-			else if (userModel.getRole().equals("SUPPLIER"))
+			if (userModel.getRole().equals("SUPPLIER"))
 				return "redirect:/supplier/";
 			else if (userModel.getRole().equals("STAFF"))
 				return "redirect:/staff/";			
 			else if (userModel.getRole().equals("USER"))
 				return "redirect:/show/all/products";
-			
 		}
 		return "redirect:/home";
 		

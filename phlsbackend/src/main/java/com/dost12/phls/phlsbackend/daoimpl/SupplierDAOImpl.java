@@ -66,6 +66,20 @@ public class SupplierDAOImpl implements SupplierDAO {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Supplier> list(String email) {
+		
+		String selectActiveCategory = "FROM Supplier s WHERE s.active = :active AND email = :email ORDER BY updatedOn DESC";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(selectActiveCategory);
+				
+		query.setParameter("active", true);
+		
+		query.setParameter("email", email);
+
+		return query.getResultList();
+	}
+	
 	/*
 	 * Getting single category based on id
 	 */
@@ -112,7 +126,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 	@Override
 	public boolean delete(Supplier manufacture) {
 		
-		manufacture.setActive(false);
+		manufacture.setActive(false);	
 		manufacture.setUpdatedOn(LocalDate.now());
 		try {
 			

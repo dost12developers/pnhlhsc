@@ -40,13 +40,16 @@ public class OnsiteAssessment implements Serializable{
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy") 
 	@Column(name="created_on")
+	@JsonIgnore
 	private LocalDate createdOn;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy") 
 	@Column(name="updated_on")
+	@JsonIgnore
 	private LocalDate updateOn;
 	
 	@Column(name="is_active")
+	@JsonIgnore
 	private Boolean active;	
 
 	@OneToOne
@@ -73,6 +76,7 @@ public class OnsiteAssessment implements Serializable{
 	
 	@DateTimeFormat(pattern="mm/dd/yyyy") 
 	@Column(name="validity")
+	@JsonIgnore
 	private LocalDate valid;
 	
 	@Transient

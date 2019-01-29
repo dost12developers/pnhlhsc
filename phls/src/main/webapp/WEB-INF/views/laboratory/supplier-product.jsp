@@ -18,11 +18,10 @@
 	</div>
 
 	<div class="card-body">
-		<h4>${supplier.nameOfEstablishment}</h4>
+		<h4>Company : <strong>${supplier.nameOfEstablishment}</strong></h4>
 		<div class="modal-body">
 			<table class="table table-bordered">
 				<tr>
-					<th></th>
 					<th>Product Code</th>
 					<th>Product Name</th>
 					<th>Product Description</th>
@@ -31,9 +30,6 @@
 				</tr>
 				<c:forEach items="${products}" var="product">
 					<tr>
-						<td><img
-							src="${contextRoot}/resources/images/${product.code}.png"
-							class="dataTableImg" /></td>
 						<td>${product.code}</td>
 						<td>${product.name}</td>
 						<td>${product.description}</td>

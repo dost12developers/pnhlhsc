@@ -13,6 +13,6 @@ public interface OnsiteAddressDAO {
 	boolean update(OnsiteAddress onsiteAddress);
 	boolean delete(OnsiteAddress onsiteAddress);
 	
-	List<OnsiteAddress> list(Supplier supplier);
+	List<OnsiteAddress> list(int id);
 	
 }

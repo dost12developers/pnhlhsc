@@ -102,6 +102,10 @@
 					</tr>
 					<tr>
 						<sf:input type="hidden" path="id" />
+						<sf:input type="hidden" path="updatedOn" />
+						<sf:input type="hidden" path="createdOn" />
+						<sf:input type="hidden" path="enable" />
+						<sf:input type="hidden" path="active" />
 						<td><a href="${contextRoot}/supplier/suppliers"
 							class="btn btn-secondary">Cancel</a>&nbsp;&nbsp;
 							<input type="submit" value="Save" class="btn btn-primary" /></td>

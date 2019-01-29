@@ -20,9 +20,11 @@
                   <thead>
                     <tr>
 					    <th></th>
+					    <th>Created On</th>
+					    <th>Update On</th>
 					    <th>Code</th>
 					    <th>Name</th>
-					    <th>Qty</th>
+					    <th>Quantity</th>
 					    <th>Unit Price</th>
 					    <th>Company</th>
 					    <th>Ingredient</th>
@@ -35,9 +37,11 @@
                   <tfoot>
                     <tr>
 					    <th></th>
+					    <th>Created On</th>
+					    <th>Update On</th>					    
 					    <th>Code</th>
 					    <th>Name</th>
-					    <th>Qty</th>
+					    <th>Quantity</th>
 					    <th>Unit Price</th>
 					    <th>Company</th>
 					    <th>Ingredient</th>

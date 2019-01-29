@@ -12,10 +12,10 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              List of Suppliers</div>
+              List of Companies</div>
             <div class="card-body">
               <div class="table-responsive">
-              <a class="btn btn-primary" style="float: left" href="${contextRoot}/laboratory/lab-supplier"><i class="fas fa-plus-square"></i></a>
+             
                 <table class="table table-bordered" id="dataTableSupplierId" width="100%" cellspacing="0">
                   <thead>
                     <tr>

@@ -20,8 +20,7 @@
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
-<title>${title} - Philippine National Halal Laboratory and Halal Science
-	Center</title>
+<title>${title} - Onlineshopping</title>
 
 <script>
 	window.menu = '${title}';
@@ -32,19 +31,18 @@
 
 	window.categoryId = '';
 </script>
+<link href="${images}/favicon.png" rel="icon">
+<link href="${images}/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Bootstrap Core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
+<!-- Bootstrap Readable Theme -->
+<link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
 
 
 <!-- Bootstrap DataTables -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
-
-
-
-<%--     <link href="${css}/bootstrap.responsive.css" rel="stylesheet">
-    <link href="${css}/bootstrap.responsive.min.css" rel="stylesheet"> --%>
      
 <!-- Custom CSS -->
 <!-- Bootstrap Readable Theme -->
@@ -138,8 +136,6 @@
 						
 		</div>
 
-
-
 		<!-- Footer comes here -->
 		<%@include file="./shared/footer.jsp"%>
 		
@@ -150,7 +146,7 @@
 		<script src="${js}/jquery.validate.js"></script>
 
 		<!-- Bootstrap Core JavaScript -->
-		<script src="${js}/bootstrap.js"></script>
+		<script src="${js}/bootstrap.min.js"></script>
 
 		<!-- DataTable Plugin -->
 		<script src="${js}/jquery.dataTables.js"></script>
@@ -158,18 +154,13 @@
 		<!-- DataTable Bootstrap Script -->
 		<script src="${js}/dataTables.bootstrap.js"></script>
 
-<%-- 	    <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script> --%>
-		
+		<!-- DataTable Bootstrap Script -->
+		<script src="${js}/bootbox.min.js"></script>
 		
 		<script src="${js}/myapp.js"></script>
 			
 		<script src="${js}/list.min.js"></script>
 		<!-- Self coded javascript -->	
-	
-		
-		                   
-
-
 	
 
 </body>

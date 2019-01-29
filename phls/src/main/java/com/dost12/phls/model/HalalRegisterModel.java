@@ -2,6 +2,8 @@ package com.dost12.phls.model;
 
 import java.io.Serializable;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.dost12.phls.phlsbackend.dto.OnsiteAddress;
 import com.dost12.phls.phlsbackend.dto.Supplier;
 
@@ -15,6 +17,8 @@ public class HalalRegisterModel  implements Serializable {
 	private Supplier supplier;
 	
 	private OnsiteAddress address;
+	
+
 
 	public HalalRegisterModel() {
 		super();

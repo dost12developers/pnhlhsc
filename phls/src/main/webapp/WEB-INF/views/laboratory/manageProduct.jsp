@@ -21,7 +21,8 @@
                 <table class="table table-bordered" id="dataTableProductId" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-					    <th></th>
+					    <th>Created On</th>
+					    <th>Updated On</th>
 					    <th>Code</th>
 					    <th>Name</th>					    
 					    <th>Description</th>
@@ -34,7 +35,8 @@
                   </thead>
                   <tfoot>
                     <tr>
-					    <th></th>
+						 <th>Created On</th>
+					    <th>Updated On</th>				   
 					    <th>Code</th>
 					    <th>Name</th>					    
 					    <th>Description</th>

@@ -1,54 +1,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="container">
-
-
+	
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="${contextRoot}/home">Home</a>
+		</li>
+		<li class="breadcrumb-item"><a href="${contextRoot}/show/all/products">Products</a></li>
+		<li class="breadcrumb-item active">${product.name }</li>
+	</ol>
 
 	<div class="row">
 
 
-		<div class="breadcrumb">
 
-			<h1>
-				Online Shopping
-			</h1>
-
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-
-					<div class="item active">
-						<img src="${images}/buy-logo.png" width="28" style="float: left;">
-						<p>&nbsp;Order product.</p>
-					</div>
-
-					<div class="item">
-						<img src="${images}/mouse-logo.png" width="28"
-							style="float: left;">
-						<p>&nbsp;You'll receive delivery.</p>
-					</div>
-
-					<div class="item">
-						<img src="${images}/icon-logo.png" width="28" style="float: left;">
-						<p>&nbsp;Product with verified Halal.</p>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
 
 		<!-- to display the actual products -->
 		<div class="col-md-9">
-
 
 
 
@@ -85,7 +52,7 @@
 							varStatus="loop">
 							<c:choose>
 								<c:when
-									test="${ingredientDetail.ingredient.critical and ingredientDetail.markDescription != ''}">
+									test="${ingredientDetail.ingredient.critical}">
 									<i title="${ingredientDetail.markDescription}"
 										style="color: darkred">${ingredientDetail.ingredient.name}</i>
 								</c:when>
@@ -98,7 +65,7 @@
 						</c:forEach>
 					</h5>
 					
-					<c:if test="${fn:length(halalAnalysisReports) gt 0}">
+<%-- 					<c:if test="${fn:length(halalAnalysisReports) gt 0}">
 					<hr />
 						No found:
 						<c:forEach items="${halalAnalysisReports}"
@@ -109,9 +76,9 @@
 							</c:if>
 	 						
 						</c:forEach>
-					</c:if>
+					</c:if> --%>
 					
-					<c:if test="${fn:length(nutritionFactsResults) gt 0}">
+<%-- 					<c:if test="${fn:length(nutritionFactsResults) gt 0}">
 					<hr />
 						It contains:
 						<c:forEach items="${nutritionFactsResults}"
@@ -119,7 +86,7 @@
 							<b>${nutritionFactsResult.nutritionFactsParameter.name}</b>
 							${!loop.last ? ',' : ''}
 						</c:forEach>
-					</c:if>
+					</c:if> --%>
 
 
 					<c:choose>

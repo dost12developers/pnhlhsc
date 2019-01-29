@@ -113,7 +113,7 @@
 			
 			</div>
 			<!-- /.container-fluid -->
-			<%@include file="laboratory/shared/footer.jsp"%>
+			<%@include file="supplier/shared/footer.jsp"%>
 
 		</div>
 		<!-- /.content-wrapper -->

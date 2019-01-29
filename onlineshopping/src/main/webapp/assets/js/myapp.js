@@ -442,8 +442,7 @@ $(function() {
 			    				s +=   '<div class="caption">'
 			    					s +=    '<h4 class="name">'+json[i].name+'</h4>'
 			    						s +=   '<p class="description">'+json[i].description+'</p><p>'
-			    						//	s +=   '<a href="#" class="btn btn-primary" role="button">Add Cart</a>
-			    								if(userRole !== 'ADMIN' || userRole !== 'STAFF' || userRole !== 'LABORATORY' || userRole !== 'SUPPLIER') {
+			/*    								if(userRole !== 'ADMIN' || userRole !== 'STAFF' || userRole !== 'LABORATORY' || userRole !== 'SUPPLIER') {
 													if (json[i].quantity < 1) {
 														s += '<a href="javascript:void(0)" class="btn btn-success disabled">Add Cart</a>';
 													} else {
@@ -453,8 +452,8 @@ $(function() {
 																+ json[i].id
 																+ '/product" class="btn btn-success">Add Cart</a>';
 													}
-												}
-			    								s += '<a href="'+contextRoot+'/show/'+json[i].id+'/product" class="btn btn-default" role="button">View Details</a>'
+												}*/
+			    								s += '<a href="'+contextRoot+'/show/'+json[i].id+'/product" class="btn btn-primary" role="button">View</a>'
 			    								s +=    '</p></div>'
 			    									s +=  '</div>'
 			    										s +=    '</div></div></li>';
@@ -463,7 +462,7 @@ $(function() {
 			    }
 			 	var options = {
 				     	valueNames: [ 'name', 'description'],
-				     	page: 3,
+				     	page: 6,
 				     	pagination: true
 				  };
 				 var halalList = new List('halal-item', options);

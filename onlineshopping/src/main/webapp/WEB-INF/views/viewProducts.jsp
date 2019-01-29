@@ -1,6 +1,11 @@
 
 <div class="container">
 
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="${contextRoot}/home">Home</a>
+		</li>
+		<li class="breadcrumb-item active">Products</li>
+	</ol>
 
 
 	<c:if test="${userClickAllProducts == true}">
@@ -25,45 +30,6 @@
 	<div class="row">
 
 
-		<div class="breadcrumb">
-
-			<h1>
-				<b>Online Shopping</b>
-			</h1>
-
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-
-					<div class="item active">
-						<img src="${images}/buy-logo.png" width="28" style="float: left;">
-						<p>&nbsp;Order product.</p>
-					</div>
-
-					<div class="item">
-						<img src="${images}/mouse-logo.png" width="28"
-							style="float: left;">
-						<p>&nbsp;You'll receive delivery.</p>
-					</div>
-
-					<div class="item">
-						<img src="${images}/icon-logo.png" width="28" style="float: left;">
-						<p>&nbsp;Product with verified Halal.</p>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-
 		<!-- Would be to display sidebar -->
 		<div class="col-md-3">
 
@@ -83,10 +49,10 @@
 
 					<div id="halal-item">
 						<div class="row">
-							<div class="col-md-4">
-								<input type="text" class="fuzzy-search form-control" placeholder="Search for product name" />
+							<div class="col-md-5">
+								<input type="text" class="fuzzy-search form-control" placeholder="Search for product" />
 							</div>
-							<div class="col-md-6"></div>
+							<div class="col-md-5"></div>
 							<div class="col-md-2">
 								<button class="sort btn btn-default" data-sort="name">Sort
 									by name</button>

@@ -167,11 +167,14 @@ public class SupplierController {
 		mv.addObject("title", "Product");
 		mv.addObject("productForm", true);
 
-		if (id != null && productDAO.get(Integer.parseInt(id)).getId() != 0)
+		if (id != null && productDAO.get(Integer.parseInt(id)).getId() != 0) {
 			mv.addObject("product", productDAO.get(Integer.parseInt(id)));
-		else
+			mv.addObject("edit", true);
+		}
+		else {
 			mv.addObject("product", new Product());
-
+			mv.addObject("edit", false);
+		}
 		return mv;
 	}
 
@@ -196,15 +199,21 @@ public class SupplierController {
 
 		mProduct.setSupplier(supplierDAO.get(mProduct.getSupplierId()));
 
-		if (mProduct.getId() != 0)
+		if (mProduct.getId() != 0) {
+			Product temp = productDAO.get(mProduct.getId());
+			mProduct.setCode(temp.getCode());
+			mProduct.setName(temp.getName());
+			mProduct.setSupplier(temp.getSupplier());
 			productDAO.update(mProduct);
+		}
 		else
 			productDAO.add(mProduct);
 
 		// upload the file
 		if (!mProduct.getFile().getOriginalFilename().equals("")) {
 			FileUtil.uploadFile(request, mProduct.getFile(), mProduct.getCode());
-		}
+		}else
+			FileUtil.uploadNoImage(request, mProduct.getCode());
 
 		return "redirect:/supplier/products?success=product";
 	}

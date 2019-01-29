@@ -48,6 +48,7 @@ public class User implements Serializable{
 	private String password;
 	
 	@Transient
+	@JsonIgnore
 	private String confirmPassword;
 
 	

@@ -21,6 +21,10 @@
 
 <title>PNHLHSC - Membership</title>
 
+<!-- Favicons -->
+<link href="${images}/favicon.png" rel="icon">
+<link href="${images}/apple-touch-icon.png" rel="apple-touch-icon">
+
 <script>
 
 	window.contextRoot = '${contextRoot}'
@@ -54,14 +58,14 @@
 
 	<div class="wrapper">
 
-	    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<%-- 	    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	        <div class="container">
 	            <!-- Brand and toggle get grouped for better mobile display -->
 	            <div class="navbar-header">
 	                <a class="navbar-brand" href="${flowExecutionUrl}&_eventId=home"><img src="${images}/logo.png" width="32"  alt=""></a>
 	            </div>
 			</div>
-		</nav>
+		</nav> --%>
 		
 		
 		<!-- Page Content -->

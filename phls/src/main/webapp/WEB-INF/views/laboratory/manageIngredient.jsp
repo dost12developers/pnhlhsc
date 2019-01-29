@@ -61,7 +61,7 @@
        			<div class="form-group">
 					<label class="control-label col-md-4">Name</label>
 					<div class="col-md-8 validate">
-						<sf:input type="text" path="name" class="form-control" placeholder="Ingredient Name" /> 
+						<sf:input type="text" path="nameDesc" class="form-control" placeholder="Ingredient Name" /> 
 					</div>
 				</div>
        			
@@ -76,7 +76,7 @@
 				<label class="control-label col-md-4">Mark Ingredient</label>
 				<div class="col-md-8">
 					<label class="radio-inline">
-						<sf:radiobutton path="critical" value="false" checked="checked"/> None Critical  				
+						<sf:radiobutton path="critical" value="false" checked="checked"/> Safe				
 					</label>
 					<label class="radio-inline">
 						<sf:radiobutton path="critical" value="true"/>&nbsp;Critical

@@ -76,7 +76,7 @@ public class IngredientDetail implements Serializable{
 	public IngredientDetail() {
 		super();
 		active = true;
-		mark = true;
+		mark = false;
 		createdOn = new Date();
 		updateOn = new Date();
 		markDescription = ""; 

@@ -8,9 +8,11 @@
 	<li class="breadcrumb-item"><a href="${contextRoot}/staff/">Dashboard</a></li>
 	<li class="breadcrumb-item active">Ingredient</li>
 </ol>
-		<c:if test="${not empty message}">
-			<div class="alert alert-success">${message}</div>
-		</c:if>
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">${message}</div>
+</c:if>
+
 <!-- DataTables -->
 <div class="card mb-3">
 	<div class="card-header">
@@ -18,72 +20,44 @@
 	</div>
 
 	<div class="card-body">
-		<h4>${product.name}</h4>
+		<h4>Company : <strong>${product.supplier.nameOfEstablishment}</strong></h4>
+		<h4>Product : <strong>${product.name}</strong></h4>
+		<h4>Ingredient : </h4>
 		<div class="modal-body">
 			<table class="table table-bordered">
 				<tr>
-					<th>Ingredient Name</th>
-					<th>Type Of Ingredient</th>
-					<th>Mark</th>
+					<th>Name</th>
 					<th>Description</th>
+					<th>Mark</th>
 					<th></th>
+					<th>Comment</th>
+		
 				</tr>
 				<c:forEach items="${ingredientDetails}" var="ingredient">
 					<tr>
 						<td>${ingredient.ingredient.name}</td>
+						<td>${ingredient.ingredient.description}</td>
 						<td><c:if test="${ingredient.ingredient.critical}">
-							CRITICAL
+							Critical
 						</c:if> <c:if test="${not ingredient.ingredient.critical}">
-							SAFE
+							Safe
 						</c:if></td>
 						<td><c:if test="${ingredient.mark}">
-							HARAM
+							None conform to H. Standards
 						</c:if> <c:if test="${not ingredient.mark}">
-							HALAL
+							Conform to H. Standards
 						</c:if></td>
 						<td>${ingredient.markDescription}</td>
-						<td><a
-							href="${contextRoot}/staff/product/${product.id}/ingredients?ingredientDetailId=${ingredient.id}"><i class="fas fa-edit"></i></a>
-							|
 
-							<a href="#" data-toggle="modal"
-								data-target="#mymodal${ingredient.id}"><i class="fas fa-trash-alt"></i></a>
-								
-							<div id="mymodal${ingredient.id}" class="modal fade"
-								tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-
-										<div class="modal-header">
-											<h4 class="modal-title">Delete</h4>
-											<button type="button" class="close" data-dismiss="modal"aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											
-										</div>
-										<div class="modal-body">
-											<p>Are you sure you want to delete?</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
-											<a href="${contextRoot}/laboratory/product/${product.id}/ingredients/${ingredient.id}/delete"
-												class="btn btn-danger">Delete</a>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</td>
 					</tr>
 				</c:forEach>
 
 			</table>
 			<a href="${contextRoot}/staff/products"
-				class="btn btn-lg btn-primary">Back</a> <a
-				href="${contextRoot}/staff/product/${product.id}/ingredients/add"
-				class="btn btn-lg btn-primary">Add</a>
+				class="btn btn-lg btn-primary">Back</a> 
+
 
 		</div>
 	</div>
 </div>
+

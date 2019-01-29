@@ -2,6 +2,7 @@ package com.dost12.phls.phlsbackend.dto;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -62,7 +63,7 @@ public class Certification implements Serializable {
 
 	public Certification() {
 		super();
-		halalCertificateNo = "";
+		this.halalCertificateNo = "HC-" + UUID.randomUUID().toString().substring(30).toUpperCase();	
 		isActive = true;
 		address = "";
 	}

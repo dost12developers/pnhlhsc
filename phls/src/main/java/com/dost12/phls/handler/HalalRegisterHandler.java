@@ -1,5 +1,8 @@
 package com.dost12.phls.handler;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -8,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dost12.phls.model.HalalRegisterModel;
 import com.dost12.phls.model.SupplierModel;
@@ -39,7 +45,8 @@ public class HalalRegisterHandler {
 		return new HalalRegisterModel();
 	}
 
-	public void addSupplier(HalalRegisterModel halalRegistrationModel, Supplier supplier) {
+	public void addSupplier(HalalRegisterModel halalRegistrationModel, Supplier supplier){
+
 		halalRegistrationModel.setSupplier(supplier);
 	}
 
@@ -50,22 +57,22 @@ public class HalalRegisterHandler {
 	public String validateSupplier(Supplier supplier, MessageContext error) {
 		String transitionValue = "success";
 
-		if (userDAO.getByEmail(supplier.getEmail()) != null) {
-			error.addMessage(new MessageBuilder().error().source("email").defaultText("Email address is already taken!")
-					.build());
-			transitionValue = "failure";
-		}
+		   if(supplierDAO.list(supplier.getEmail()).size() > 0) {
+			    error.addMessage(new MessageBuilder().error()
+			    		.source("email")
+			    			.defaultText("Email address is already taken!").build());
+			    transitionValue = "failure";
+			}
 		return transitionValue;
 	}
 
-	public String saveAll(HalalRegisterModel halalRegistrationModel) {
+	public String saveAll(HalalRegisterModel halalRegistrationModel)  {
 		String transitionValue = "success";
 		Integer supplierId = supplierDAO.add(halalRegistrationModel.getSupplier());
 		OnsiteAddress adress = halalRegistrationModel.getAddress();
 		adress.setSupplierId(supplierId);
 		onsiteAddressDAO.add(adress);
 		return transitionValue;
-
 	}
 
 }

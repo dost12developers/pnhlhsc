@@ -21,11 +21,14 @@
 	</div>
 
 	<div class="card-body">
-		<p>
-			<h5>Name : ${product.name}</h5>
-			<h6>Code : ${product.code}</h6>
-			<h6>Description : ${product.description}</h6>
-		</p>
+
+			
+		<h4>Company : <strong>${product.supplier.nameOfEstablishment}</strong></h4>
+		<h4>Product : <strong>${product.name}</strong></h4>
+		<h4>Halal Analysis  : </h4>
+		
+		
+
 		<div class="modal-body">
 			<table class="table table-bordered">
 				<tr>
@@ -36,6 +39,8 @@
 					<th>Result</th>
 					<th>Unit</th>
 					<th>Mark</th>
+					<th>Analyst By</th>
+					<th>Updated By</th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -53,7 +58,16 @@
 								Found non-conformant to H. Standards
 							</c:if>
 						</td>
-															  
+						<td>
+						<c:if test="${halalAnalysisReport.analyst ne null}">
+							${halalAnalysisReport.analyst.name}
+						</c:if>
+						</td>
+						<td>
+						<c:if test="${halalAnalysisReport.updatedBy ne null}">
+							${halalAnalysisReport.updatedBy.completeName}
+						</c:if>
+						</td>						  
 						<td><a href="${contextRoot}/laboratory/product/${product.id}/halalanalysis/pdf?halalanalysisid=${halalAnalysisReport.id}" target="_blank"><i class="fas fa-file-pdf"></i></a></td>
 						<td><a
 							href="${contextRoot}/laboratory/product/${product.id}/halalanalysis?halalanalysisId=${halalAnalysisReport.id}"><i

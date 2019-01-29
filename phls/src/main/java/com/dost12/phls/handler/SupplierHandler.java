@@ -53,12 +53,19 @@ public class SupplierHandler {
 	 public String validateSupplier(Supplier supplier, MessageContext error) {
 		  String transitionValue = "success";
 
-		   if(userDAO.getByEmail(supplier.getEmail())!=null) {
+		   if(supplierDAO.list(supplier.getEmail()).size() > 0) {
+			    error.addMessage(new MessageBuilder().error()
+			    		.source("email")
+			    			.defaultText("Email address is already taken!").build());
+			    transitionValue = "failure";
+			}
+		   
+/*		   if(userDAO.getByEmail(supplier.getEmail())!=null) {
 		    error.addMessage(new MessageBuilder().error()
 		    		.source("email")
 		    			.defaultText("Email address is already taken!").build());
 		    transitionValue = "failure";
-		   }
+		   }*/
 		  return transitionValue;
 		 }
 	public String saveAll(SupplierModel supplierModel) {

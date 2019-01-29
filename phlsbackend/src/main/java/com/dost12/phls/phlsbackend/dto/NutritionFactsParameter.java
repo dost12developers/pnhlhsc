@@ -28,11 +28,23 @@ public class NutritionFactsParameter implements Serializable {
 	private String name;
 	
 	private String description;
+	
+	private String value;
+	
+	private String value2;
+	
 
 	@Column(name = "is_active")	
 	private Boolean active;
 	
 	
+	public NutritionFactsParameter(String name, String value, String value2) {
+		this.name = name;
+		this.value = value;
+		this.value2 = value2;
+		active = true;
+	}
+
 	public NutritionFactsParameter() {
 		super();
 		active = true;
@@ -68,6 +80,23 @@ public class NutritionFactsParameter implements Serializable {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	
+	public String getValue2() {
+		return value2;
+	}
+
+	public void setValue2(String value2) {
+		this.value2 = value2;
 	}
 
 	@Override

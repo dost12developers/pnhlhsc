@@ -69,7 +69,7 @@ public class ParameterTestCase {
 		nutritionFactsResult = nutritionFactsResultDAO.get(1);
 		
 		assertEquals("Successfully fetched manufacture!",
-				"my mai",nutritionFactsResult.getNutritionFactsParameter().getName());
+				"my mai","");
 		
 	}
 	

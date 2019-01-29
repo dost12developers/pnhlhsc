@@ -18,10 +18,7 @@
 	<http>
 		<!-- only admin access -->
 		<intercept-url pattern="/manage/**" access="hasAuthority('ADMIN')" />
-		
-		<!-- only lab access -->
-		<intercept-url pattern="/laboratory/**" access="hasAuthority('LABORATORY')" />	
-							
+						
 		<!-- only supplier access -->
 		<intercept-url pattern="/supplier/**" access="hasAuthority('SUPPLIER')" />
 		

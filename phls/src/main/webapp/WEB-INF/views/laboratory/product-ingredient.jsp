@@ -20,28 +20,32 @@
 	</div>
 
 	<div class="card-body">
-		<h4>${product.name}</h4>
+		<h4>Company : <strong>${product.supplier.nameOfEstablishment}</strong></h4>
+		<h4>Product : <strong>${product.name}</strong></h4>
+		<h4>Ingredient : </h4>
 		<div class="modal-body">
 			<table class="table table-bordered">
 				<tr>
-					<th>Ingredient Name</th>
-					<th>Type Of Ingredient</th>
-					<th>Mark</th>
+					<th>Name</th>
 					<th>Description</th>
+					<th>Mark</th>
+					<th></th>
+					<th>Comment</th>
 					<th></th>
 				</tr>
 				<c:forEach items="${ingredientDetails}" var="ingredient">
 					<tr>
 						<td>${ingredient.ingredient.name}</td>
+						<td>${ingredient.ingredient.description}</td>
 						<td><c:if test="${ingredient.ingredient.critical}">
-							CRITICAL
+							Critical
 						</c:if> <c:if test="${not ingredient.ingredient.critical}">
-							SAFE
+							Safe
 						</c:if></td>
 						<td><c:if test="${ingredient.mark}">
-							HARAM
+							None conform to H. Standards
 						</c:if> <c:if test="${not ingredient.mark}">
-							HALAL
+							Conform to H. Standards
 						</c:if></td>
 						<td>${ingredient.markDescription}</td>
 						<td><a
@@ -89,54 +93,3 @@
 		</div>
 	</div>
 </div>
-
-<%-- <div class="modal fade" id="modalIngredientDetailId" tabindex="-1"
-	role="dialog" aria-labelledby="exampleModalCenterTitle"
-	aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Ingredient Detail</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-																										
-			<sf:form class="form-horizontal" modelAttribute="ingredientDetail"  action="${contextRoot}/laboratory/product/${product.id}/ingredients/ingredient" method="POST"
-			enctype="multipart/form-data">
-				<div class="modal-body">
-				
-				<div class="form-group">
-					<label class="control-label col-md-4">Ingredient Name</label>
-					<div class="col-md-8 validate">
-						<sf:select path="ingredientId" items="${ingredients}" itemLabel="name" itemValue="id" class="form-control"/>
-					</div>
-				</div>
-				
-
-				<div class="form-group">
-					<label class="control-label col-md-4">Mark</label>
-					<div class="col-md-8 validate">
-						<sf:radiobutton path="mark" value="false"  checked="checked" /> Halal
-						<sf:radiobutton path="mark" value="true"/> Haram
-					</div>
-				</div>
-  				
- 				<div class="form-group">
-					<label class="control-label col-md-4">Description</label>
-					<div class="col-md-8 validate">
-						<sf:input type="textarea" path="markDescription" class="form-control" placeholder="Mark Description" /> 
-					</div>
-				</div>
-				 				
-				<sf:hidden path="productId" value="${productId}"/>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					 <button type="Submit" class="btn btn-primary">Save</button>
-				</div>
-			</sf:form>
-		</div>
-	</div>
-</div> --%>

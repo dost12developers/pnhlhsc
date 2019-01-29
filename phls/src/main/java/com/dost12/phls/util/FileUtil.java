@@ -15,10 +15,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUtil {
 
-	private static final String ABS_PATH = "C:/Users/DOST-XII PC13/git4/pnhlhsc/onlineshopping/src/main/webapp/assets/images/";
-	                                       
+	private static final String ABS_PATH = "C:/Users/DOSTXII_LP2/Desktop/Developers Files Thanks/pnhlhsc github/pnhlhsc/phls/src/main/webapp/assets/images/";
+	
+	private static final String ABS_PATH2 = "C:/Users/DOSTXII_LP2/Desktop/Developers Files Thanks/pnhlhsc github/pnhlhsc/phls/src/main/webapp/assets/files/";
+	
+	
 	private static String REAL_PATH = null;
+	
+	private static String REAL_PATH2 = null;
+	
 	private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
+	
 	public static boolean uploadFile(HttpServletRequest request, MultipartFile file, String code) 
 	{				
 		// get the real server path
@@ -74,5 +81,33 @@ public class FileUtil {
 			ex.printStackTrace();
 		}
 	}
+	
+	public static boolean uploadDoc(HttpServletRequest request, MultipartFile file, String code) 
+	{				
+		// get the real server path
+		REAL_PATH2 = request.getSession().getServletContext().getRealPath("/assets/files/");
+		
+		logger.info(REAL_PATH2);					
+		// create the directories if it does not exist
+		
+		if(!new File(REAL_PATH2).exists()) {
+			new File(REAL_PATH2).mkdirs();
+		}
+		
+		if(!new File(ABS_PATH2).exists()) {
+			new File(ABS_PATH2).mkdirs();
+		}
+		
+		try {
+			//transfer the file to both the location
+			file.transferTo(new File(REAL_PATH2 + code + ".pdf"));
+			file.transferTo(new File(ABS_PATH2 + code + ".pdf"));
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+		}
+		return true;
+	}
+	
 	
 }

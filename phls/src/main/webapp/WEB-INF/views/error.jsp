@@ -67,8 +67,8 @@
 
 	<div class="wrapper">
 
-		<%@include file="./shared/navbar.jsp"%>
-			
+		<%-- <%@include file="./shared/navbar.jsp"%>
+			 --%>
 		
 		<div class="content">
 		
@@ -78,14 +78,14 @@
 				
 					<div class="col-xs-12">
 					
-						
+	
 						<div class="jumbotron">
 						
 							<h3>${errorTitle}</h3>
 							<hr/>
-								${errorDescription}
+								${errorDescription}<a href="${contextRoot}/home" > Return Home</a>
 							
-						
+
 						</div>
 						
 											

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +21,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,10 +41,16 @@ public class Supplier implements Serializable {
 	
 	
 	@Column(name ="created_on")
+	@JsonIgnore
 	private LocalDate createdOn;	
 	
 	@Column(name ="updated_on")
+	@JsonIgnore
 	private LocalDate updatedOn;	
+	
+	@NotEmpty
+	@Column(name="code", unique=true, nullable=false)
+	private String code;
 
 	@Column(name ="is_active")
 	private Boolean active;	
@@ -53,11 +62,16 @@ public class Supplier implements Serializable {
 	@Column(name ="name_of_establishment")
 	private String nameOfEstablishment;
 
-	private String owner;
+	@NotBlank(message = "Please enter the Address")
+	@JsonIgnore
+	private String addressOfEstablishment;
+	
+	//private String owner;
 	
 	@Column(name ="tel_no")
 	private String telNo;
 
+	@JsonIgnore
 	private String fax;
 	
 	@Column(name="person_involved")
@@ -69,61 +83,79 @@ public class Supplier implements Serializable {
 	@NotBlank(message = "*Please provide an email")	
 	private String email;
 	
+	@JsonIgnore
 	private String website;
 	
 	@Column(name="reason")
+	@JsonIgnore
 	private String reason;
 
 	@Column(name="num_of_employees")
+	@JsonIgnore
 	private int numOfEmployees;
 
 	@Column(name="production_area_size")
+	@JsonIgnore
 	private int productionAreaSize;
 
 	@Column(name="indoor_area")
+	@JsonIgnore
 	private int indoorArea;
 
 	@Column(name="open_area")
+	@JsonIgnore
 	private int openArea;
 
 	@Column(name="num_raw_material")
+	@JsonIgnore
 	private String numOfRawMaterial;
 
 	//
 	@Column(name="num_finished_product")
+	@JsonIgnore
 	private String numProductsWarehouses;
 	//
 	@Column(name="production_capacity")
+	@JsonIgnore
 	private String productionCapacity;
 	
 	@Column(name="production_lines")
+	@JsonIgnore
 	private String productionLines;
 	//
 	@Column(name="custom_production")
+	@JsonIgnore
 	private String customProduction;
 
 	//
 	@Column(name="product_brands")
+	@JsonIgnore
 	private String productBrands;
 	
+	@Column(name="product_varieties")
+	@JsonIgnore
+	private String productVarieties;
+	
+	
 	@Column(name="none_halal_products")
+	@JsonIgnore
 	private String productNotHalal;
 
 	//
 	@Column(name="names_of_raw_materials")
+	@JsonIgnore
 	private String namesOfRawMaterials;	
 	
 	//
 	@Column(name="names_of_suppliers")
+	@JsonIgnore
 	private String namesOfSuppliers;	
 	
 	//
 	@Column(name="products_process")
+	@JsonIgnore
 	private String productsProcess;	
 	
-	@Column(name ="additional_activities")
-	private String additionalActivities;
-
 	
 	// eccommerse - account
 	@OneToOne
@@ -136,7 +168,15 @@ public class Supplier implements Serializable {
 	private Userlab createdBy;
 	
 	
+	@Column 
+	private String typeOfApplication;
+	
 	@Transient
+	@JsonIgnore
+	private MultipartFile file;
+	
+	@Transient
+	@JsonIgnore
 	private List<Product> products;
 	
 	public Supplier() {
@@ -148,28 +188,10 @@ public class Supplier implements Serializable {
 		createdOn = LocalDate.now();
 		updatedOn = LocalDate.now();
 		
-		position ="";
-		website ="";
-		telNo ="";
-		email ="";
-		reason ="";
-		numOfEmployees =0;
-		productionAreaSize=0;
-		indoorArea=0;
-		openArea=0;
-		numOfRawMaterial="";
-		productionLines="";
-		productNotHalal="";
-		additionalActivities="";
-		numProductsWarehouses ="";
-		productionCapacity ="";
-		customProduction ="";
-		productBrands ="";
-		namesOfRawMaterials="";
-		namesOfSuppliers ="";
-		productsProcess="";
-		createdBy = null;
+		this.code = "APP" + UUID.randomUUID().toString().substring(26).toUpperCase();
 		
+		this.typeOfApplication = ApplicationRegistrationType.PRODUCT_SERVICE.getTypeOfAppSerivce();
+
 	}
 	
 	public int getId() {
@@ -221,21 +243,6 @@ public class Supplier implements Serializable {
 		this.active = active;
 	}
 
-	public String getOwner() {
-		return owner;
-	}
-
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-
-	public String getAdditionalActivities() {
-		return additionalActivities;
-	}
-
-	public void setAdditionalActivities(String additionalActivities) {
-		this.additionalActivities = additionalActivities;
-	}
 
 	public String getPersonInvolved() {
 		return personInvolved;
@@ -286,8 +293,6 @@ public class Supplier implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 
 	public String getReason() {
 		return reason;
@@ -435,10 +440,54 @@ public class Supplier implements Serializable {
 		this.enable = enable;
 	}
 
+	
+	public String getProductVarieties() {
+		return productVarieties;
+	}
+
+	public void setProductVarieties(String productVarieties) {
+		this.productVarieties = productVarieties;
+	}
+
 	public String getCreatedByStr() {
 		if(createdBy != null)
 			return createdBy.getLastName()+", "+createdBy.getFirstName();
 		return "";
+	}
+
+	
+	public String getAddressOfEstablishment() {
+		return addressOfEstablishment;
+	}
+
+	public void setAddressOfEstablishment(String addressOfEstablishment) {
+		this.addressOfEstablishment = addressOfEstablishment;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	
+	public String getTypeOfApplication() {
+		return typeOfApplication;
+	}
+
+	public void setTypeOfApplication(String typeOfApplication) {
+		this.typeOfApplication = typeOfApplication;
 	}
 
 	@Override
@@ -475,18 +524,22 @@ public class Supplier implements Serializable {
 	@Override
 	public String toString() {
 		return "Supplier [id=" + id + ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + ", active=" + active
-				+ ", enable=" + enable + ", nameOfEstablishment=" + nameOfEstablishment + ", owner=" + owner
-				+ ", telNo=" + telNo + ", fax=" + fax + ", personInvolved=" + personInvolved + ", position=" + position
-				+ ", email=" + email + ", website=" + website + ", reason=" + reason + ", numOfEmployees="
-				+ numOfEmployees + ", productionAreaSize=" + productionAreaSize + ", indoorArea=" + indoorArea
-				+ ", openArea=" + openArea + ", numOfRawMaterial=" + numOfRawMaterial + ", numProductsWarehouses="
-				+ numProductsWarehouses + ", productionCapacity=" + productionCapacity + ", productionLines="
-				+ productionLines + ", customProduction=" + customProduction + ", productBrands=" + productBrands
-				+ ", productNotHalal=" + productNotHalal + ", namesOfRawMaterials=" + namesOfRawMaterials
-				+ ", namesOfSuppliers=" + namesOfSuppliers + ", productsProcess=" + productsProcess
-				+ ", additionalActivities=" + additionalActivities + ", user=" + user + ", createdBy=" + createdBy
-				+ ", products=" + products + "]";
-	}	
+				+ ", enable=" + enable + ", nameOfEstablishment=" + nameOfEstablishment + ", addressOfEstablishment="
+				+ addressOfEstablishment + ", telNo=" + telNo + ", fax=" + fax + ", personInvolved=" + personInvolved
+				+ ", position=" + position + ", email=" + email + ", website=" + website + ", reason=" + reason
+				+ ", numOfEmployees=" + numOfEmployees + ", productionAreaSize=" + productionAreaSize + ", indoorArea="
+				+ indoorArea + ", openArea=" + openArea + ", numOfRawMaterial=" + numOfRawMaterial
+				+ ", numProductsWarehouses=" + numProductsWarehouses + ", productionCapacity=" + productionCapacity
+				+ ", productionLines=" + productionLines + ", customProduction=" + customProduction + ", productBrands="
+				+ productBrands + ", productVarieties=" + productVarieties + ", productNotHalal=" + productNotHalal
+				+ ", namesOfRawMaterials=" + namesOfRawMaterials + ", namesOfSuppliers=" + namesOfSuppliers
+				+ ", productsProcess=" + productsProcess + ", user=" + user + ", createdBy=" + createdBy + ", products="
+				+ products + "]";
+	}
+
+
+
+
 	
 	
 

@@ -1,6 +1,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 	<script>
 		window.userRole = '${userModel.role}';
+		window.supplierid = '${supplierid}';
 	</script>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 

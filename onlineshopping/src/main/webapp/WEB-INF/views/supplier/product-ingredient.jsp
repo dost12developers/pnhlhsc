@@ -18,73 +18,18 @@
 	</div>
 
 	<div class="card-body">
-		<h4>${product.name}</h4>
+		<h4>Product : <strong>${product.name}</strong></h4>
+		<h4>Ingredients : </h4>
 		<div class="modal-body">
 			<table class="table table-bordered">
 				<tr>
-					<th>Ingredient Name</th>
-					<security:authorize access="!hasAuthority('SUPPLIER')">
-					<th>Type Of Ingredient</th>
-					<th>Mark</th>
-					<th>Comment</th>
-					</security:authorize>
-					<th></th>
+					<th>Name</th>
+					<th>Description</th>
 				</tr>
 				<c:forEach items="${ingredientDetails}" var="ingredient">
 					<tr>
 						<td>${ingredient.ingredient.name}</td>
-						<security:authorize access="!hasAuthority('SUPPLIER')">
-						<td>
-							<c:if test="${ingredient.ingredient.critical}">
-								CRITICAL
-							</c:if> <c:if test="${not ingredient.ingredient.critical}">
-								SAFE
-							</c:if>
-						</td>
-						<td>
-							<c:if test="${ingredient.mark}">
-							HARAM
-							</c:if> <c:if test="${not ingredient.mark}">
-							HALAL
-							</c:if>
-						</td>
-						<td>${ingredient.markDescription}</td>
-						</security:authorize>
-						
-						<td>
-						<security:authorize access="!hasAuthority('SUPPLIER')">
-							<a href="${contextRoot}/supplier/product/${product.id}/ingredients?ingredientDetailId=${ingredient.id}"><i class="fas fa-edit"></i></a>
-							|
-						</security:authorize>
-							<a href="#" data-toggle="modal"
-								data-target="#mymodal${ingredient.id}"><i class="fas fa-trash-alt"></i></a>
-								
-							<div id="mymodal${ingredient.id}" class="modal fade"
-								tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-
-										<div class="modal-header">
-											<h4 class="modal-title">Delete</h4>
-											<button type="button" class="close" data-dismiss="modal"aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											
-										</div>
-										<div class="modal-body">
-											<p>Are you sure you want to delete?</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
-											<a href="${contextRoot}/supplier/product/${product.id}/ingredients/${ingredient.id}/delete"
-												class="btn btn-danger">Delete</a>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</td>
+						<td>${ingredient.ingredient.description}</td>					
 					</tr>
 				</c:forEach>
 

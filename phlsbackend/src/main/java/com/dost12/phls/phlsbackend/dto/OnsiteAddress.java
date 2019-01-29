@@ -20,15 +20,28 @@ public class OnsiteAddress implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "address")
-	private String address;
+	@NotBlank(message = "Please enter address line one!")
+	@Column(name = "address_line_one")
+	private String addressLineOne;
 	
+	
+	@Column(name = "address_line_two")
+	private String addressLineTwo;
+	
+	@NotBlank(message = "Please enter City!")	
 	private String city;
+	
+	
+	@NotBlank(message = "Please enter State!")	
+	private String state;
+	
+	@NotBlank(message = "Please enter country!")	
+	private String country;
 	
 	@Column(name = "postal_code")
 	private String postalCode;
 	
-	@Column(name = "supplier_id")
+	@Column(name = "supplier_id", nullable=false)
 	private int supplierId;
 
 	private Boolean onsite;
@@ -95,13 +108,39 @@ public class OnsiteAddress implements Serializable{
 		this.active = active;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getAddressLineOne() {
+		return addressLineOne;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddressLineOne(String addressLineOne) {
+		this.addressLineOne = addressLineOne;
 	}
+
+	public String getAddressLineTwo() {
+		return addressLineTwo;
+	}
+
+	public void setAddressLineTwo(String addressLineTwo) {
+		this.addressLineTwo = addressLineTwo;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
 	
 	
 }

@@ -43,6 +43,10 @@ public class Ingredient  implements Serializable{
 	private Boolean critical;
 	private String description;
 	
+	@Transient
+	private String nameDesc;
+	
+	
 	
 	public Ingredient() {
 		super();
@@ -93,6 +97,16 @@ public class Ingredient  implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+
+	public String getNameDesc() {
+		if(!critical)
+			return name+" - Safe";
+		return name;
+	}
+	public void setNameDesc(String nameDesc) {
+		this.nameDesc = nameDesc;
 	}
 	@Override
 	public String toString() {

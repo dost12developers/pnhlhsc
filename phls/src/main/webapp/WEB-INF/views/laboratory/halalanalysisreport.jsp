@@ -21,28 +21,33 @@
 					<tr>
 						<td><sf:label path="dateSubmittedStr" class="control-label">Date Submitted</sf:label></td>
 						<td>
-							<sf:input path="dateSubmittedStr" type="date" class="form-control"/>
+							<sf:input path="dateSubmittedStr" type="date" class="form-control" required="required"/>
 						</td>
 					</tr>
 					<tr>
-						<td><sf:label path="fromDateAnalyzedStr" class="control-label">Started Date Analyzed</sf:label></td>
+						<td><sf:label path="fromDateAnalyzedStr" class="control-label">Started Date Analyzed </sf:label></td>
 						<td>
-							<sf:input path="fromDateAnalyzedStr" type="date" class="form-control"/>
+							<sf:input path="fromDateAnalyzedStr" type="date" class="form-control" required="required"/>
 						</td>
 					</tr>				
 					<tr>
 						<td><sf:label path="toDateAnalyzedStr" class="control-label">End Date Analyzed</sf:label></td>
 						<td>
-							<sf:input path="toDateAnalyzedStr" type="date" class="form-control"/>
+							<sf:input path="toDateAnalyzedStr" type="date" class="form-control" required="required"/>
 						</td>
 					</tr>					
 					<tr>
 						<td><sf:label path="dateReportedStr" class="control-label">Date Reported</sf:label></td>
 						<td>
-							<sf:input path="dateReportedStr" type="date" class="form-control"/>
+							<sf:input path="dateReportedStr" type="date" class="form-control" required="required"/>
 						</td>
 					</tr>	
-										
+					<tr>
+						<td><sf:label path="code" class="control-label">Code</sf:label></td>
+						<td>
+							<sf:input path="code" type="code" class="form-control" required="required"/>
+						</td>
+					</tr>											
 					
 					<c:if test="${halalParameter == null}">
 					<tr>
@@ -80,12 +85,28 @@
 							<sf:input path="unit" class="form-control" required="required"/>
 						</td>
 					</tr>	
-														
+
+					<c:if test="${analyst eq null}">
+					<tr>
+						<td><sf:label path="analystId" class="control-label">Analyst By</sf:label></td>
+						<td>
+							<sf:select path="analystId" items="${analysts}" itemLabel="name" multiple="true" itemValue="id" required="required" class="form-control"/>
+						</td>
+					</tr>
+					</c:if>
+					<c:if test="${analyst ne null}">
+						<td><label>Analyst By</label></td>
+						<td>
+							<label><b>${analyst.name }</b></label>
+							<sf:input type="hidden" path="analystId" value="${analyst.id}"/>
+						</td>
+					</c:if>
+																			
 					<tr>
 						<td><sf:label path="mark" class="control-label">Mark</sf:label></td>
 						<td>
-							<sf:radiobutton path="mark" value="0"  checked="checked" /> No Found
-							<sf:radiobutton path="mark" value="1"/> Found
+							<sf:radiobutton path="mark" value="0"  checked="checked" /> Conform to H. Standards <br/>
+							<sf:radiobutton path="mark" value="1"/> None conform to H. Standards
 						</td>
 					</tr>					
 					<tr>

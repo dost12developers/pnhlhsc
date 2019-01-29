@@ -14,7 +14,9 @@ import com.dost12.phls.phlsbackend.dao.HalalParameterDAO;
 import com.dost12.phls.phlsbackend.dao.IngredientDAO;
 import com.dost12.phls.phlsbackend.dao.IngredientDetailDAO;
 import com.dost12.phls.phlsbackend.dao.NutritionFactsParameterDAO;
+import com.dost12.phls.phlsbackend.dao.OnsiteAddressDAO;
 import com.dost12.phls.phlsbackend.dao.OnsiteAssessmentDAO;
+import com.dost12.phls.phlsbackend.dao.PersonnelDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
 import com.dost12.phls.phlsbackend.dao.SupplierDAO;
 import com.dost12.phls.phlsbackend.dto.Category;
@@ -23,7 +25,9 @@ import com.dost12.phls.phlsbackend.dto.HalalParameter;
 import com.dost12.phls.phlsbackend.dto.Ingredient;
 import com.dost12.phls.phlsbackend.dto.IngredientDetail;
 import com.dost12.phls.phlsbackend.dto.NutritionFactsParameter;
+import com.dost12.phls.phlsbackend.dto.OnsiteAddress;
 import com.dost12.phls.phlsbackend.dto.OnsiteAssessment;
+import com.dost12.phls.phlsbackend.dto.Personnel;
 import com.dost12.phls.phlsbackend.dto.Supplier;
 import com.dost12.phls.phlsbackend.dto.Product;
 
@@ -57,6 +61,12 @@ public class JsonDataLabController {
 
 	@Autowired
 	private HalalParameterDAO halalParameterDAO;
+	
+	@Autowired
+	private PersonnelDAO personnelDAO;
+	
+	@Autowired
+	private OnsiteAddressDAO onsiteAddressDAO;
 	
 	
 	@RequestMapping("/all/categories")
@@ -109,6 +119,14 @@ public class JsonDataLabController {
 		return ingredientDetails;
 		
 	}
+	
+	@RequestMapping("/onsite/{id}/addresses")
+	@ResponseBody
+	public List<OnsiteAddress> getOnsiteAddress(@PathVariable int id) {
+	
+		List<OnsiteAddress> onsiteAddresses = onsiteAddressDAO.list(id);
+		return onsiteAddresses;
+	}	
 	@RequestMapping("/all/nutritionfacts")
 	@ResponseBody
 	public List<NutritionFactsParameter> getAllNutritionFactsJSONList() {		
@@ -118,6 +136,12 @@ public class JsonDataLabController {
 	@ResponseBody
 	public List<HalalParameter> getAllHalalParametersJSONList() {		
 		return halalParameterDAO.list();
+	}
+	
+	@RequestMapping("/all/personnels")
+	@ResponseBody
+	public List<Personnel> getAllPersonnelJSONList() {		
+		return personnelDAO.list();
 	}
 }
  

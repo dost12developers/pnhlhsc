@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +45,7 @@ import com.dost12.phls.phlsbackend.dao.IngredientDetailDAO;
 import com.dost12.phls.phlsbackend.dao.NutritionFactsParameterDAO;
 import com.dost12.phls.phlsbackend.dao.NutritionFactsResultDAO;
 import com.dost12.phls.phlsbackend.dao.OnsiteAssessmentDAO;
+import com.dost12.phls.phlsbackend.dao.PersonnelDAO;
 import com.dost12.phls.phlsbackend.dao.ProductDAO;
 import com.dost12.phls.phlsbackend.dao.SettingDAO;
 import com.dost12.phls.phlsbackend.dao.SupplierDAO;
@@ -56,7 +59,10 @@ import com.dost12.phls.phlsbackend.dto.Ingredient;
 import com.dost12.phls.phlsbackend.dto.IngredientDetail;
 import com.dost12.phls.phlsbackend.dto.NutritionFactsParameter;
 import com.dost12.phls.phlsbackend.dto.NutritionFactsResult;
+import com.dost12.phls.phlsbackend.dto.NutritionalTypeName;
 import com.dost12.phls.phlsbackend.dto.OnsiteAssessment;
+import com.dost12.phls.phlsbackend.dto.Personnel;
+import com.dost12.phls.phlsbackend.dto.PersonnelType;
 import com.dost12.phls.phlsbackend.dto.Supplier;
 import com.dost12.phls.phlsbackend.dto.User;
 import com.dost12.phls.phlsbackend.dto.Userlab;
@@ -124,7 +130,9 @@ public class LabController {
 	@Autowired
 	private SettingDAO settingDAO;
 	
-
+	@Autowired
+	private PersonnelDAO personnelDAO;
+	
 
 	@RequestMapping(value = { "","/", "/main", "/index" })
 	public ModelAndView manageLabProduct(@RequestParam(name = "success", required = false) String success) {
@@ -162,6 +170,25 @@ public class LabController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/onsiteaddresses")
+	public ModelAndView onsiteaddress( @RequestParam(name = "success", required = false) String success,
+			@RequestParam(name = "supplierid", required = false) String supplierid) {
+		ModelAndView mv = new ModelAndView("page-laboratory");
+		mv.addObject("title", "On Site Addresses");
+		mv.addObject("userClickOnsiteAddress", true);
+		mv.addObject("supplierid", supplierid);
+		mv.addObject("supplier", supplierDAO.get(Integer.parseInt(supplierid)));
+		if (success != null) {
+			if (success.equals("onsiteaddress")) {
+				mv.addObject("message", "On site Address submitted successfully!");
+			}
+			if (success.equals("remove")) {
+				mv.addObject("message", "Removed successfully!");
+			}
+		}
+		return mv;
+	}
+	
 	@RequestMapping(value = "/suppliers")
 	public ModelAndView suppliers(
 			@RequestParam(name = "success", required = false) String success) {
@@ -324,6 +351,63 @@ public class LabController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/personnels")
+	public ModelAndView personnels(@RequestParam(name = "success", required = false) String success,
+			@RequestParam(name = "id", required = false) String id) {
+		ModelAndView mv = new ModelAndView("page-laboratory");
+		mv.addObject("title", "Personnel");
+		mv.addObject("userClickPersonnels", true);
+		if (success != null) {
+			if (success.equals("personnel")) {
+				mv.addObject("message", "Personnel submitted successfully!");
+			}
+			if (success.equals("remove")) {
+				mv.addObject("message", "Removed successfully!");
+			}
+		}
+
+		return mv;
+	}
+	@RequestMapping(value = "/personnel")
+	public ModelAndView personnel(@RequestParam(name = "id", required = false) String id) {
+		ModelAndView mv = new ModelAndView("page-laboratory");
+		mv.addObject("title", "Personnel");
+		mv.addObject("personnelForm", true);
+
+		List<String >postions = new ArrayList<>();
+		postions.add(PersonnelType.ANALYST.getUserProfileType());
+		postions.add(PersonnelType.MANAGER.getUserProfileType());
+		postions.add(PersonnelType.DIRECTOR.getUserProfileType());
+		
+		mv.addObject("positions", postions);
+		
+		if (id != null && personnelDAO.get(Integer.parseInt(id)) != null)
+			mv.addObject("personnel", personnelDAO.get(Integer.parseInt(id)));
+		else
+			mv.addObject("personnel", new Personnel());
+		return mv;
+	}
+
+	@RequestMapping(value = "/personnel", method = RequestMethod.POST)
+	public String adddpersonnel(@ModelAttribute("personnel") Personnel personnel,
+			HttpServletRequest request) {
+		boolean c = personnel.getId() != 0 ? personnelDAO.update(personnel)
+				: personnelDAO.add(personnel);
+		return "redirect:/laboratory/personnels?success=personnel";
+	}
+
+	@RequestMapping(value = "/personnel/{id}/delete")
+	public String deletepersonnel(@PathVariable int id, HttpServletRequest request) {
+		if (personnelDAO.get(Integer.valueOf(id)) != null)
+			personnelDAO.delete(personnelDAO.get(Integer.valueOf(id)));
+		return "redirect:/laboratory/personnels?success=remove";
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/category", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category mCategory, HttpServletRequest request) {
 		boolean c = mCategory.getId() != 0 ? categoryDAO.update(mCategory) : categoryDAO.add(mCategory);
@@ -382,11 +466,23 @@ public class LabController {
 	public String addNutritionFact(
 			@ModelAttribute("nutritionfactsparameter") NutritionFactsParameter nutritionfactsparameter,
 			HttpServletRequest request) {
-		boolean c = nutritionfactsparameter.getId() != 0 ? nutritionFactsParameterDAO.update(nutritionfactsparameter)
-				: nutritionFactsParameterDAO.add(nutritionfactsparameter);
+		if( nutritionfactsparameter.getId() != 0)
+				nutritionFactsParameterDAO.update(nutritionfactsparameter);
+		else
+				nutritionFactsParameterDAO.add(nutritionfactsparameter);
 		return "redirect:/laboratory/nutritionfacts?success=nutritionfact";
 	}
 
+	@RequestMapping(value = "product/{id}/pro-nutritionfactsparameter")
+	public String updateProducNutritionFact(@PathVariable int id,
+			@ModelAttribute("nutritionfactsparameter") NutritionFactsParameter nutritionfactsparameter,
+			HttpServletRequest request) {
+		
+		nutritionFactsParameterDAO.update(nutritionfactsparameter);
+		
+		return "redirect:/laboratory/product/"+id+"/nutritionfactsresult";
+	}
+	
 	@RequestMapping(value = "/nutritionfactsparameter/{id}/delete")
 	public String deleteNutritionFact(@PathVariable int id, HttpServletRequest request) {
 		if (nutritionFactsParameterDAO.get(Integer.valueOf(id)) != null)
@@ -479,24 +575,32 @@ public class LabController {
 			@RequestParam(name = "supplierId", required = false) String supplierId) {
 		ModelAndView mv = new ModelAndView("page-laboratory");
 
-		// this for supplier form
-		if (supplierId != null && supplierDAO.get(Integer.parseInt(supplierId)) != null)
-			mv.addObject("supplier", supplierDAO.get(Integer.parseInt(supplierId)));
-
 		mv.addObject("title", "Product");
 		mv.addObject("productForm", true);
+		
+		// this for supplier form (redirection)
+		if (supplierId != null && supplierDAO.get(Integer.parseInt(supplierId)) != null) {
+			Supplier supplier = supplierDAO.get(Integer.parseInt(supplierId));
+			mv.addObject("supplier", supplier );			
+		}
 
-		if (id != null && productDAO.get(Integer.parseInt(id)).getId() != 0)
-			mv.addObject("product", productDAO.get(Integer.parseInt(id)));
-		else
+		if (id != null && productDAO.get(Integer.parseInt(id)).getId() != 0) {
+			Product product = productDAO.get(Integer.parseInt(id));
+			mv.addObject("product", product );
+			mv.addObject("edit", true);
+		}
+		else {
 			mv.addObject("product", new Product());
+			mv.addObject("edit", false);
+		}
+			
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
 	public String managePostProduct(@Valid @ModelAttribute("product") Product mProduct, 
-			@RequestParam(name = "supplierId", required = false) String supplierId,
+		
 			BindingResult results,
 			Model model, HttpServletRequest request){
 		// mandatory file upload check
@@ -527,13 +631,45 @@ public class LabController {
 		}else
 			FileUtil.uploadNoImage(request, mProduct.getCode());
 		
-		if(supplierId != "" && supplierDAO.get(Integer.parseInt(supplierId)) != null)
-			return "redirect:/laboratory/supplier/"+
-				supplierDAO.get(Integer.parseInt(supplierId)).getId()+"/products?success=product";
-		
 		return "redirect:/laboratory/products?success=product";
 	}
 
+	@RequestMapping(value = "/supplier-product", method = RequestMethod.POST)                        
+	public String managePostSuppplierProduct(@Valid @ModelAttribute("product") Product mProduct,
+			BindingResult results,
+			Model model, HttpServletRequest request){
+		// mandatory file upload check
+		if (mProduct.getId() == 0) {
+			new ProductValidator().validate(mProduct, results);
+		} else {
+			// edit check only when the file has been selected
+			if (!mProduct.getFile().getOriginalFilename().equals("")) {
+				new ProductValidator().validate(mProduct, results);
+			}
+		}
+		if (results.hasErrors()) {
+			model.addAttribute("message", "Validation fails for adding the product!");
+			model.addAttribute("userClickProducts", true);
+			return "page-laboratory";
+		}
+
+		mProduct.setSupplier(supplierDAO.get(mProduct.getSupplierId()));
+
+		if (mProduct.getId() != 0)
+			productDAO.update(mProduct);
+		else
+			productDAO.add(mProduct);
+
+		// upload the file
+		if (!mProduct.getFile().getOriginalFilename().equals("")) {
+			FileUtil.uploadFile(request, mProduct.getFile(), mProduct.getCode());
+		}else
+			FileUtil.uploadNoImage(request, mProduct.getCode());
+		
+		return "redirect:/laboratory/supplier/"+
+			mProduct.getSupplier().getId()+"/products?success=product";
+	}
+	
 	@RequestMapping(value = "/product/{id}/delete")
 	public String deleteProduct(@PathVariable int id, HttpServletRequest request) {
 		if (productDAO.get(id) != null)
@@ -557,8 +693,10 @@ public class LabController {
 		ModelAndView mv = new ModelAndView("page-laboratory");
 		mv.addObject("title", "Supplier");
 		mv.addObject("supplierForm", true);
-		if (id != null && supplierDAO.get(Integer.parseInt(id)).getId() != 0)
-			mv.addObject("supplier", supplierDAO.get(Integer.parseInt(id)));
+		Supplier supplier = supplierDAO.get(Integer.parseInt(id));
+		if (id != null && supplier != null) {
+			mv.addObject("supplier", supplier);
+		}
 		else
 			mv.addObject("supplier", new Supplier());
 		return mv;
@@ -580,17 +718,14 @@ public class LabController {
 	
 	@RequestMapping(value = "/supplier/{id}/delete")
 	public String deleteSupplier(@PathVariable int id, HttpServletRequest request) {
-		if (supplierDAO.get(id) != null) {
-			User user = null;
-			if (!supplierDAO.get(id).getEmail().isEmpty())
-				user = userDAO.getByEmail(supplierDAO.get(id).getEmail());
-
-			if (user != null && user.getId() > 0) {
+		Supplier supplier = supplierDAO.get(id);
+		if (supplier != null) {
+			User user = userDAO.getByEmail(supplier.getEmail());
+			if (user != null) {
 				user.setEnabled(false);
 				userDAO.update(user);
 			}
-			supplierDAO.delete(supplierDAO.get(id));
-
+			supplierDAO.delete(supplier);
 		}
 		return "redirect:/laboratory/suppliers?success=remove";
 	}
@@ -702,6 +837,8 @@ public class LabController {
 		Product product = productDAO.get(id);
 		mv.addObject("product", productDAO.get(id));
 
+		
+		mv.addObject("analysts", personnelDAO.list());
 		// remove
 		List<HalalParameter> halalParameters = halalParameterDAO.list();
 		for (HalalAnalysisReport halalAnalysisReport : halalAnalysisReportDAO.listOfProduct(product))
@@ -710,12 +847,13 @@ public class LabController {
 					halalParameters.remove(halalParameter);
 
 		if (halalanalysisId != null  && halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId)) != null) {
+			HalalAnalysisReport halalAnalysisReport = halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId));
 			mv.addObject("title", "Halal Analysis");
 			mv.addObject("halalAnalysisReportForm", true);
 			mv.addObject("halalParameters", halalParameters);
-			mv.addObject("halalAnalysisReport", halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId)) );
-			mv.addObject("halalParameter",
-					halalAnalysisReportDAO.get(Integer.parseInt(halalanalysisId)).getHalalParameter());
+			mv.addObject("halalAnalysisReport", halalAnalysisReport );
+			mv.addObject("halalParameter", halalAnalysisReport.getHalalParameter());
+			mv.addObject("analyst", halalAnalysisReport.getAnalyst());
 		} else {
 			mv.addObject("title", "Product Halal Analysis");
 			mv.addObject("productHalalParamForm", true);
@@ -736,9 +874,11 @@ public class LabController {
 				if (halalAnalysisReport.getHalalParameter().getName().equals(halalParameter.getName()))
 					halalParameters.remove(halalParameter);
 
-		mv.addObject("product", productDAO.get(id));
 		mv.addObject("title", "Halal Analysis");
 		mv.addObject("halalAnalysisReportForm", true);
+		
+		mv.addObject("product", productDAO.get(id));
+		mv.addObject("analysts", personnelDAO.list());
 		mv.addObject("halalParameters", halalParameters);
 		mv.addObject("halalAnalysisReport", new HalalAnalysisReport());
 		return mv;
@@ -751,7 +891,7 @@ public class LabController {
 		Product product = productDAO.get(id);
 		halalAnalysisReport.setHalalParameter(halalParameterDAO.get(halalAnalysisReport.getHalalParameterId()));
 		halalAnalysisReport.setProduct(product);
-		
+		halalAnalysisReport.setAnalyst(personnelDAO.get(halalAnalysisReport.getAnalystId()));
 		try {
 		halalAnalysisReport.setDateSubmitted(LocalDate.parse(halalAnalysisReport.getDateSubmittedStr()));
 		}catch(Exception e) {}
@@ -788,29 +928,33 @@ public class LabController {
 	public ModelAndView productnutrition(@PathVariable int id,
 			@RequestParam(name = "nutritionfactsId", required = false) String nutritionfactsId,
 			HttpServletRequest request) {
+		
 		ModelAndView mv = new ModelAndView("page-laboratory");
 		Product product = productDAO.get(id);
 		mv.addObject("product", productDAO.get(id));
 
+		
 		// remove
-		List<NutritionFactsParameter> nutritionFactsParameters = nutritionFactsParameterDAO.list();
+/*		List<NutritionFactsParameter> nutritionFactsParameters = nutritionFactsParameterDAO.list();
 		for (NutritionFactsResult nutritionFactsResult : nutritionFactsResultDAO.listOfProduct(productDAO.get(id)))
 			for (NutritionFactsParameter nutritionFactsParameter : nutritionFactsParameterDAO.list())
 				if (nutritionFactsResult.getNutritionFactsParameter().getName()
 						.equals(nutritionFactsParameter.getName()))
-					nutritionFactsParameters.remove(nutritionFactsParameter);
+					nutritionFactsParameters.remove(nutritionFactsParameter);*/
 
 		if (nutritionfactsId != null && Integer.parseInt(nutritionfactsId) > 0) {
 			mv.addObject("title", "Nutrition Facts Result");
 			mv.addObject("nutritionFactsResultForm", true);
-			mv.addObject("nutritionFactsParameters", nutritionFactsParameters);
+		//	mv.addObject("nutritionFactsParameters", nutritionFactsParameters);
+			mv.addObject("analysts", personnelDAO.list());
 			mv.addObject("nutritionFactsResult", nutritionFactsResultDAO.get(Integer.parseInt(nutritionfactsId)));
-			mv.addObject("nutritionFactsParameter",
-					nutritionFactsResultDAO.get(Integer.parseInt(nutritionfactsId)).getNutritionFactsParameter());
+		//	mv.addObject("nutritionFactsParameter", nutritionFactsResultDAO.get(Integer.parseInt(nutritionfactsId)).getNutritionFactsParameter());
+			mv.addObject("nutritionfactsparameter", new NutritionFactsParameter());
 		} else {
 			mv.addObject("title", "Product Nutrition Facts");
 			mv.addObject("productNutritionFactsParamForm", true);
 			mv.addObject("nutritionFactsResults", nutritionFactsResultDAO.listOfProduct(product));
+			mv.addObject("nutritionfactsparameter", new NutritionFactsParameter());
 		}
 
 		return mv;
@@ -821,31 +965,61 @@ public class LabController {
 		ModelAndView mv = new ModelAndView("page-laboratory");
 
 		// remove
-		List<NutritionFactsParameter> nutritionFactsParameters = nutritionFactsParameterDAO.list();
+/*		List<NutritionFactsParameter> nutritionFactsParameters = nutritionFactsParameterDAO.list();
 		for (NutritionFactsResult nutritionFactsResult : nutritionFactsResultDAO.listOfProduct(productDAO.get(id)))
 			for (NutritionFactsParameter nutritionFactsParameter : nutritionFactsParameterDAO.list())
 				if (nutritionFactsResult.getNutritionFactsParameter().getName()
 						.equals(nutritionFactsParameter.getName()))
-					nutritionFactsParameters.remove(nutritionFactsParameter);
+					nutritionFactsParameters.remove(nutritionFactsParameter);*/
 
 		mv.addObject("product", productDAO.get(id));
 		mv.addObject("title", "Nutrition Facts Result");
 		mv.addObject("nutritionFactsResultForm", true);
-		mv.addObject("nutritionFactsParameters", nutritionFactsParameters);
+		mv.addObject("analysts", personnelDAO.list());
+		//mv.addObject("nutritionFactsParameters", nutritionFactsParameters);
 		mv.addObject("nutritionFactsResult", new NutritionFactsResult());
+		
+		mv.addObject("nutritionFactsParam", new NutritionFactsParameter());
 		return mv;
 	}
 
 	@RequestMapping(value = "/product/{id}/nutritionfactsresult", method = RequestMethod.POST)
 	public String addproductnutrition(@PathVariable int id,
-			@Valid @ModelAttribute("nutritionfactsresult") NutritionFactsResult nutritionfactsresult, Model model,
-			BindingResult results, HttpServletRequest request) {
+			@ModelAttribute("nutritionfactsresult") NutritionFactsResult nutritionfactsresult, Model model, HttpServletRequest request) {
 		Product product = productDAO.get(id);
-		nutritionfactsresult.setNutritionFactsParameter(
-				nutritionFactsParameterDAO.get(nutritionfactsresult.getNutritionFactsParameterId()));
+		//nutritionfactsresult.setNutritionFactsParameter(nutritionFactsParameterDAO.get(nutritionfactsresult.getNutritionFactsParameterId()));
 		nutritionfactsresult.setProduct(product);
+		nutritionfactsresult.setAnalyst(personnelDAO.get(nutritionfactsresult.getAnalystId()));
+		nutritionfactsresult.setUpdatedBy(getUserlab());
+
+		Integer idCALORIES = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.CALORIES.getNutritionalTypeName(), "0", null));
+		Integer idCALORIES_FAT = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.CALORIES_FAT.getNutritionalTypeName(), "0", null));
+		Integer idTOTAL_FAT = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.TOTAL_FAT.getNutritionalTypeName(), "0", "0"));
+		Integer idSODIUM = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.SODIUM.getNutritionalTypeName(), "0", "0"));
+		Integer idTOTAL_CARBOHYDRATES = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.TOTAL_CARBOHYDRATES.getNutritionalTypeName(), "0", "0"));
+		Integer idPROTEIN = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.PROTEIN.getNutritionalTypeName(), "0", null));
+		Integer idSUGAR = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.SUGAR.getNutritionalTypeName(), "0", null));
+		Integer idVITAMIN_C = nutritionFactsParameterDAO.add(new NutritionFactsParameter(NutritionalTypeName.VITAMIN_C.getNutritionalTypeName(), "0", "0"));
+	
+		
+		Set<NutritionFactsParameter> nutritionFactsParameters1 = nutritionfactsresult.getNutritionFactsParameters();
+		
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idCALORIES));
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idCALORIES_FAT));
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idTOTAL_FAT));		
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idSODIUM));
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idTOTAL_CARBOHYDRATES));
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idPROTEIN));
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idSUGAR));
+		nutritionFactsParameters1.add(nutritionFactsParameterDAO.get(idVITAMIN_C));
+		
+		
+		nutritionfactsresult.setNutritionFactsParameters(nutritionFactsParameters1);	
+		
 		Boolean b = nutritionfactsresult.getId() > 0 ? nutritionFactsResultDAO.update(nutritionfactsresult)
 				: nutritionFactsResultDAO.add(nutritionfactsresult);
+		
+				
 		return "redirect:/laboratory/product/" + product.getId() + "/nutritionfactsresult";
 	}
 

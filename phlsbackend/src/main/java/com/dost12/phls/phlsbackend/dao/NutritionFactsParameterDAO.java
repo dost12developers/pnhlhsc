@@ -10,8 +10,8 @@ public interface NutritionFactsParameterDAO {
 
 	NutritionFactsParameter get(int id);
 	List<NutritionFactsParameter> list();
-	boolean add(NutritionFactsParameter nutritionFactsParameter);
+	//boolean add(NutritionFactsParameter nutritionFactsParameter);
 	boolean update(NutritionFactsParameter nutritionFactsParameter);
 	boolean delete(NutritionFactsParameter nutritionFactsParameter);
-	
+	 Integer add(NutritionFactsParameter nutritionFactsParameter);
 }

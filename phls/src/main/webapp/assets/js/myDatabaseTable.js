@@ -209,30 +209,24 @@ $(document)
 								+ '/laboratory/json/data/all/products';
 						$dataProduct
 								.DataTable({
-
+									 "order": [[ 1, "desc" ]],
 									lengthMenu : [
-											[ 5, 10, 15 ],
-											[ '5 Records', '10 Records',
-													'15 Records' ] ],
-									pageLength : 5,
+											[  10, 15 , 20],
+											[ '10 Records', '15 Records', '20 Records' ] ],
+									pageLength : 10,
 									ajax : {
 										url : jsonUrl,
 										dataSrc : ''
 									},
 									columns : [
-											{
-												data : 'code',
-												bSortable : false,
-												mRender : function(data, type,
-														row) {
-													return '<img src="'
-															+ window.contextRoot
-															+ '/resources/images/'
-															+ data
-															+ '.png" class="dataTableImg"/>';
+										{
+											data : 'createdOnStr'
 
-												}
-											},
+										},	
+										{
+											data : 'updatedOnStr'
+
+										},	
 											{
 												data : 'code'
 
@@ -244,9 +238,11 @@ $(document)
 											{
 												data : 'description'
 											},
+											
+											
 											{
 												data : 'supplier.nameOfEstablishment'
-											},
+											},										
 											{
 												data : 'id',
 												bSortable : false,
@@ -424,8 +420,75 @@ $(document)
 								});
 					}
 
+					
+					var $dataTableOnsiteAddress = $('#dataTableOnsiteAddressId');
+					if ($dataTableOnsiteAddress.length) {
+						var jsonUrl = '';
+						jsonUrl = window.contextRoot
+								+ '/laboratory/json/data/onsite/'+ window.supplierid
+								+'/addresses';
+						
+						$dataTableOnsiteAddress
+								.DataTable({
 
+									lengthMenu : [
+											[ 10, 15, 20 ],
+											[ '10 Records', '15 Records',
+													'20 Records' ] ],
+									pageLength : 10,
+									ajax : {
+										url : jsonUrl,
+										dataSrc : ''
+									},
+									columns : [
 
+											{
+												data : 'addressLineOne'
+											},
+											{
+												data : 'addressLineTwo'
+											},
+											{
+												data : 'city'
+											},
+											{
+												data : 'state'
+											},
+											{
+												data : 'country'
+											},
+
+											{
+												data : 'postalCode'
+											},
+											{
+												data : 'onsite'
+			
+											},
+											{
+												data : 'id',
+												bSortable : false,
+												width : "8%",
+												mRender : function(data, type,row) {
+
+													var str = '';
+													str += '<a href="'
+													+ window.contextRoot
+													+ '/laboratory/onsiteassessment?id='
+													+ data
+													+'"><i class="fas fa-edit"></i></a> | ';
+
+													str += '<a href="'
+														+ window.contextRoot
+														+ '/laboratory/onsiteassessment/'
+														+ data
+														+ '/delete"><i class="fas fa-trash-alt"></i></a>';
+													return str;
+
+												}
+											} ]
+								});
+					}
 					var $dataOnsite = $('#dataTableOnsiteId');
 					if ($dataOnsite.length) {
 						var jsonUrl = '';
@@ -461,17 +524,15 @@ $(document)
 												data : 'certification.title'
 											},
 											{
-
-												data : 'id',
+												data : 'supplier.id',
 												bSortable : false,
-												width : "4%",
-												mRender : function(data, type,
-														row) {
+												width : "8%",
+												mRender : function(data, type, row) {
 													if (userRole === 'LABORATORY') {
 														var str = '';
 														str += '<a href="'
 																+ window.contextRoot
-																+ '/laboratory/'
+																+ '/laboratory/onsiteaddresses?supplierid='
 																+ data
 																+ '"><i class="fa fa-list"></i></a>';
 														return str;
@@ -481,8 +542,7 @@ $(document)
 											{
 												data : 'status',
 												width : "10%",
-												mRender : function(data, type,
-														row) {
+												mRender : function(data, type, row) {
 													var str = '';
 													if (data === 1) {
 														str += '<i class="fas fa-thermometer-three-quarters" style="color:orange"></i>&nbsp;No Status';
@@ -640,6 +700,58 @@ $(document)
 								});
 					}
 					
+	
+					var $dataPersonnel = $('#dataTablePersonnelId');
+					if ($dataPersonnel.length) {
+						var jsonUrl = '';
+						jsonUrl = window.contextRoot
+								+ '/laboratory/json/data/all/personnels';
+						$dataPersonnel
+								.DataTable({
+
+									lengthMenu : [
+											[ 10, 15, 20 ],
+											[ '10 Records', '15 Records','20 Records' ] ],
+									pageLength : 10,
+									ajax : {
+										url : jsonUrl,
+										dataSrc : ''
+									},
+									columns : [
+
+											{
+												data : 'lastName'
+											},
+											{
+												data : 'firstName'
+											},
+											{
+												data : 'middleName'
+											},
+											{
+												data : 'position'
+											},
+											{
+												data : 'incharge'
+											},
+											{
+												data : 'id',
+												bSortable : false,
+												width : "8%",
+												mRender : function(data, type,row) {
+													if (userRole === 'LABORATORY') {
+													var str = '';
+													str += '<a href="' + window.contextRoot + '/laboratory/personnel?id=' + data + '"><i class="fas fa-edit"></i></a>|';
+													str += modalDeleteString(data,
+															window.contextRoot + '/laboratory/personnel/' + data + '/delete');
+													return str;
+													
+													}
+
+												}
+											} ]
+								});
+					}
 					
 				function modalDeleteString(index, link){
 						var str = '';

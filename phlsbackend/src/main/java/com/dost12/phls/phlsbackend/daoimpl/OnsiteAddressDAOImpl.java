@@ -90,7 +90,7 @@ public class OnsiteAddressDAOImpl implements OnsiteAddressDAO {
 	}
 	
 	@Override
-	public List<OnsiteAddress> list(Supplier supplier) {
+	public List<OnsiteAddress> list(int id) {
 		
 		
 		String selectActiveCategory = "FROM OnsiteAddress WHERE supplierId = :supplierId AND "
@@ -100,7 +100,7 @@ public class OnsiteAddressDAOImpl implements OnsiteAddressDAO {
 				
 		query.setParameter("active", true);
 		
-		query.setParameter("supplierId", supplier.getId());
+		query.setParameter("supplierId", id);
 						
 		return query.getResultList();
 	}

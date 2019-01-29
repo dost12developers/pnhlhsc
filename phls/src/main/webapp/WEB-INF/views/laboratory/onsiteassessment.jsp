@@ -20,22 +20,22 @@
 		
 					<c:if test="${supplier == null}" >
 						<tr>
-							<td><sf:label path="supplierId" class="control-label">Supplier</sf:label></td>
+							<td><sf:label path="supplierId" class="control-label">Company</sf:label></td>
 							<td><sf:select path="supplierId" items="${suppliers}" itemLabel="nameOfEstablishment" itemValue="id" multiple="true" class="form-control"/></td>						
 						</tr>
 					</c:if>
 					<c:if test="${supplier != null}" >
 						<tr>
-							<td><label>Supplier</label></td>
+							<td><label>Company</label></td>
 							<td><b>${supplier.nameOfEstablishment}</b></td>						
-						</tr>					
+						</tr>
+						<sf:input type="hidden" path="supplierId" value="${supplier.id }"/>
 					</c:if>
 					
 					<c:if test="${certification == null}" >
 					<tr>
 						<td><sf:label path="certificationId" class="control-label">Certification</sf:label></td>
-						<td><sf:select path="certificationId" items="${certifications}" itemLabel="display" itemValue="id" multiple="true"  class="form-control"/></td>
-						
+						<td><sf:select path="certificationId" items="${certifications}" itemLabel="display" itemValue="id" multiple="true"  class="form-control"/></td>						
 					</tr>
 					</c:if>
 					
@@ -43,7 +43,7 @@
 					<tr>
 						<td><label>Certification</label></td>
 						<td><b>${certification.halalCertificateNo} - ${certification.title}</b></td>
-						
+						<sf:input type="hidden" path="certificationId" value="${certification.id}"/>
 					</tr>
 					</c:if>
 										

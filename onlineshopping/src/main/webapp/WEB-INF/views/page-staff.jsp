@@ -169,7 +169,7 @@
 				</c:if>				
 			</div>
 			<!-- /.container-fluid -->
-			<%@include file="laboratory/shared/footer.jsp"%>
+			<%@include file="staff/shared/footer.jsp"%>
 
 		</div>
 		<!-- /.content-wrapper -->
@@ -210,8 +210,9 @@
 	
     <!-- Bootstrap core JavaScript-->
     <script src="${vendor}/jquery/jquery.min.js"></script>
+     <script src="${vendor}/bootstrap/js/bootstrap.js"></script>
     <script src="${vendor}/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
+	<script src="${js}/bootbox.min.js"></script>
 	
     <!-- Core plugin JavaScript-->
     <script src="${vendor}/jquery-easing/jquery.easing.min.js"></script>
@@ -222,7 +223,7 @@
     <script src="${vendor}/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="${js}/bootbox.min.js"></script>
+    
     <script src="${js}/sb-admin.min.js"></script>
 	<script src="${js}/myStaff.js"></script>
 

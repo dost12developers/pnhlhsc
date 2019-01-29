@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dost12.phls.phlsbackend.dao.NutritionFactsParameterDAO;
 import com.dost12.phls.phlsbackend.dto.NutritionFactsParameter;
+import com.dost12.phls.phlsbackend.dto.Product;
 
 @Repository("nutritionFactsParameterDAO")
 @Transactional
@@ -39,7 +40,7 @@ public class NutritionFactsParameterDAOImpl implements NutritionFactsParameterDA
 
 	}
 
-	@Override
+/*	@Override
 
 	public boolean add(NutritionFactsParameter nutritionFactsParameter) {
 
@@ -52,7 +53,26 @@ public class NutritionFactsParameterDAOImpl implements NutritionFactsParameterDA
 			return false;
 		}
 
+	}*/
+	
+	/*
+	 * INSERT
+	 * */
+	@Override
+	public Integer add(NutritionFactsParameter nutritionFactsParameter) {
+		try {		
+			
+			Integer id = (Integer)sessionFactory
+					.getCurrentSession()
+						.save(nutritionFactsParameter);
+			return id;
+		}
+		catch(Exception ex) {		
+			ex.printStackTrace();			
+		}		
+		return 0;
 	}
+
 
 	/*
 	 * Updating a single category

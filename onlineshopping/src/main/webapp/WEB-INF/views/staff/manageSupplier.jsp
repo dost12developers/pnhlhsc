@@ -15,20 +15,20 @@
               List of Suppliers</div>
             <div class="card-body">
               <div class="table-responsive">
-              <a class="btn btn-primary" style="float: left" href="${contextRoot}/staff/lab-supplier"><i class="fas fa-plus-square"></i></a>
+             
                 <table class="table table-bordered" id="dataTableSupplierId" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>CreatedOn</th>
-                      <th>UpdatedOn</th>                              
+                      <th>Created On</th>
+                      <th>Updated On</th>                              
                       <th>Name</th>
                       <th>Authorized Person</th>
                       <th>Position</th>                      
                       <th>Telephone No.</th>
                       <th>Email</th>                     
                       <th>Products</th>
-                      <th>Account</th>
-                      <th>User</th>
+                      <th>Enable Sign Up</th>
+                      <th>Enable User</th>
                       <th>UpdatedBy</th>
                    	  <th></th>
                    	  <th></th>
@@ -44,8 +44,8 @@
                       <th>Telephone No.</th>
                       <th>Email</th>                     
                       <th>Products</th>
-                      <th>Account</th>
-                      <th>User</th>
+                      <th>Enable Access Sign Up</th>
+                      <th>Enable User</th>
                       <th>UpdatedBy</th>
                    	  <th></th>
                    	  <th></th>

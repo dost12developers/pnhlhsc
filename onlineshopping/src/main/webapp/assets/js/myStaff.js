@@ -211,7 +211,7 @@ $(document)
 								+ '/staff/json/data/all/products';
 						$dataProduct
 								.DataTable({
-
+									 "order": [[ 1, "desc" ]],
 									lengthMenu : [
 											[ 5, 10, 15 ],
 											[ '5 Records', '10 Records',
@@ -222,6 +222,7 @@ $(document)
 										dataSrc : ''
 									},
 									columns : [
+
 											{
 												data : 'code',
 												bSortable : false,
@@ -234,6 +235,14 @@ $(document)
 															+ '.png" class="dataTableImg"/>';
 
 												}
+											},
+											{
+												data : 'createdOnStr'
+	
+											},
+											{
+												data : 'updatedOnStr'
+	
 											},
 											{
 												data : 'code'
@@ -415,8 +424,7 @@ $(document)
 												data : 'id',
 												bSortable : false,
 												width : "6%",
-												mRender : function(data, type,
-														row) {
+												mRender : function(data, type, row) {
 													if (userRole === 'STAFF') {
 														var str = '';
 														str += '<a href="'
@@ -432,15 +440,15 @@ $(document)
 												data : 'enable',
 												bSortable : false,
 												width : "10%",
-												className: 'editableEnableSupplier',
+									
 												mRender : function(data, type, row) {
 													var str = '';
 													if (userRole === 'STAFF') {
 														
 														if(data)
-															str += modalConfirm(row.id+'activate', "Deactivate deletes the existing User Account permanate. Are you sure?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-success')
+															str += '<i class="fas fa-user-alt"></i>';//modalConfirm(row.id+'activate', "Delete the existing User Account permanately. Are you sure?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-success')
 														else
-															str += modalConfirm(row.id+'activate', "Create Account for Supplier. Kindly confirm?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-warning')
+															str += modalConfirm(row.id+'activate', "Activate Email address for this Supplier. Kindly confirm?", "fa-user-alt", window.contextRoot+'/staff/supplier/'+row.id+'/activation', 'btn-warning')
 													}
 													return str;
 												}

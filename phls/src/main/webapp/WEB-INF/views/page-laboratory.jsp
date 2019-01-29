@@ -28,7 +28,10 @@
 <script>
 	window.menu = '${title}';
 
-	window.contextRoot = '${contextRoot}'
+	window.contextRoot = '${contextRoot}';
+	
+	
+	
 </script>
 
 <!-- Bootstrap core CSS-->
@@ -163,13 +166,23 @@
 					<%@include file="laboratory/certification.jsp"%>
 				</c:if>
 				
-				
-				
 				<c:if test="${userClickSetting == true }">
 					<%@include file="laboratory/setting.jsp"%>
 				</c:if>
+
+				<c:if test="${userClickPersonnels == true }">
+					<%@include file="laboratory/managePersonnel.jsp"%>
+				</c:if>
+								
+				<c:if test="${personnelForm == true }">
+					<%@include file="laboratory/personnel.jsp"%>
+				</c:if>
 				
+				<c:if test="${userClickOnsiteAddress == true }">
+					<%@include file="laboratory/onsiteAddress.jsp"%>
+				</c:if>			
 				
+								
 			</div>
 			<!-- /.container-fluid -->
 			<%@include file="laboratory/shared/footer.jsp"%>

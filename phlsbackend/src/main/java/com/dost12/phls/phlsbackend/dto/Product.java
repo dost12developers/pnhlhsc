@@ -1,6 +1,9 @@
 package com.dost12.phls.phlsbackend.dto;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +24,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,11 +42,13 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "created_on")	
-	private Date createdOn;
+	@Column(name ="created_on")
+	@JsonIgnore
+	private LocalDate createdOn;	
 	
-	@Column(name = "updated_on")	
-	private Date updatedOn;
+	@Column(name ="updated_on")
+	@JsonIgnore
+	private LocalDate updatedOn;	
 	
 	@Column(name = "is_active")	
 	private boolean active;
@@ -50,6 +56,8 @@ public class Product implements Serializable {
 	@Column(name = "is_display")	
 	private boolean displayed;
 	
+	@NotEmpty
+	@Column(name="code",  nullable=false)
 	private String code;
 	
 	@NotBlank(message = "Please enter the product name!")
@@ -67,11 +75,12 @@ public class Product implements Serializable {
 	private Double weight;
 	
 	@Column(name = "manufactured_date")
+	@JsonIgnore
 	private Date manufacturedDate;
 	
 	@Column(name = "expiration_date")
+	@JsonIgnore
 	private Date expirationDate;
-	
 	
 	@Column(name = "category_id")
 	@JsonIgnore
@@ -97,18 +106,27 @@ public class Product implements Serializable {
 	@JsonIgnore
 	private double destinationLongitude;	
 
+	@Transient
+	private String createdOnStr;
+	
+	@Transient
+	private String updatedOnStr;
 	
 	
 	@Transient
+	@JsonIgnore
 	private int supplierId;
 	
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ingredient", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<IngredientDetail> ingredientDetails;	
 	
 	@Transient
+	@JsonIgnore
 	private MultipartFile file;
 
+	
 	private int purchases;
 	
 	private int views;
@@ -116,11 +134,13 @@ public class Product implements Serializable {
 
 	// default constructor
 	public Product() {
-		this.createdOn = new Date();
-		this.updatedOn = new Date();
+		createdOn = LocalDate.now();
+		updatedOn = LocalDate.now();
 		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();		
 		this.active = true;
 		this.displayed = false;
+		this.unitPrice = 0.0;
+		this.quantity = 0;
 		ingredientDetails = new ArrayList<>();
 		supplier = new Supplier();
 	}
@@ -276,19 +296,19 @@ public class Product implements Serializable {
 	}
 
 
-	public Date getCreatedOn() {
+	public LocalDate getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(LocalDate createdOn) {
 		this.createdOn = createdOn;
 	}
 
-	public Date getUpdatedOn() {
+	public LocalDate getUpdatedOn() {
 		return updatedOn;
 	}
 
-	public void setUpdatedOn(Date updatedOn) {
+	public void setUpdatedOn(LocalDate updatedOn) {
 		this.updatedOn = updatedOn;
 	}
 
@@ -308,5 +328,27 @@ public class Product implements Serializable {
 		this.displayed = displayed;
 	}
 
+	public String getCreatedOnStr() {
+		if(createdOn != null)
+			return createdOn.toString();
+		return createdOnStr;
+	}
+
+	public void setCreatedOnStr(String createdOnStr) {
+		this.createdOnStr = createdOnStr;
+	}
+
+	public String getUpdatedOnStr() {	
+		if(updatedOn != null)
+			return updatedOn.toString();
+		return updatedOnStr;
+	}
+
+	public void setUpdatedOnStr(String updatedOnStr) {
+		this.updatedOnStr = updatedOnStr;
+	}
+
+	
+	
 	
 }
